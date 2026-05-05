@@ -1,52 +1,65 @@
 import { useState } from "react";
 import emailjs from "emailjs-com";
 import React from "react";
+import { Box, Container, Grid, Stack, Typography, Divider } from "@mui/material";
+import { Phone, Email, Public } from "@mui/icons-material";
 
-const initialState = {
-  name: "",
-  email: "",
-  message: "",
-};
+
 export const Contact = (props) => {
-  const [{ name, email, message }, setState] = useState(initialState);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setState((prevState) => ({ ...prevState, [name]: value }));
+  const profilData = {
+  nama: "Dinas Tenaga Kerja dan Transmigrasi Provinsi Jawa Tengah",
+  singkatan: "Disnakertrans Jateng",
+  tahunBerdiri: 1950,
+  alamat: "Jl. Pahlawan No. 16, Semarang, Jawa Tengah 50241",
+  telepon: "(024) 8311713",
+  email: "disnakertrans@jatengprov.go.id",
+  website: "https://disnakertrans.jatengprov.go.id",
+  jamOperasional: "Senin – Jumat: 07.30 – 15.30 WIB",
+  kepalaKantor: "Ahmad Aziz, S.E., M.Si.",
+  visi:
+    "Jawa Tengah Yang Mandiri, Maju, Sejahtera dan Lestari.",
+  misi: [
+    "Mewujudkan sumber daya manusia dan masyarakat Jawa Tengah yang berkualitas, beriman dan bertakwa kepada Tuhan Yang Maha Esa, cerdas, sehat, serta berbudaya.",
+    "Mewujudkan perekonomian daerah yang berbasis pada potensi unggulan daerah dengan dukungan rekayasa teknologi dan berorientasi pada ekonomi kerakyatan.",
+    "Menwujudkan kehidupan politik dan tata pemerintahan yang baik (good governance), demokratis, dan bertanggung jawab, didukung oleh kompetensi dan profesionalitas aparatur, bebas dari praktik korupsi, kolusi dan nepotisme (KKN), serta pengembangan jejaring",
+    "Mewujudkan pengelolaan sumber daya alam dan lingkungan hidup yang optimal dengan tetap menjaga kelestarian fungsinya dalam menopang kehidupan.",
+    "Mewujudkan kualitas dan kuantitas prasarana dan sarana yang menunjang pembagian wilayah, penyediaan pelayanan dasar dan pertumbuhan ekonomi daerah; dan",
+    "Mewujudkan kehidupan masyarakat yang sejahtera, aman, damai, dan bersatu dalam wadah Negara Kesatuan Republik Indonesia (NKRI) didukung dengan kepastian hukum dan penegakan HAM serta kesetaraan dan keadilan gender.",
+  ],
   };
-  const clearState = () => setState({ ...initialState });
   
-  
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(name, email, message);
-    
-    {/* replace below with your own Service ID, Template ID and Public Key from your EmailJS account */ }
-    
-    emailjs
-      .sendForm("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", e.target, "YOUR_PUBLIC_KEY")
-      .then(
-        (result) => {
-          console.log(result.text);
-          clearState();
-        },
-        (error) => {
-          console.log(error.text);
-        }
-      );
-  };
   return (
-    <div>
-      <div id="footer">
-        <div className="container text-center">
-          <p>
-            &copy; {new Date().getFullYear()} Issaaf Kattan React Land Page Template. Design by{" "}
-            <a href="http://www.templatewire.com" rel="nofollow">
-              TemplateWire
-            </a>
-          </p>
-        </div>
-      </div>
-    </div>
+        <Box sx={{ bgcolor: "#0D3349", color: "rgba(255,255,255,0.7)", py: 4, mt: 4 }}>
+          <Container maxWidth="lg">
+            <Grid container spacing={3}>
+              <Grid item xs={12} md={6}>
+                <Typography variant="h3" fontWeight={700} mb={1} >
+                  {profilData.singkatan}
+                </Typography>
+                <Typography variant="h4"  sx={{ fontFamily: "'Source Sans 3', sans-serif", lineHeight: 1.8 }}>
+                  {profilData.alamat}
+                </Typography>
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Stack spacing={0.75}>
+                  {[
+                    { label: profilData.telepon, icon: Phone },
+                    { label: profilData.email, icon: Email },
+                    { label: profilData.website, icon: Public },
+                  ].map(({ label, icon: Ic }) => (
+                    <Stack key={label} direction="row" spacing={1} alignItems="center">
+                      <Ic fontSize="small" />
+                      <Typography variant="h4" color="white" sx={{ fontFamily: "'Source Sans 3', sans-serif" }}>{label}</Typography>
+                    </Stack>
+                  ))}
+                </Stack>
+              </Grid>
+            </Grid>
+            <Divider sx={{ my: 3, borderColor: "rgba(255,255,255,0.1)" }} />
+            <Typography variant="caption" sx={{ fontFamily: "'Source Sans 3', sans-serif" }}>
+              © {new Date().getFullYear()} Disnakertrans Jawa Tengah — Hak Cipta Dilindungi Undang-Undang.
+            </Typography>
+          </Container>
+        </Box>
   );
 };

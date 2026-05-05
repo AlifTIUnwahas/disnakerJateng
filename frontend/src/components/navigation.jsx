@@ -35,9 +35,9 @@ export const Navigation = (props) => {
               <span style={{ 
                             fontSize: '18px', 
                             fontWeight: '700', 
-                            lineHeight: '1',  // Mencegah jarak baris yang ketinggian
+                            lineHeight: '1',
                             margin: 0,
-                            color: '#333',    // Sesuaikan warna teks
+                            color: '#333',
                             textTransform: 'uppercase'
               }}>Disnakertrans Jateng
               </span> 

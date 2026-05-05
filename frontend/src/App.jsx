@@ -12,6 +12,7 @@ import { Layout } from "./components/layout";
 import { Struktur } from "./pages/Struktur";
 import { DIP } from "./pages/publikInfo";
 import { Serta } from "./pages/sertaMerta";
+import { SwiperHome } from './components/swiperHome';
 import { DIK } from "./pages/infoKecuali";
 import { ProfilDinas } from "./pages/sejarahDinas";
 import JsonData from "./data/data.json";
@@ -27,7 +28,6 @@ export const scroll = new SmoothScroll('a[href*="#"]', {
 const Home = ({ data }) => (
   <div>
     <Header data={data.Header} />
-    <Features data={data.Features} />
     <Berita data={data.Berita} />
     <About data={data.About} />
     <Services data={data.Services} />

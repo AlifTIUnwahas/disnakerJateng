@@ -249,7 +249,7 @@ const beritaData = [
 ];
 
 const strukturData = [
-  { jabatan: "Kepala Dinas", nama: "Ahmad Azizy, S.E., M.Si.", level: 1 },
+  { jabatan: "Kepala Dinas", nama: "Ahmad Aziz, S.E., M.Si.", level: 1 },
   { jabatan: "Sekretaris Dinas", nama: "Ir. Siti Rahayu, M.T.", level: 2 },
   { jabatan: "Bid. Penempatan & Perluasan Kerja", nama: "Heru Santoso, S.E., M.M.", level: 2 },
   { jabatan: "Bid. Pelatihan & Produktivitas", nama: "Dr. Wahyu Lestari, M.Pd.", level: 2 },
@@ -797,39 +797,6 @@ export const ProfilDinas = () => {
           </TabPanel>
         </Container>
 
-        {/* ── FOOTER ── */}
-        <Box sx={{ bgcolor: "#0D3349", color: "rgba(255,255,255,0.7)", py: 4, mt: 4 }}>
-          <Container maxWidth="lg">
-            <Grid container spacing={3}>
-              <Grid item xs={12} md={6}>
-                <Typography variant="subtitle1" fontWeight={700} color="#fff" mb={1}>
-                  {profilData.singkatan}
-                </Typography>
-                <Typography variant="body2" sx={{ fontFamily: "'Source Sans 3', sans-serif", lineHeight: 1.8 }}>
-                  {profilData.alamat}
-                </Typography>
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <Stack spacing={0.75}>
-                  {[
-                    { label: profilData.telepon, icon: Phone },
-                    { label: profilData.email, icon: Email },
-                    { label: profilData.website, icon: Public },
-                  ].map(({ label, icon: Ic }) => (
-                    <Stack key={label} direction="row" spacing={1} alignItems="center">
-                      <Ic fontSize="small" />
-                      <Typography variant="body2" sx={{ fontFamily: "'Source Sans 3', sans-serif" }}>{label}</Typography>
-                    </Stack>
-                  ))}
-                </Stack>
-              </Grid>
-            </Grid>
-            <Divider sx={{ my: 3, borderColor: "rgba(255,255,255,0.1)" }} />
-            <Typography variant="caption" sx={{ fontFamily: "'Source Sans 3', sans-serif" }}>
-              © {new Date().getFullYear()} Disnakertrans Jawa Tengah — Hak Cipta Dilindungi Undang-Undang.
-            </Typography>
-          </Container>
-        </Box>
       </Box>
     </ThemeProvider>
   );

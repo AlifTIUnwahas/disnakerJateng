@@ -1,7 +1,6 @@
 {
   "Header": {
-    "title": "PPID Disnakertrans Provinsi Jawa Tengah",
-    "paragraph": "Setiap Badan Publik memiliki kewajiban untuk memberikan akses informasi kepada masyarakat, sebagaimana diatur dalam Undang-Undang Nomor 14 Tahun 2008 tentang Keterbukaan Informasi Publik. Undang-undang ini menegaskan pentingnya transparansi sebagai bagian dari pelayanan publik yang akuntabel. Dalam konteks ini, PPID Pelaksana Dinas Tenaga Kerja dan Transmigrasi Provinsi Jawa Tengah hadir untuk memastikan informasi terkait program, kebijakan, dan layanan di bidang ketenagakerjaan dan transmigrasi dapat diakses secara mudah."
+    "title": "Dinas Tenaga Kerja dan Transmigrasi Provinsi Jawa Tengah"
   },
   "About": {
     "paragraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
@@ -72,9 +71,9 @@
       "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at."
     },
     {
-      "icon": "fa fa-cart-arrow-down",
-      "name": "Consectetur adipiscing",
-      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at."
+      "icon": "fa fa-newspaper-o",
+      "name": "Lowongan Pekerjaan",
+      "text": "Lowongan Kerja."
     },
     {
       "icon": "fa fa-cloud-download",

@@ -1,4 +1,5 @@
 import React from "react";
+import SwiperHome from "./swiperHome";
 
 export const Header = (props) => {
   return (
@@ -8,17 +9,12 @@ export const Header = (props) => {
           <div className="container">
             <div className="row">
               <div className="col-md-8 col-md-offset-2 intro-text">
-                <h1>
+                <h1 style={{textTransform: 'none'}}>
                   {props.data ? props.data.title : "Loading"}
                   <span></span>
                 </h1>
-                <p>{props.data ? props.data.paragraph : "Loading"}</p>
-                <a
-                  href="https://disnakertrans.jatengprov.go.id/publik" target="_blank" rel="noopener noreferrer"
-                  className="btn btn-custom btn-lg page-scroll"
-                >
-                  Web Disnakertrans
-                </a>{" "}
+                <span></span>
+                <SwiperHome />
               </div>
             </div>
           </div>
