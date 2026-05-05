@@ -15,6 +15,7 @@ import { Serta } from "./pages/sertaMerta";
 import { SwiperHome } from './components/swiperHome';
 import { DIK } from "./pages/infoKecuali";
 import { ProfilDinas } from "./pages/sejarahDinas";
+import { VisiDinas } from "./pages/visiMisiDinas"
 import JsonData from "./data/data.json";
 import SmoothScroll from "smooth-scroll";
 import "./App.css";
@@ -28,6 +29,7 @@ export const scroll = new SmoothScroll('a[href*="#"]', {
 const Home = ({ data }) => (
   <div>
     <Header data={data.Header} />
+    <SwiperHome />
     <Berita data={data.Berita} />
     <About data={data.About} />
     <Services data={data.Services} />
@@ -51,6 +53,7 @@ const App = () => {
           <Route path="berita/:slug" element={<DetailBerita data={landingPageData.Berita} />} />
           {/* <Route path="layanan" element={<Layanan />} /> */}
           <Route path="profil-dinas" element={<ProfilDinas />} />
+          <Route path="visi-dinas" element={<VisiDinas />} />
           <Route path="struktur" element={<Struktur data={landingPageData.Struktur} />} />
           <Route path="daftar-informasi-publik" element={<DIP />} />
           <Route path="info-sertamerta" element={<Serta />} />

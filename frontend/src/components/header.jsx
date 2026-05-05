@@ -14,7 +14,7 @@ export const Header = (props) => {
                   <span></span>
                 </h1>
                 <span></span>
-                <SwiperHome />
+                
               </div>
             </div>
           </div>

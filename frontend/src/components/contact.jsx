@@ -10,8 +10,8 @@ export const Contact = (props) => {
   nama: "Dinas Tenaga Kerja dan Transmigrasi Provinsi Jawa Tengah",
   singkatan: "Disnakertrans Jateng",
   tahunBerdiri: 1950,
-  alamat: "Jl. Pahlawan No. 16, Semarang, Jawa Tengah 50241",
-  telepon: "(024) 8311713",
+  alamat: "Jl. Pahlawan No. 16, Semarang, Jawa Tengah, Indonesia",
+  telepon: "(024) 8311713 / (024) 8311711",
   email: "disnakertrans@jatengprov.go.id",
   website: "https://disnakertrans.jatengprov.go.id",
   jamOperasional: "Senin – Jumat: 07.30 – 15.30 WIB",
@@ -29,7 +29,7 @@ export const Contact = (props) => {
   };
   
   return (
-        <Box sx={{ bgcolor: "#0D3349", color: "rgba(255,255,255,0.7)", py: 4, mt: 4 }}>
+        <Box sx={{ bgcolor: "#41a3db", color: "rgba(255,255,255,0.7)", py: 4, mt: 4 }}>
           <Container maxWidth="lg">
             <Grid container spacing={3}>
               <Grid item xs={12} md={6}>
@@ -45,7 +45,6 @@ export const Contact = (props) => {
                   {[
                     { label: profilData.telepon, icon: Phone },
                     { label: profilData.email, icon: Email },
-                    { label: profilData.website, icon: Public },
                   ].map(({ label, icon: Ic }) => (
                     <Stack key={label} direction="row" spacing={1} alignItems="center">
                       <Ic fontSize="small" />
@@ -56,7 +55,7 @@ export const Contact = (props) => {
               </Grid>
             </Grid>
             <Divider sx={{ my: 3, borderColor: "rgba(255,255,255,0.1)" }} />
-            <Typography variant="caption" sx={{ fontFamily: "'Source Sans 3', sans-serif" }}>
+            <Typography variant="h6" sx={{ fontFamily: "'Source Sans 3', sans-serif" }}>
               © {new Date().getFullYear()} Disnakertrans Jawa Tengah — Hak Cipta Dilindungi Undang-Undang.
             </Typography>
           </Container>
