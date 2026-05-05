@@ -123,7 +123,7 @@ const InfoCard = ({ title, desc, link }) => (
   </Card>
 );
 
-export const DIK = (props) => {
+export const Berkala = (props) => {
   return (
     <Box sx={{ bgcolor: "#f8f9fa", minHeight: "50vh" }}>
       {/* Hero Section */}
@@ -142,7 +142,7 @@ export const DIK = (props) => {
       >
         <Container maxWidth="lg">
           <Typography variant="h1" sx={{ fontWeight: 800, mb: 3, color: 'white', fontSize: { xs: "2.5rem", md: "4.5rem" }, lineHeight: 1.1 }}>
-            Informasi Dikecualikan
+            Informasi Berkala
           </Typography>
           <Typography variant="h5" sx={{ opacity: 0.9, color: 'white', fontWeight: "normal", maxWidth: "850px", fontSize: "1.3rem", textTransform: "none", lineHeight: 1.6 }}>
             Sesuai Pasal 11 Undang-Undang Nomor 14 Tahun 2008 mengenai Keterbukaan Informasi Publik, 
@@ -183,16 +183,16 @@ export const DIK = (props) => {
             </Button>
           </Stack>
         */}
-          
+          {/* Grid Cards */}
           <Grid container spacing={4} sx={{ display: 'flex' }}>
             <Grid item xs={12} md={6} sx={{ display: 'flex' }}>
-              <InfoCard title="DIK 2025" desc="Daftar Informasi Publik Dinas Tenaga Kerja dan Transmigrasi Tahun 2025." link="https://drive.google.com/file/d/1LIffiukyRMOrk7exyGYXo5j4tAAHLlfo/view?usp=sharing" />
+              <InfoCard title="DIP 2025" desc="Daftar Informasi Publik Dinas Tenaga Kerja dan Transmigrasi Tahun 2025." link="https://drive.google.com/file/d/1LIffiukyRMOrk7exyGYXo5j4tAAHLlfo/view?usp=sharing" />
             </Grid>
             <Grid item xs={12} md={6} sx={{ display: 'flex' }}>
-              <InfoCard title="DIK 2024" desc="Daftar Informasi Publik Dinas Tenaga Kerja dan Transmigrasi Tahun 2024." link="https://drive.google.com/file/d/1FnGy2-n7YjdBY-EPEceayalPN-fr_gcJ/view?usp=sharing" />
+              <InfoCard title="DIP 2024" desc="Daftar Informasi Publik Dinas Tenaga Kerja dan Transmigrasi Tahun 2024." link="https://drive.google.com/file/d/1FnGy2-n7YjdBY-EPEceayalPN-fr_gcJ/view?usp=sharing" />
             </Grid>
             <Grid item xs={12} md={6} sx={{ display: 'flex' }}>
-              <InfoCard title="DIK 2023" desc="Daftar Informasi Publik Dinas Tenaga Kerja dan Transmigrasi Tahun 2023." link="https://drive.google.com/file/d/1CcNmBiHDU3q1xOiJu7-IDHtXagRK2Paj/view?usp=sharing" />
+              <InfoCard title="DIP 2023" desc="Daftar Informasi Publik Dinas Tenaga Kerja dan Transmigrasi Tahun 2023." link="https://drive.google.com/file/d/1CcNmBiHDU3q1xOiJu7-IDHtXagRK2Paj/view?usp=sharing" />
             </Grid>
           </Grid>
         </Card>

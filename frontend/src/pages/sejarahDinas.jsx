@@ -42,7 +42,7 @@ export const ProfilDinas = () => {
       padding: '10px 15px',
       backgroundColor: '#f1f5f9',
       borderRadius: '6px',
-      fontSize: '0.9rem',
+      fontSize: '1.2rem',
       fontWeight: '500',
       border: '1px solid #cbd5e1',
       transition: 'background-color 0.2s',
@@ -68,8 +68,10 @@ export const ProfilDinas = () => {
 
   const uptdList = [
     "BLK Cilacap", "BLK Semarang 1", "BLK Semarang 2", 
-    "Balai Keselamatan Kerja", "Balai Transmigrasi", 
-    "Balai Pelayanan Perselisihan", "Satwasker B"
+    "Balai Pelayanan Penyelesaian Perselisihan Tenaga Kerja (BP3TK)", "Balai Kesehatan dan Keselamatan Kerja",
+    "Satwasker Semarang", "Satwasker Pati",
+    "Satwasker Magelang", "Satwasker Surakarta",
+    "Satwasker Banyumas", "Satwasker Pekalongan"
   ];
 
   return (
@@ -144,8 +146,8 @@ export const ProfilDinas = () => {
                 e.currentTarget.style.transform = 'scale(1)';
               }}
             >
-              <h4 style={{ fontWeight: '700', fontSize: '1rem', marginBottom: '5px' }}>{org.title}</h4>
-              <p style={{ fontSize: '0.85rem', color: '#64748b' }}>{org.role}</p>
+              <h4 style={{ fontWeight: '700', fontSize: '1.3rem', marginBottom: '5px' }}>{org.title}</h4>
+              <p style={{ fontSize: '1rem', color: '#64748b' }}>{org.role}</p>
             </div>
           ))}
         </div>
@@ -164,7 +166,7 @@ export const ProfilDinas = () => {
                 padding: '6px 12px', 
                 border: '1px solid #475569', 
                 borderRadius: '20px', 
-                fontSize: '0.85rem',
+                fontSize: '1.2rem',
                 transition: 'all 0.2s'
               }}
               onMouseOver={(e) => {

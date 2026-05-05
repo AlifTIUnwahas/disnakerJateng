@@ -130,7 +130,7 @@ export const DIP = (props) => {
       {/* Hero Section */}
       <Box 
         sx={{ 
-          backgroundImage: 'url("/img/gedungDisnakertrans1.jpg")',
+          backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/img/gedungDisnakertrans1.jpg")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',

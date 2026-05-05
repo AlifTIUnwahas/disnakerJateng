@@ -103,7 +103,6 @@ const InfoCard = ({ title, desc, link }) => (
         <ArrowRight size={20} />
       </Stack>
 
-      {/* Dekorasi Dot Pattern di Pojok */}
       <Box 
         className="decoration-dots"
         sx={{ 
@@ -130,18 +129,22 @@ export const Serta = (props) => {
       {/* Hero Section */}
       <Box 
         sx={{ 
-          bgcolor: "#01c5ed",
-          color: "white", 
+          backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/img/gedungDisnakertrans1.jpg")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          minHeight: '500px', 
+          width: '100%',
           pt: { xs: 15, md: 22 }, 
           pb: { xs: 12, md: 18 }, 
           px: 3 
         }}
       >
         <Container maxWidth="lg">
-          <Typography variant="h1" sx={{ fontWeight: 800, mb: 3, color: 'black', fontSize: { xs: "2.5rem", md: "4.5rem" }, lineHeight: 1.1 }}>
+          <Typography variant="h1" sx={{ fontWeight: 800, mb: 3, color: 'white', fontSize: { xs: "2.5rem", md: "4.5rem" }, lineHeight: 1.1 }}>
             Informasi Serta Merta
           </Typography>
-          <Typography variant="h5" sx={{ opacity: 0.9, color: 'black', fontWeight: "normal", maxWidth: "850px", fontSize: "1.3rem", textTransform: "none", lineHeight: 1.6 }}>
+          <Typography variant="h5" sx={{ opacity: 0.9, color: 'white', fontWeight: "normal", maxWidth: "850px", fontSize: "1.3rem", textTransform: "none", lineHeight: 1.6 }}>
             Sesuai Pasal 11 Undang-Undang Nomor 14 Tahun 2008 mengenai Keterbukaan Informasi Publik, 
             Badan Publik wajib menyediakan Informasi Publik setiap saat yang dapat diakses oleh Pengguna Informasi Publik.
           </Typography>

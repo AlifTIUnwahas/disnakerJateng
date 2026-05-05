@@ -73,7 +73,7 @@ export const Navigation = (props) => {
                 </li>
                 <li>
                   <Link to="/struktur-dinas">
-                    Struktur Organisasi
+                    Struktur Organisasi Dinas
                   </Link>
                 </li>
               </ul>
@@ -83,6 +83,16 @@ export const Navigation = (props) => {
                 PPID <span className="caret"></span>
               </a>
               <ul className="dropdown-menu">
+                <li>
+                  <Link to="/daftar-informasi-publik">
+                    Profil PPID
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/daftar-informasi-publik">
+                    Daftar Informasi Publik
+                  </Link>
+                </li>
                 <li>
                   <Link to="/daftar-informasi-publik">
                     Daftar Informasi Publik

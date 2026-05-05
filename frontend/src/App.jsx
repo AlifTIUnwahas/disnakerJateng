@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Header } from "./components/header";
 import { Features } from "./components/features";
 import { Berita } from "./components/berita";
+import { Berkala } from "./pages/berkala"
 import { About } from "./components/about";
-import { Services } from "./components/services";
 import { Gallery } from "./components/gallery";
 import { Testimonials } from "./components/testimonials";
 import { DetailBerita } from "./components/detailBerita";
@@ -32,7 +32,6 @@ const Home = ({ data }) => (
     <SwiperHome />
     <Berita data={data.Berita} />
     <About data={data.About} />
-    <Services data={data.Services} />
     <Gallery data={data.Gallery} />
     <Testimonials data={data.Testimonials} />
   </div>
@@ -58,6 +57,7 @@ const App = () => {
           <Route path="daftar-informasi-publik" element={<DIP />} />
           <Route path="info-sertamerta" element={<Serta />} />
           <Route path="info-kecuali" element={<DIK />} />
+          <Route path="info-berkala" element={<Berkala />} />
           {/* <Route path="profil" element={<Profil />} /> */}
         </Route>
       </Routes>
