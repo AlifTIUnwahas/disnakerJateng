@@ -15,52 +15,35 @@ import { Search, ArrowRight } from "lucide-react";
 // Komponen Card dengan animasi hover seperti referensi
 const InfoCard = ({ title, desc, link }) => (
   <Card 
-    onClick={()=> window.open(link, '_blank')}
+    onClick={() => window.open(link, '_blank')}
     variant="outlined" 
     sx={{ 
       height: '100%',
       display: 'flex',
       flexDirection: 'column',
-      borderRadius: 4, 
+      borderRadius: 6, 
       position: 'relative',
       overflow: 'hidden',
       cursor: 'pointer',
       transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)', 
       border: '1px solid #eee',
-      // Logika Hover: Mengubah warna seluruh elemen di dalamnya
+      // Background Image sebagai identitas visual kartu
+      background: `linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url("/img/ppid.PNG")`,
+      backgroundSize: '120px',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'right 20px bottom 20px',
+      
       '&:hover': { 
         bgcolor: '#5ca9fb', 
-        transform: 'translateY(-5px)',
-        boxShadow: '0 12px 25px rgba(0,0,0,0.1)',
+        backgroundImage: `linear-gradient(rgba(92, 169, 251, 0.9), rgba(92, 169, 251, 0.9)), url("/img/ppid.PNG")`,
+        transform: 'translateY(-8px)',
+        boxShadow: '0 15px 35px rgba(92, 169, 251, 0.3)',
         '& .text-target': { color: '#ffffff !important' },
-        '& .icon-dot': { bgcolor: '#ffffff' },
         '& .decoration-dots div': { bgcolor: '#ffffff', opacity: 0.4 }
       }
     }}
   >
-    <CardContent sx={{ p: 4 }}>
-      {/* Label PPID */}
-      <Typography 
-        variant="caption" 
-        className="text-target"
-        sx={{ 
-          color: "#28a745", 
-          fontWeight: "bold", 
-          display: "flex", 
-          alignItems: "center", 
-          gap: 1.5, 
-          mb: 3,
-          fontSize: '0.85rem',
-          transition: '0.3s'
-        }}
-      >
-        <Box 
-          className="icon-dot"
-          sx={{ width: 10, height: 10, bgcolor: "#28a745", borderRadius: "50%", transition: '0.3s' }} 
-        /> 
-        ppid
-      </Typography>
-
+    <CardContent sx={{ p: 5, position: 'relative', zIndex: 2 }}>
       {/* Judul */}
       <Typography 
         className="text-target"
@@ -84,8 +67,9 @@ const InfoCard = ({ title, desc, link }) => (
           mb: 4, 
           fontSize: "1.05rem",
           lineHeight: 1.6,
-          minHeight: '50px',
-          transition: '0.3s'
+          minHeight: '60px',
+          transition: '0.3s',
+          maxWidth: '85%' // Memberi ruang agar teks tidak menabrak background di kanan
         }}
       >
         {desc}
@@ -103,6 +87,7 @@ const InfoCard = ({ title, desc, link }) => (
         <ArrowRight size={20} />
       </Stack>
 
+      {/* Dekorasi Titik-titik */}
       <Box 
         className="decoration-dots"
         sx={{ 
@@ -129,7 +114,7 @@ export const Serta = (props) => {
       {/* Hero Section */}
       <Box 
         sx={{ 
-          backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/img/gedungDisnakertrans1.jpg")',
+          backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("/img/gedungDisnakertrans1.jpg")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',

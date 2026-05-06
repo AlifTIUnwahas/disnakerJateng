@@ -14,8 +14,10 @@ import { DIP } from "./pages/publikInfo";
 import { Serta } from "./pages/sertaMerta";
 import { SwiperHome } from './components/swiperHome';
 import { DIK } from "./pages/infoKecuali";
+import { ProfilPpid } from "./pages/profilPpid";
 import { ProfilDinas } from "./pages/sejarahDinas";
 import { VisiDinas } from "./pages/visiMisiDinas"
+import { TusiDinas } from "./pages/tusiDinas";
 import JsonData from "./data/data.json";
 import SmoothScroll from "smooth-scroll";
 import "./App.css";
@@ -53,6 +55,9 @@ const App = () => {
           {/* <Route path="layanan" element={<Layanan />} /> */}
           <Route path="profil-dinas" element={<ProfilDinas />} />
           <Route path="visi-dinas" element={<VisiDinas />} />
+          <Route path="tusi-dinas" element={<TusiDinas />} />
+          {/* Route PPID */}
+          <Route path="profil-ppid" element={<ProfilPpid />} />
           <Route path="struktur" element={<Struktur data={landingPageData.Struktur} />} />
           <Route path="daftar-informasi-publik" element={<DIP />} />
           <Route path="info-sertamerta" element={<Serta />} />

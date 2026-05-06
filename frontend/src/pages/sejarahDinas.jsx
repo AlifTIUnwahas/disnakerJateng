@@ -1,7 +1,85 @@
-import React from 'react';
+import React, { useState } from "react";
 import { Book, Briefcase, Users, Home, ShieldCheck, ChevronRight } from 'lucide-react';
 
 export const ProfilDinas = () => {
+  const [openFaq, setOpenFaq] = useState(null);
+
+  const profilData = {
+    singkatan: "Dinas Tenaga Kerja dan Transmigrasi Provinsi Jawa Tengah",
+    alamat: "Jl. Pahlawan No. 16, Semarang, Jawa Tengah 50241",
+    telepon: "(024) 8311713 / (024) 8311711",
+    email: "disnakertrans@jatengprov.go.id",
+    jamOperasional: "Senin – Jumat: 07.30 – 15.30 WIB",
+    kepalaKantor: "Ahmad Aziz, S.E., M.Si.",
+  };
+
+  const s = {
+    wrapper: {
+      backgroundColor: "#F0F4F8",
+      minHeight: "100vh",
+      padding: "150px 20px 50px 20px", // mt: 8 + py: 6
+      fontFamily: "'Source Sans 3', sans-serif",
+      color: "#1C2833",
+    },
+    container: {
+      maxWidth: "1200px",
+      margin: "0 auto",
+      display: "flex",
+      flexWrap: "wrap",
+      gap: "30px",
+    },
+    mainCol: { flex: "2 1 600px" },
+    sideCol: { flex: "1 1 350px" },
+    card: {
+      backgroundColor: "#fff",
+      borderRadius: "12px",
+      padding: "30px",
+      boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
+      marginBottom: "25px",
+    },
+    header: { display: "flex", alignItems: "center", gap: "15px", marginBottom: "20px" },
+    iconCircle: {
+      width: "40px",
+      height: "40px",
+      borderRadius: "50%",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      color: "#fff",
+      fontSize: "1.2rem",
+    },
+    h2: { margin: 0, fontSize: "1.5rem", fontWeight: "700" },
+    alert: {
+      backgroundColor: "#E3F2FD",
+      padding: "20px",
+      borderRadius: "8px",
+      fontStyle: "italic",
+      borderLeft: "5px solid #1A5276",
+      color: "#1A5276",
+      lineHeight: "1.6",
+    },
+    divider: { border: "none", borderTop: "1px solid #eee", margin: "25px 0" },
+    list: { listStyle: "none", padding: 0 },
+    listItem: { display: "flex", gap: "12px", marginBottom: "15px", lineHeight: "1.5" },
+    infoRow: { display: "flex", gap: "15px", marginBottom: "20px" },
+    label: { fontSize: "1.2rem", color: "#5D6D7E", display: "block" },
+    value: { fontWeight: "600", fontSize: "1.2rem" },
+    accordion: {
+      backgroundColor: "#fff",
+      border: "1px solid #ddd",
+      borderRadius: "8px",
+      marginBottom: "10px",
+      overflow: "hidden",
+    },
+    accHeader: {
+      padding: "15px 20px",
+      cursor: "pointer",
+      display: "flex",
+      justifyContent: "space-between",
+      fontWeight: "600",
+    },
+    accBody: { padding: "0 20px 15px 20px", color: "#5D6D7E", fontSize: "1.2rem" },
+  };
   const styles = {
     container: {
       maxWidth: '1000px',
@@ -17,6 +95,13 @@ export const ProfilDinas = () => {
       marginBottom: '50px',
       paddingBottom: '20px',
       borderBottom: '4px solid #dc2626',
+    },
+     headerLogos: { 
+      display: "flex", 
+      gap: "20px", 
+      marginBottom: "30px",
+      justifyContent: "center",
+      alignItems: "center"
     },
     sectionCard: {
       backgroundColor: '#ffffff',
@@ -49,6 +134,12 @@ export const ProfilDinas = () => {
     }
   };
 
+  const faqs = [
+    { q: "Bagaimana cara mendaftar pelatihan kerja?", a: "Pendaftaran dapat dilakukan melalui BLK terdekat atau portal resmi." },
+    { q: "Apa itu program transmigrasi?", a: "Program perpindahan penduduk untuk pemerataan kesejahteraan." },
+    { q: "Cara lapor pelanggaran?", a: "Laporan melalui email resmi atau datang langsung ke bidang pengawasan." },
+  ];
+
   const fungsiList = [
     "Perumusan Kebijakan teknis bidang ketenagakerjaan.",
     "Pelaksanaan kebijakan di bidang pelatihan & produktivitas.",
@@ -77,6 +168,11 @@ export const ProfilDinas = () => {
   return (
     <div style={styles.container}>
       <header style={styles.header}>
+        <div style={styles.headerLogos}>
+          <img src="/img/jateng.png" alt="Jateng" style={{ height: "70px" }} />
+          <img src="/img/ayoKerjo.png" alt="Ayo Kerjo" style={{ height: "60px" }} />
+          <img src="/img/ngopeniNglakoni.png" alt="Slogan" style={{ height: "60px" }} />
+        </div> 
         <h1 style={{ fontSize: '2.2rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>
           Dinas Tenaga Kerja dan Transmigrasi
         </h1>
@@ -152,8 +248,34 @@ export const ProfilDinas = () => {
           ))}
         </div>
       </div>
-
-      <section style={{ backgroundColor: '#1e293b', color: '#f8fafc', padding: '30px', borderRadius: '12px' }}>
+      <div style={s.card}>
+            <h2 style={{ ...s.h2, marginBottom: "20px" }}>Informasi Kantor</h2>
+            {[
+              { icon: "🏢", label: "Instansi", val: profilData.singkatan },
+              { icon: "👤", label: "Kepala Dinas", val: profilData.kepalaKantor },
+              { icon: "📍", label: "Alamat", val: profilData.alamat },
+              { icon: "📞", label: "Telepon", val: profilData.telepon },
+              { icon: "📧", label: "Email", val: profilData.email },
+            ].map((item, i) => (
+              <div key={i} style={s.infoRow}>
+                <span>{item.icon}</span>
+                <div>
+                  <span style={s.label}>{item.label}</span>
+                  <span style={s.value}>{item.val}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+      <h2 style={{ ...s.h2, margin: "20px 0 15px" }}>FAQ</h2>
+          {faqs.map((f, i) => (
+            <div key={i} style={s.accordion}>
+              <div style={s.accHeader} onClick={() => setOpenFaq(openFaq === i ? null : i)}>
+                {f.q} <span>{openFaq === i ? "−" : "+"}</span>
+              </div>
+              {openFaq === i && <div style={s.accBody}>{f.a}</div>}
+            </div>
+          ))}
+    <section style={{ backgroundColor: '#1e293b', color: '#f8fafc', padding: '30px', borderRadius: '12px' }}>
         <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
           <Home style={{ color: '#facc15', marginRight: '12px' }} />
           <h3 style={{ fontSize: '1.4rem', fontWeight: '700', color: 'white' }}>Unit Pelaksana Teknis (UPTD)</h3>

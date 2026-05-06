@@ -11,7 +11,12 @@ export const Berita = () => {
     const fetchNews = async () => {
       try {
         const res = await axios.get("http://localhost:5000/api/admin/berita");
-        setNewsData(res.data);
+      
+      const sortedData = res.data.sort((a, b) => {
+        return new Date(b.date) - new Date(a.date);
+      });
+      const limitedData = sortedData.slice(0, 3);
+      setNewsData(limitedData);
       } catch (error) {
         console.error("Gagal mengambil berita:", error);
       }

@@ -1,23 +1,43 @@
 import React, { useState } from "react";
+import { 
+  ClipboardList, 
+  Settings, 
+  BarChart3, 
+  Users, 
+  ShieldCheck, 
+  Briefcase, 
+  MapPin, 
+  ChevronDown,
+  Star, 
+  CheckCircle2,
+  Building2
+} from "lucide-react";
 
 export const VisiDinas = () => {
   const [openFaq, setOpenFaq] = useState(null);
 
   const profilData = {
-    singkatan: "Dinas Tenaga Kerja dan Transmigrasi Provinsi Jawa Tengah",
-    alamat: "Jl. Pahlawan No. 16, Semarang, Jawa Tengah 50241",
-    telepon: "(024) 8311713 / (024) 8311711",
-    email: "disnakertrans@jatengprov.go.id",
-    jamOperasional: "Senin – Jumat: 07.30 – 15.30 WIB",
-    kepalaKantor: "Ahmad Aziz, S.E., M.Si.",
-    visi: "Jawa Tengah Yang Mandiri, Maju, Sejahtera dan Lestari.",
+    visi: "Jawa Tengah Sebagai Provinsi Maju Yang Berkelanjutan Untuk Menuju Indonesia Emas 2045.",
     misi: [
-      "Mewujudkan sumber daya manusia masyarakat Jawa Tengah yang berkualitas dan berbudaya.",
-      "Mewujudkan perekonomian daerah yang berbasis pada potensi unggulan daerah.",
-      "Mewujudkan tata pemerintahan yang baik dan profesional.",
-      "Mewujudkan pengelolaan sumber daya alam yang optimal.",
-      "Mewujudkan sarana prasarana yang menunjang pelayanan dasar.",
-      "Mewujudkan masyarakat yang sejahtera, aman, dan damai.",
+      "Meningkatkan Layanan Dasar yang Inklusif untuk mewujudkan Sumber Daya Manusia yang Mandiri, Kompetitif dan Berwawasan Global.",
+      "Meningkatkan Pertumbuhan Perekonomian Perkotaan dan Pedesaan Berbasis Sektor Unggulan yang Inovatif, Mandiri dan berkelanjutan.",
+      "Mewujudkan Tata Kelola Pemerintahan yang Responsif dan Kolaboratif dengan mengedepankan nilai-nilai Integritas.",
+      "Mewujudkan Pembangunan Infrastruktur Jawa Tengah yang merata dan berkeadilan, melalui perencanaan tata ruang yang responsif.",
+      "Menjaga Stabilitas dan Kondusivitas Daerah dengan pendekatan budaya lokal, serta menjamin kebebasan warga dalam menjalankan ibadah, perlindungan kesejahteraan sosial serta hak asasi manusia yang berkeadilan",
+      "Menjaga iklim Investasi yang kondusif dan kolaboratif untuk membuka kesempatan kerja dan berusaha seluas-luasnya bagi warga Jawa Tengah. Serta Mengembangkan pembiayaan Pembangunan yang partisipatif, kolaboratif dan terintegrasi.",
+    ],
+    programPrioritas: [
+      "Melahirkan Pemerintahan yang Good Clear Government dan Collaborative Governance melalui peningkatan kesejahteraan, Profesionalitas dan kualitas ASN dan Perangkat Desa.",
+      "Melahirkan ekosistem ekonomi syariah melalui penguatan regulasi dan pengembangan wisata ramah muslim.",
+      "Pupuk mudah bagi petani, subsidi solar bagi nelayan dan ketersediaan day care untuk buruh di Kawasan industri.",
+      "Taruna mandiri melalui program kartu zilenial untuk membuka lapangan kerja.",
+      "Moderasi Beragama dan wawasan kebangsaan melalui penguatan regulasi, pendidikan dan pelatihan.",
+      "Pesantren Obah melalui Penambahan Dana Pengembangan Pesantren.",
+      "Pelayanan kesehatan yang paripurna melalui asuransi kesehatan gratis bagi warga miskin.",
+      "Pendidikan yang berkualitas dan merata melalui peningkatan kesejahteraan guru, pengajar agama dan beasiswa untuk siswa miskin, Guru, Santri, penghafal Quran, untuk sekolah ke dalam dan luar negeri bagi yang berprestasi.",
+      "Desa maju dan berdaya melalui pembangunan lumbung kesejahteraan, produk unggulan go unternasional, Sistem Informasi Desa (SID), dan Tim Tanggap Bencana.",
+      "Pembangunan Infrastruktur melalui Permukiman Layak Huni melalui 1 KK 1 ruamh layak huni, Pengembangan Pusat Rekreasi dan Promosi Pembangunan, dan Gelanggang Olah Raga Internasional.",
+      "Penanggulangan Bencana dan keberlanjutan Lingkungan melalui Mageri Segoro untuk mengamankan garis pantai.",
     ],
   };
 
@@ -52,6 +72,13 @@ export const VisiDinas = () => {
       marginBottom: "25px",
     },
     header: { display: "flex", alignItems: "center", gap: "15px", marginBottom: "20px" },
+    headerLogos: { 
+      display: "flex", 
+      gap: "20px", 
+      marginBottom: "30px",
+      justifyContent: "center",
+      alignItems: "center"
+    },
     iconCircle: {
       width: "40px",
       height: "40px",
@@ -76,8 +103,8 @@ export const VisiDinas = () => {
     list: { listStyle: "none", padding: 0 },
     listItem: { display: "flex", gap: "12px", marginBottom: "15px", lineHeight: "1.5" },
     infoRow: { display: "flex", gap: "15px", marginBottom: "20px" },
-    label: { fontSize: "0.85rem", color: "#5D6D7E", display: "block" },
-    value: { fontWeight: "600", fontSize: "1rem" },
+    label: { fontSize: "1.2rem", color: "#5D6D7E", display: "block" },
+    value: { fontWeight: "600", fontSize: "1.2rem" },
     accordion: {
       backgroundColor: "#fff",
       border: "1px solid #ddd",
@@ -92,17 +119,22 @@ export const VisiDinas = () => {
       justifyContent: "space-between",
       fontWeight: "600",
     },
-    accBody: { padding: "0 20px 15px 20px", color: "#5D6D7E", fontSize: "0.95rem" },
+    accBody: { padding: "0 20px 15px 20px", color: "#5D6D7E", fontSize: "1.2rem" },
   };
 
   return (
+    
     <div style={s.wrapper}>
-      <div style={s.container}>
-        
+      <div style={s.headerLogos}>
+          <img src="/img/jateng.png" alt="Jateng" style={{ height: "70px" }} />
+          <img src="/img/ayoKerjo.png" alt="Ayo Kerjo" style={{ height: "60px" }} />
+          <img src="/img/ngopeniNglakoni.png" alt="Slogan" style={{ height: "60px" }} />
+        </div> 
+      <div style={s.container}> 
         <div style={s.mainCol}>
           <div style={s.card}>
             <div style={s.header}>
-              <div style={{ ...s.iconCircle, backgroundColor: "#1A5276" }}>⭐</div>
+              <div style={{ ...s.iconCircle, backgroundColor: "#1A5276" }}><Star size={24} color="#FFD700" fill="#FFD700" /></div>
               <h2 style={s.h2}>Visi</h2>
             </div>
             <div style={s.alert}>"{profilData.visi}"</div>
@@ -110,7 +142,7 @@ export const VisiDinas = () => {
             <hr style={s.divider} />
 
             <div style={s.header}>
-              <div style={{ ...s.iconCircle, backgroundColor: "#1E8449" }}>📈</div>
+              <div style={{ ...s.iconCircle, backgroundColor: "#1E8449" }}><BarChart3 size={24} /></div>
               <h2 style={s.h2}>Misi</h2>
             </div>
             <ul style={s.list}>
@@ -123,28 +155,22 @@ export const VisiDinas = () => {
             </ul>
           </div>
         </div>
-
+        
         <div style={s.sideCol}>
-          <div style={s.card}>
-            <h2 style={{ ...s.h2, marginBottom: "20px" }}>Informasi Kantor</h2>
-            {[
-              { icon: "🏢", label: "Instansi", val: profilData.singkatan },
-              { icon: "👤", label: "Kepala", val: profilData.kepalaKantor },
-              { icon: "📍", label: "Alamat", val: profilData.alamat },
-              { icon: "📞", label: "Telepon", val: profilData.telepon },
-              { icon: "📧", label: "Email", val: profilData.email },
-            ].map((item, i) => (
-              <div key={i} style={s.infoRow}>
-                <span>{item.icon}</span>
-                <div>
-                  <span style={s.label}>{item.label}</span>
-                  <span style={s.value}>{item.val}</span>
-                </div>
-              </div>
-            ))}
+          <div style={s.card}>  
+            <h2 style={{ ...s.h2, marginBottom: "20px" }}>Program Prioritas</h2>
+            <ul style={s.list}>
+              {profilData.programPrioritas.map((m, i) => (
+                <li key={i} style={s.listItem}>
+                  <span style={{ color: "#1E8449" }}>✔</span>
+                  <span>{m}</span>
+                </li>
+              ))}
+            </ul>
           </div>
-
-          <h2 style={{ ...s.h2, margin: "30px 0 15px" }}>FAQ</h2>
+        </div>
+      </div>
+      <h2 style={{ ...s.h2, margin: "10px 0 15px" }}>FAQ</h2>
           {faqs.map((f, i) => (
             <div key={i} style={s.accordion}>
               <div style={s.accHeader} onClick={() => setOpenFaq(openFaq === i ? null : i)}>
@@ -153,8 +179,7 @@ export const VisiDinas = () => {
               {openFaq === i && <div style={s.accBody}>{f.a}</div>}
             </div>
           ))}
-        </div>
-      </div>
     </div>
+    
   );
 };
