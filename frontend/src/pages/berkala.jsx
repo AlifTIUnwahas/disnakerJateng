@@ -2,15 +2,13 @@ import React from "react";
 import { 
   Box, 
   Container, 
-  Typography, 
-  TextField, 
-  Button, 
+  Typography,
   Grid,
   Card, 
   CardContent, 
   Stack 
 } from "@mui/material";
-import { Search, ArrowRight } from "lucide-react";
+import {  ArrowRight } from "lucide-react";
 
 // Komponen Card dengan animasi hover seperti referensi
 const InfoCard = ({ title, desc, link }) => (
@@ -27,7 +25,6 @@ const InfoCard = ({ title, desc, link }) => (
       cursor: 'pointer',
       transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)', 
       border: '1px solid #eee',
-      // Background Image sebagai identitas visual kartu
       background: `linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url("/img/ppid.PNG")`,
       backgroundSize: '120px',
       backgroundRepeat: 'no-repeat',
@@ -69,7 +66,7 @@ const InfoCard = ({ title, desc, link }) => (
           lineHeight: 1.6,
           minHeight: '60px',
           transition: '0.3s',
-          maxWidth: '85%' // Memberi ruang agar teks tidak menabrak background di kanan
+          maxWidth: '85%'
         }}
       >
         {desc}
@@ -139,35 +136,6 @@ export const Berkala = (props) => {
       {/* Main Content */}
       <Container maxWidth="lg" sx={{ mt: -10, pb: 10, position: 'relative', zIndex: 10 }}>
         <Card sx={{ borderRadius: 6, p: { xs: 3, md: 6 }, boxShadow: "0 15px 40px rgba(0,0,0,0.12)" }}>
-        {/* 
-          <Stack direction="row" spacing={2} sx={{ mb: 6 }}>
-            <TextField 
-              fullWidth 
-              placeholder="Cari item..." 
-              variant="outlined" 
-              InputProps={{
-                startAdornment: <Search size={20} style={{ marginRight: 10, color: "#999" }} />,
-              }}
-              sx={{ 
-                bgcolor: "white",
-                '& .MuiOutlinedInput-root': { borderRadius: 3 }
-              }}
-            />
-            <Button 
-              variant="contained" 
-              sx={{ 
-                px: 5, 
-                bgcolor: "#1d7edb", 
-                textTransform: "none", 
-                fontWeight: "bold", 
-                borderRadius: 3,
-                fontSize: "1.1rem"
-              }}
-            >
-              Cari
-            </Button>
-          </Stack>
-        */}
           {/* Grid Cards */}
           <Grid container spacing={4} sx={{ display: 'flex' }}>
             <Grid item xs={12} md={6} sx={{ display: 'flex' }}>

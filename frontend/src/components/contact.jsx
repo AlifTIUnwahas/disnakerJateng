@@ -1,8 +1,6 @@
-import { useState } from "react";
-import emailjs from "emailjs-com";
 import React from "react";
 import { Box, Container, Grid, Stack, Typography, Divider } from "@mui/material";
-import { Phone, Email, Public } from "@mui/icons-material";
+import { Phone, Email } from "@mui/icons-material";
 
 
 export const Contact = (props) => {

@@ -3,8 +3,6 @@ import {
   Box, 
   Container, 
   Typography, 
-  Grid,
-  Card, 
 } from "@mui/material";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
@@ -131,7 +129,7 @@ export const ProfilPpid = () => {
           <Typography variant="h1" sx={{ fontWeight: 800, mb: 3, color: 'white', fontSize: { xs: "2.5rem", md: "4rem" }, lineHeight: 1.1 }}>
             Profil PPID
           </Typography>
-          <Typography variant="h5" sx={{ opacity: 0.9, color: 'white', fontWeight: "normal", maxWidth: "850px", fontSize: "1.2rem", lineHeight: 1.6 }}>
+          <Typography variant="h5" sx={{ opacity: 0.9, color: 'white', fontWeight: "normal", maxWidth: "850px", textTransform: "none", fontSize: "1.2rem", lineHeight: 1.6 }}>
             Setiap Badan Publik memiliki kewajiban untuk memberikan akses informasi kepada masyarakat, sebagaimana diatur dalam Undang-Undang Nomor 14 Tahun 2008 tentang Keterbukaan Informasi Publik.
           </Typography>
         </Container>
@@ -154,7 +152,9 @@ export const ProfilPpid = () => {
               Adapun konsekuensi dari tuntutan reformasi tersebut di antaranya penetapan <strong>Undang-undang Republik Indonesia Nomor 14 Tahun 2008</strong> tentang Keterbukaan informasi publik yang bertujuan untuk mewujudkan tata kelola pemerintahan yang baik (<i>good governance</i>).
             </Typography>
             <div className="info-badge">
+              <a href="https://drive.google.com/file/d/1a9_dv5_2IjdP1a2WTi_XXsVhSkU-1QQc/view?usp=sharing" target="_blank" rel="noopener noreferrer">
               <FontAwesomeIcon icon={faGavel} /> Keputusan Gubernur Jawa Tengah No. 550/1 TAHUN 2013
+              </a>
             </div>
           </div>
 

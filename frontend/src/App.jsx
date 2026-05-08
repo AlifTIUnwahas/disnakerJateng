@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Header } from "./components/header";
-import { Features } from "./components/features";
 import { Berita } from "./components/berita";
 import { Berkala } from "./pages/berkala"
 import { About } from "./components/about";

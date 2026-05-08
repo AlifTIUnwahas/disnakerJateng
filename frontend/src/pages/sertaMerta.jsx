@@ -2,15 +2,13 @@ import React from "react";
 import { 
   Box, 
   Container, 
-  Typography, 
-  TextField, 
-  Button, 
+  Typography,  
   Grid,
   Card, 
   CardContent, 
   Stack 
 } from "@mui/material";
-import { Search, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 // Komponen Card dengan animasi hover seperti referensi
 const InfoCard = ({ title, desc, link }) => (
@@ -139,35 +137,6 @@ export const Serta = (props) => {
       {/* Main Content */}
       <Container maxWidth="lg" sx={{ mt: -10, pb: 10, position: 'relative', zIndex: 10 }}>
         <Card sx={{ borderRadius: 6, p: { xs: 3, md: 6 }, boxShadow: "0 15px 40px rgba(0,0,0,0.12)" }}>
-        {/* 
-          <Stack direction="row" spacing={2} sx={{ mb: 6 }}>
-            <TextField 
-              fullWidth 
-              placeholder="Cari item..." 
-              variant="outlined" 
-              InputProps={{
-                startAdornment: <Search size={20} style={{ marginRight: 10, color: "#999" }} />,
-              }}
-              sx={{ 
-                bgcolor: "white",
-                '& .MuiOutlinedInput-root': { borderRadius: 3 }
-              }}
-            />
-            <Button 
-              variant="contained" 
-              sx={{ 
-                px: 5, 
-                bgcolor: "#1d7edb", 
-                textTransform: "none", 
-                fontWeight: "bold", 
-                borderRadius: 3,
-                fontSize: "1.1rem"
-              }}
-            >
-              Cari
-            </Button>
-          </Stack>
-        */}
           {/* Grid Cards */}
           <Grid container spacing={4} sx={{ display: 'flex' }}>
             <Grid item xs={12} md={6} sx={{ display: 'flex' }}>

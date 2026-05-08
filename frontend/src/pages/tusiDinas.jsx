@@ -2,14 +2,7 @@ import React, { useState } from "react";
 import { 
   ClipboardList, 
   Settings, 
-  BarChart3, 
-  Users, 
-  ShieldCheck, 
-  Briefcase, 
-  MapPin, 
-  ChevronDown, 
-  CheckCircle2,
-  Building2
+  BarChart3
 } from "lucide-react";
 
 export const TusiDinas = () => {

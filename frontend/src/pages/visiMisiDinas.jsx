@@ -1,16 +1,7 @@
 import React, { useState } from "react";
 import { 
-  ClipboardList, 
-  Settings, 
-  BarChart3, 
-  Users, 
-  ShieldCheck, 
-  Briefcase, 
-  MapPin, 
-  ChevronDown,
-  Star, 
-  CheckCircle2,
-  Building2
+  BarChart3,
+  Star
 } from "lucide-react";
 
 export const VisiDinas = () => {

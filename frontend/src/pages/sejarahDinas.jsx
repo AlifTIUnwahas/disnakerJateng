@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Book, Briefcase, Users, Home, ShieldCheck, ChevronRight } from 'lucide-react';
+import { Book, Users, Home, ShieldCheck, ChevronRight } from 'lucide-react';
 
 export const ProfilDinas = () => {
   const [openFaq, setOpenFaq] = useState(null);
