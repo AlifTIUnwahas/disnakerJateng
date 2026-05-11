@@ -17,6 +17,7 @@ import { ProfilPpid } from "./pages/profilPpid";
 import { ProfilDinas } from "./pages/sejarahDinas";
 import { VisiDinas } from "./pages/visiMisiDinas"
 import { TusiDinas } from "./pages/tusiDinas";
+import { StrukturDinas } from "./pages/strukturDinas";
 import JsonData from "./data/data.json";
 import SmoothScroll from "smooth-scroll";
 import "./App.css";
@@ -55,6 +56,7 @@ const App = () => {
           <Route path="profil-dinas" element={<ProfilDinas />} />
           <Route path="visi-dinas" element={<VisiDinas />} />
           <Route path="tusi-dinas" element={<TusiDinas />} />
+          <Route path="struktur-dinas" element={<StrukturDinas />}/>
           {/* Route PPID */}
           <Route path="profil-ppid" element={<ProfilPpid />} />
           <Route path="struktur" element={<Struktur data={landingPageData.Struktur} />} />

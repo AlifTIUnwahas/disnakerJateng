@@ -135,7 +135,7 @@ export const DIK = (props) => {
       </Box>
 
       {/* Main Content */}
-      <Container maxWidth="lg" sx={{ mt: -10, pb: 10, position: 'relative', zIndex: 10 }}>
+      <Container maxWidth="xl" sx={{ mt: -10, pb: 10, position: 'relative', zIndex: 10, display: 'flex', justifyContent: 'center' }}>
         <Card sx={{ borderRadius: 6, p: { xs: 3, md: 6 }, boxShadow: "0 15px 40px rgba(0,0,0,0.12)" }}>
           
           <Grid container spacing={4} sx={{ display: 'flex' }}>

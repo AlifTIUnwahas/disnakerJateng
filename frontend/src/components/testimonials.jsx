@@ -60,16 +60,14 @@ const LayananCard = ({ layanan, delay }) => {
 
   return (
     <div className={`col-md-4 mb-4 card-anim ${shown ? "is-visible" : ""}`}>
-      <a href={layanan.link} className="layanan-card-root h-100 d-flex flex-column">
+      <div className="layanan-card-root h-100 d-flex flex-column">
         <div className="layanan-content flex-grow-1">
           <div 
             className="layanan-ikon-circle" 
             style={{ backgroundColor: `${layanan.warna}1a`, color: layanan.warna }}
           >
             {/* Placeholder Ikon (Bisa diganti SVG spesifik) */}
-            <svg width="26" height="26" fill="currentColor" viewBox="0 0 24 24">
-               <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14h-2v-4h-2v4H8V7h2v2h2V7h2v10z"/>
-            </svg>
+            <img src="/img/jateng.png" alt="Logo" width="26" height="26" style={{ display: 'block', objectFit: 'contain' }} />
           </div>
           
           <h3 className="layanan-judul">{layanan.judul}</h3>
@@ -87,11 +85,7 @@ const LayananCard = ({ layanan, delay }) => {
             ))}
           </div>
         </div>
-        
-        <div className="layanan-footer">
-          <span style={{ color: layanan.warna }}>Selengkapnya →</span>
-        </div>
-      </a>
+      </div>
     </div>
   );
 };
@@ -134,13 +128,13 @@ export const Testimonials = () => {
           color: #fff !important;
         }
         .layanan-judul {
-          font-size: 1.15rem;
+          font-size: 1.5rem;
           font-weight: 600;
           color: #222;
           margin-bottom: 10px;
         }
         .layanan-deskripsi {
-          font-size: 0.9rem;
+          font-size: 1.2rem;
           color: #666;
           line-height: 1.6;
           margin-bottom: 16px;
@@ -151,7 +145,7 @@ export const Testimonials = () => {
           gap: 6px;
         }
         .layanan-tag {
-          font-size: 0.72rem;
+          font-size: 0.9rem;
           font-weight: 700;
           padding: 4px 10px;
           border-radius: 4px;
@@ -160,7 +154,7 @@ export const Testimonials = () => {
         .layanan-footer {
           padding: 16px 24px;
           border-top: 1px solid #f5f5f5;
-          font-size: 0.85rem;
+          font-size: 0.9rem;
           font-weight: 600;
         }
         .card-anim {

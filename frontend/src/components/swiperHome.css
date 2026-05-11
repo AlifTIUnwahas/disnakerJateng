@@ -1,33 +1,42 @@
-.swiper {
-  margin-left: auto;
-  margin-right: auto;
-  position: relative;
+.slider-container {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 10px 0;
+}
+.swiper-wrapper {
+  height: auto; /* Biarkan mengikuti tinggi konten/gambar */
+  align-items: flex-start; /* Memastikan konten tidak ditarik ke tengah secara vertikal */
+}
+.mySwiper {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 0 !important;
   overflow: hidden;
-  list-style: none;
-  padding: 0;
-  z-index: 1;
-  display: block;
 }
 
-.swiper-wrapper {
-  position: relative;
+.card-slider {
   width: 100%;
-  height: 70%;
-  z-index: 1;
+  aspect-ratio: 16 / 6; 
   display: flex;
-  transition-property: transform;
-  box-sizing: content-box;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
 }
-.swiper-slide {
-  flex-shrink: 0;
+
+.card-slider img {
   width: 100%;
   height: 100%;
-  position: relative;
-  transition-property: transform;
+  object-fit: fill; 
 }
-.swiper-slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+
+/* Responsif Mobile */
+@media (max-width: 768px) {
+  .card-slider {
+    aspect-ratio: 16 / 9;
+  }
+  
+  .mySwiper {
+    border-radius: 0; 
+  }
 }

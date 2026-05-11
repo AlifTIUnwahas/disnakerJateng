@@ -9199,7 +9199,7 @@ svgo@^2.7.0:
 
 swiper@^12.1.4:
   version "12.1.4"
-  resolved "https://registry.npmjs.org/swiper/-/swiper-12.1.4.tgz"
+  resolved "https://registry.yarnpkg.com/swiper/-/swiper-12.1.4.tgz#f89e8baa71207627ab489898d67c4e7edad834d2"
   integrity sha512-bihiwoKMOQwW8FfdUbo1DgkVH25E+4ZELIq0oopL1KTKBteLuaTMi/wwFjMxtlhTkk45k3XQ89D1Fvv0spSqBA==
 
 symbol-tree@^3.2.4:
