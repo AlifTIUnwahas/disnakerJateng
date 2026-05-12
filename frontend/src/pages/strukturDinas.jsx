@@ -1,16 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { 
   Box, 
   Typography, 
   Paper, 
   Grid, 
-  Tooltip, 
-  Collapse,
-  IconButton
+  Tooltip
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import AccountTreeIcon from '@mui/icons-material/AccountTree';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const s = {
     wrapper: {
@@ -61,7 +57,7 @@ const OrgNode = styled(Paper)(({ theme, level }) => ({
 }));
 
 export const StrukturDinas = () => {
-  const [expanded, setExpanded] = useState(true);
+
 
   return (
      <div style={s.wrapper}>
