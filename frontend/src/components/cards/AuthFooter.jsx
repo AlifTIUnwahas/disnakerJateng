@@ -17,6 +17,7 @@ export default function AuthFooter() {
       >
         <Typography variant="subtitle2" color="secondary">
           © Made with love by Team{' '}
+<<<<<<< HEAD
           <Link href="https://id.linkedin.com/in/alif-azizy" target="_blank" underline="hover">
             Teknik Informatika Unwahas
           </Link>
@@ -24,6 +25,8 @@ export default function AuthFooter() {
 
         <Typography variant="subtitle2" color="secondary">
           © Template by Team{' '}
+=======
+>>>>>>> 5b43cb788d1e8c7c08b3c7160665734c8edc3a60
           <Link href="https://codedthemes.com/" target="_blank" underline="hover">
             CodedThemes
           </Link>

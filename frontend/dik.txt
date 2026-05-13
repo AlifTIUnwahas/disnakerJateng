@@ -1,0 +1,146 @@
+import React from 'react';
+import { ArrowRight } from "lucide-react";
+
+export const DIK = () => {
+  const dataDIK = [
+    { title: "DIK 2026", desc: "Daftar Informasi Publik Dinas Tenaga Kerja dan Transmigrasi Tahun 2025.", link: "https://drive.google.com/file/d/16ym4ipUgPFpVggDsLA7BF5CpV4QwfD7x/view?usp=drivesdk" },
+    { title: "DIK 2025", desc: "Daftar Informasi Publik Dinas Tenaga Kerja dan Transmigrasi Tahun 2024.", link: "https://drive.google.com/file/d/1iFqd5ZpejCCjFy6PbWzzwLDQneJG1rQj/view?usp=drivesdk" },
+    { title: "DIK 2024", desc: "Daftar Informasi Publik Dinas Tenaga Kerja dan Transmigrasi Tahun 2023.", link: "https://drive.google.com/file/d/1ulTYFzDdwCiOOAJewmN9H8A5I5y4xoyj/view?usp=drivesdk" },
+    { title: "DIK 2023", desc: "Daftar Informasi Publik Dinas Tenaga Kerja dan Transmigrasi Tahun 2023.", link: "#" },
+  ];
+
+  return (
+    <div className="dik-wrapper">
+      {/* CSS Langsung di dalam JSX */}
+      <style>{`
+        .dik-wrapper {
+          background-color: #f8f9fa;
+          min-height: 100vh;
+          font-family: 'Inter', sans-serif;
+        }
+
+        .hero-section {
+          background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                      url('/img/gedungDisnakertrans1.jpg');
+          background-size: cover;
+          background-position: center;
+          min-height: 450px;
+          display: flex;
+          align-items: center;
+          padding: 0 24px;
+          color: white;
+        }
+
+        .main-container {
+          max-width: 1140px;
+          margin: -100px auto 50px auto;
+          padding: 0 20px;
+          position: relative;
+          z-index: 2;
+        }
+
+        .content-card {
+          background: white;
+          border-radius: 24px;
+          padding: 50px;
+          box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .dik-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 25px;
+        }
+
+        .info-card {
+          border: 1px solid #eee;
+          border-radius: 20px;
+          padding: 30px;
+          text-decoration: none;
+          transition: all 0.4s ease;
+          position: relative;
+          display: block;
+          overflow: hidden;
+        }
+
+        .info-card:hover {
+          background-color: #5ca9fb;
+          transform: translateY(-8px);
+          box-shadow: 0 10px 20px rgba(92, 169, 251, 0.3);
+        }
+
+        .card-icon {
+          width: 70px;
+          height: 70px;
+          margin-bottom: 20px;
+        }
+
+        .card-title {
+          font-size: 1.6rem;
+          color: #001d3d;
+          font-weight: 800;
+          margin-bottom: 12px;
+          transition: 0.3s;
+        }
+
+        .card-desc {
+          color: #666;
+          line-height: 1.6;
+          margin-bottom: 25px;
+          transition: 0.3s;
+        }
+
+        .card-btn {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          color: #1d7edb;
+          font-weight: 700;
+          transition: 0.3s;
+        }
+
+        /* Hover effect untuk konten di dalam card */
+        .info-card:hover .card-title,
+        .info-card:hover .card-desc,
+        .info-card:hover .card-btn {
+          color: white !important;
+        }
+
+        @media (max-width: 768px) {
+          .content-card { padding: 30px 20px; }
+          .hero-section h1 { font-size: 2.5rem; }
+        }
+      `}</style>
+
+      {/* Hero */}
+      <div className="hero-section">
+        <div style={{ maxWidth: '1140px', margin: '0 auto', width: '100%' }}>
+          <h1 style={{ fontWeight: 800, fontSize: '3.5rem', marginBottom: '1rem' }}>Informasi Dikecualikan</h1>
+          <p style={{ maxWidth: '800px', fontSize: '1.2rem', lineHeight: 1.6 }}>
+            Sesuai Pasal 11 Undang-Undang Nomor 14 Tahun 2008 mengenai Keterbukaan Informasi Publik, 
+            Badan Publik wajib menyediakan Informasi Publik setiap saat.
+          </p>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="main-container">
+        <div className="content-card">
+          <div className="dik-grid">
+            {dataDIK.map((item, index) => (
+              <a key={index} href={item.link} target="_blank" rel="noopener noreferrer" className="info-card">
+                <img src="/img/ppid.PNG" alt="icon" className="card-icon" />
+                <h2 className="card-title">{item.title}</h2>
+                <p className="card-desc">{item.desc}</p>
+                <div className="card-btn">
+                  <span>Selengkapnya</span>
+                  <ArrowRight size={18} />
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};

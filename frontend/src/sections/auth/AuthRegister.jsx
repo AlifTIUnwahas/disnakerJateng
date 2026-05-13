@@ -54,12 +54,20 @@ export default function AuthRegister() {
     <>
       <Formik
         initialValues={{
+<<<<<<< HEAD
           username: '',
           email: '',
+=======
+          firstname: '',
+          lastname: '',
+          email: '',
+          company: '',
+>>>>>>> 5b43cb788d1e8c7c08b3c7160665734c8edc3a60
           password: '',
           submit: null
         }}
         validationSchema={Yup.object().shape({
+<<<<<<< HEAD
           username: Yup.string()
             .max(255)
             .required('Username is required')
@@ -135,11 +143,93 @@ export default function AuthRegister() {
               {/* Field Email */}
               <Grid item xs={12}>
                 <Stack spacing={1}>
+=======
+          firstname: Yup.string().max(255).required('First Name is required'),
+          lastname: Yup.string().max(255).required('Last Name is required'),
+          email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
+          password: Yup.string()
+            .required('Password is required')
+            .test('no-leading-trailing-whitespace', 'Password cannot start or end with spaces', (value) => value === value.trim())
+            .max(10, 'Password must be less than 10 characters')
+        })}
+      >
+        {({ errors, handleBlur, handleChange, touched, values }) => (
+          <form noValidate>
+            <Grid container spacing={3}>
+              <Grid size={{ xs: 12, md: 6 }}>
+                <Stack sx={{ gap: 1 }}>
+                  <InputLabel htmlFor="firstname-signup">First Name*</InputLabel>
+                  <OutlinedInput
+                    id="firstname-login"
+                    type="firstname"
+                    value={values.firstname}
+                    name="firstname"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    placeholder="John"
+                    fullWidth
+                    error={Boolean(touched.firstname && errors.firstname)}
+                  />
+                </Stack>
+                {touched.firstname && errors.firstname && (
+                  <FormHelperText error id="helper-text-firstname-signup">
+                    {errors.firstname}
+                  </FormHelperText>
+                )}
+              </Grid>
+              <Grid size={{ xs: 12, md: 6 }}>
+                <Stack sx={{ gap: 1 }}>
+                  <InputLabel htmlFor="lastname-signup">Last Name*</InputLabel>
+                  <OutlinedInput
+                    fullWidth
+                    error={Boolean(touched.lastname && errors.lastname)}
+                    id="lastname-signup"
+                    type="lastname"
+                    value={values.lastname}
+                    name="lastname"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    placeholder="Doe"
+                  />
+                </Stack>
+                {touched.lastname && errors.lastname && (
+                  <FormHelperText error id="helper-text-lastname-signup">
+                    {errors.lastname}
+                  </FormHelperText>
+                )}
+              </Grid>
+              <Grid size={12}>
+                <Stack sx={{ gap: 1 }}>
+                  <InputLabel htmlFor="company-signup">Company</InputLabel>
+                  <OutlinedInput
+                    fullWidth
+                    error={Boolean(touched.company && errors.company)}
+                    id="company-signup"
+                    value={values.company}
+                    name="company"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    placeholder="Demo Inc."
+                  />
+                </Stack>
+                {touched.company && errors.company && (
+                  <FormHelperText error id="helper-text-company-signup">
+                    {errors.company}
+                  </FormHelperText>
+                )}
+              </Grid>
+              <Grid size={12}>
+                <Stack sx={{ gap: 1 }}>
+>>>>>>> 5b43cb788d1e8c7c08b3c7160665734c8edc3a60
                   <InputLabel htmlFor="email-signup">Email Address*</InputLabel>
                   <OutlinedInput
                     fullWidth
                     error={Boolean(touched.email && errors.email)}
+<<<<<<< HEAD
                     id="email-signup"
+=======
+                    id="email-login"
+>>>>>>> 5b43cb788d1e8c7c08b3c7160665734c8edc3a60
                     type="email"
                     value={values.email}
                     name="email"
@@ -149,15 +239,24 @@ export default function AuthRegister() {
                   />
                 </Stack>
                 {touched.email && errors.email && (
+<<<<<<< HEAD
                   <FormHelperText error id="helper-email-signup">
+=======
+                  <FormHelperText error id="helper-text-email-signup">
+>>>>>>> 5b43cb788d1e8c7c08b3c7160665734c8edc3a60
                     {errors.email}
                   </FormHelperText>
                 )}
               </Grid>
+<<<<<<< HEAD
 
               {/* Field Password */}
               <Grid item xs={12}>
                 <Stack spacing={1}>
+=======
+              <Grid size={12}>
+                <Stack sx={{ gap: 1 }}>
+>>>>>>> 5b43cb788d1e8c7c08b3c7160665734c8edc3a60
                   <InputLabel htmlFor="password-signup">Password</InputLabel>
                   <OutlinedInput
                     fullWidth
@@ -167,7 +266,14 @@ export default function AuthRegister() {
                     value={values.password}
                     name="password"
                     onBlur={handleBlur}
+<<<<<<< HEAD
                     onChange={handleChange}
+=======
+                    onChange={(e) => {
+                      handleChange(e);
+                      changePassword(e.target.value);
+                    }}
+>>>>>>> 5b43cb788d1e8c7c08b3c7160665734c8edc3a60
                     endAdornment={
                       <InputAdornment position="end">
                         <IconButton
@@ -185,6 +291,7 @@ export default function AuthRegister() {
                   />
                 </Stack>
                 {touched.password && errors.password && (
+<<<<<<< HEAD
                   <FormHelperText error id="helper-password-signup">
                     {errors.password}
                   </FormHelperText>
@@ -209,6 +316,45 @@ export default function AuthRegister() {
                     variant="contained"
                     color="primary"
                   >
+=======
+                  <FormHelperText error id="helper-text-password-signup">
+                    {errors.password}
+                  </FormHelperText>
+                )}
+                <FormControl fullWidth sx={{ mt: 2 }}>
+                  <Grid container spacing={2} alignItems="center">
+                    <Grid>
+                      <Box sx={{ bgcolor: level?.color, width: 85, height: 8, borderRadius: '7px' }} />
+                    </Grid>
+                    <Grid>
+                      <Typography variant="subtitle1" fontSize="0.75rem">
+                        {level?.label}
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </FormControl>
+              </Grid>
+              <Grid size={12}>
+                <Typography variant="body2">
+                  By Signing up, you agree to our &nbsp;
+                  <Link variant="subtitle2" component={RouterLink} to="#">
+                    Terms of Service
+                  </Link>
+                  &nbsp; and &nbsp;
+                  <Link variant="subtitle2" component={RouterLink} to="#">
+                    Privacy Policy
+                  </Link>
+                </Typography>
+              </Grid>
+              {errors.submit && (
+                <Grid size={12}>
+                  <FormHelperText error>{errors.submit}</FormHelperText>
+                </Grid>
+              )}
+              <Grid size={12}>
+                <AnimateButton>
+                  <Button fullWidth size="large" variant="contained" color="primary">
+>>>>>>> 5b43cb788d1e8c7c08b3c7160665734c8edc3a60
                     Create Account
                   </Button>
                 </AnimateButton>
