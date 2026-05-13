@@ -3,64 +3,45 @@ import {
   Box, 
   Container, 
   Typography, 
-  TextField, 
-  Button, 
   Grid,
   Card, 
   CardContent, 
   Stack 
 } from "@mui/material";
-import { Search, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 // Komponen Card dengan animasi hover seperti referensi
 const InfoCard = ({ title, desc, link }) => (
   <Card 
-    onClick={()=> window.open(link, '_blank')}
+    onClick={() => window.open(link, '_blank')}
     variant="outlined" 
     sx={{ 
       height: '100%',
       display: 'flex',
       flexDirection: 'column',
-      borderRadius: 4, 
+      borderRadius: 6, 
       position: 'relative',
       overflow: 'hidden',
       cursor: 'pointer',
       transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)', 
       border: '1px solid #eee',
-      // Logika Hover: Mengubah warna seluruh elemen di dalamnya
+      // Background Image sebagai identitas visual kartu
+      background: `linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url("/img/ppid.PNG")`,
+      backgroundSize: '120px',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'right 20px bottom 20px',
+      
       '&:hover': { 
         bgcolor: '#5ca9fb', 
-        transform: 'translateY(-5px)',
-        boxShadow: '0 12px 25px rgba(0,0,0,0.1)',
+        backgroundImage: `linear-gradient(rgba(92, 169, 251, 0.9), rgba(92, 169, 251, 0.9)), url("/img/ppid.PNG")`,
+        transform: 'translateY(-8px)',
+        boxShadow: '0 15px 35px rgba(92, 169, 251, 0.3)',
         '& .text-target': { color: '#ffffff !important' },
-        '& .icon-dot': { bgcolor: '#ffffff' },
         '& .decoration-dots div': { bgcolor: '#ffffff', opacity: 0.4 }
       }
     }}
   >
-    <CardContent sx={{ p: 4 }}>
-      {/* Label PPID */}
-      <Typography 
-        variant="caption" 
-        className="text-target"
-        sx={{ 
-          color: "#28a745", 
-          fontWeight: "bold", 
-          display: "flex", 
-          alignItems: "center", 
-          gap: 1.5, 
-          mb: 3,
-          fontSize: '0.85rem',
-          transition: '0.3s'
-        }}
-      >
-        <Box 
-          className="icon-dot"
-          sx={{ width: 10, height: 10, bgcolor: "#28a745", borderRadius: "50%", transition: '0.3s' }} 
-        /> 
-        ppid
-      </Typography>
-
+    <CardContent sx={{ p: 5, position: 'relative', zIndex: 2 }}>
       {/* Judul */}
       <Typography 
         className="text-target"
@@ -84,8 +65,9 @@ const InfoCard = ({ title, desc, link }) => (
           mb: 4, 
           fontSize: "1.05rem",
           lineHeight: 1.6,
-          minHeight: '50px',
-          transition: '0.3s'
+          minHeight: '60px',
+          transition: '0.3s',
+          maxWidth: '85%' // Memberi ruang agar teks tidak menabrak background di kanan
         }}
       >
         {desc}
@@ -103,7 +85,7 @@ const InfoCard = ({ title, desc, link }) => (
         <ArrowRight size={20} />
       </Stack>
 
-      {/* Dekorasi Dot Pattern di Pojok */}
+      {/* Dekorasi Titik-titik */}
       <Box 
         className="decoration-dots"
         sx={{ 
@@ -130,18 +112,22 @@ export const DIP = (props) => {
       {/* Hero Section */}
       <Box 
         sx={{ 
-          bgcolor: "#01c5ed",
-          color: "white", 
+          backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("/img/gedungDisnakertrans1.jpg")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          minHeight: '500px', 
+          width: '100%',
           pt: { xs: 15, md: 22 }, 
           pb: { xs: 12, md: 18 }, 
           px: 3 
         }}
       >
         <Container maxWidth="lg">
-          <Typography variant="h1" sx={{ fontWeight: 800, mb: 3, color: 'black', fontSize: { xs: "2.5rem", md: "4.5rem" }, lineHeight: 1.1 }}>
+          <Typography variant="h1" sx={{ fontWeight: 800, mb: 3, color: 'white', fontSize: { xs: "2.5rem", md: "4.5rem" }, lineHeight: 1.1 }}>
             Informasi Tersedia Setiap Saat
           </Typography>
-          <Typography variant="h5" sx={{ opacity: 0.9, color: 'black', fontWeight: "normal", maxWidth: "850px", fontSize: "1.3rem", textTransform: "none", lineHeight: 1.6 }}>
+          <Typography variant="h5" sx={{ opacity: 0.9, color: 'white', fontWeight: "normal", maxWidth: "850px", fontSize: "1.3rem", textTransform: "none", lineHeight: 1.6 }}>
             Sesuai Pasal 11 Undang-Undang Nomor 14 Tahun 2008 mengenai Keterbukaan Informasi Publik, 
             Badan Publik wajib menyediakan Informasi Publik setiap saat yang dapat diakses oleh Pengguna Informasi Publik.
           </Typography>
@@ -149,37 +135,8 @@ export const DIP = (props) => {
       </Box>
 
       {/* Main Content */}
-      <Container maxWidth="lg" sx={{ mt: -10, pb: 10, position: 'relative', zIndex: 10 }}>
+      <Container maxWidth="xl" sx={{ mt: -10, pb: 10, position: 'relative', zIndex: 10, display: 'flex', justifyContent: 'center' }}>
         <Card sx={{ borderRadius: 6, p: { xs: 3, md: 6 }, boxShadow: "0 15px 40px rgba(0,0,0,0.12)" }}>
-        {/* 
-          <Stack direction="row" spacing={2} sx={{ mb: 6 }}>
-            <TextField 
-              fullWidth 
-              placeholder="Cari item..." 
-              variant="outlined" 
-              InputProps={{
-                startAdornment: <Search size={20} style={{ marginRight: 10, color: "#999" }} />,
-              }}
-              sx={{ 
-                bgcolor: "white",
-                '& .MuiOutlinedInput-root': { borderRadius: 3 }
-              }}
-            />
-            <Button 
-              variant="contained" 
-              sx={{ 
-                px: 5, 
-                bgcolor: "#1d7edb", 
-                textTransform: "none", 
-                fontWeight: "bold", 
-                borderRadius: 3,
-                fontSize: "1.1rem"
-              }}
-            >
-              Cari
-            </Button>
-          </Stack>
-        */}
           {/* Grid Cards */}
           <Grid container spacing={4} sx={{ display: 'flex' }}>
             <Grid item xs={12} md={6} sx={{ display: 'flex' }}>

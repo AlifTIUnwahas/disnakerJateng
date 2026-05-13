@@ -27,7 +27,12 @@ export const DetailBerita = () => {
   if (!news) return <p>Berita tidak ditemukan.</p>;
 
   return (
-    <div className="container" style={{ padding: '40px 0' }}>
+    <div className="container" style={{ padding: '120px 0' }}>
+      <div style={{ display: "flex", gap: "20px", marginBottom: "30px", justifyContent: "center", alignItems: "center"}}>               
+          <img src="/img/jateng.png" alt="Logo Jateng" style={{ height: "70px" }} />
+          <img src="/img/ayoKerjo.png" alt="Logo Ayo Kerjo" style={{ height: "60px" }} />
+          <img src="/img/ngopeniNglakoni.png" alt="Logo Ngopeni Nglakoni Jateng" style={{ height: "60px" }} />
+      </div>
       {/* Gambar */}
       <img
         src={news.photo.url}

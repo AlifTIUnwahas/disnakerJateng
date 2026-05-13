@@ -73,7 +73,7 @@ export const Navigation = (props) => {
                 </li>
                 <li>
                   <Link to="/struktur-dinas">
-                    Struktur Organisasi
+                    Struktur Organisasi Dinas
                   </Link>
                 </li>
               </ul>
@@ -84,8 +84,18 @@ export const Navigation = (props) => {
               </a>
               <ul className="dropdown-menu">
                 <li>
+                  <Link to="/profil-ppid">
+                    Profil PPID
+                  </Link>
+                </li>
+                <li>
                   <Link to="/daftar-informasi-publik">
                     Daftar Informasi Publik
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/info-kecuali">
+                    Informasi Dikecualikan
                   </Link>
                 </li>
                 

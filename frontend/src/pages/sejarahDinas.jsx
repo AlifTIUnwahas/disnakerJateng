@@ -1,803 +1,310 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import {
-  Box,
-  Container,
-  Grid,
-  Card,
-  CardContent,
-  Typography,
-  Tabs,
-  Tab,
-  Avatar,
-  Chip,
-  Divider,
-  Paper,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  IconButton,
-  Tooltip,
-  Fade,
-  Zoom,
-  Slide,
-  LinearProgress,
-  Badge,
-  Stack,
-  Button,
-  useTheme,
-  useMediaQuery,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  Alert,
-} from "@mui/material";
-import { createTheme, ThemeProvider, alpha } from "@mui/material/styles";
-import {
-  Work,
-  People,
-  LocationOn,
-  Phone,
-  Email,
-  Language,
-  AccessTime,
-  CheckCircle,
-  ExpandMore,
-  Star,
-  TrendingUp,
-  Assignment,
-  Gavel,
-  Groups,
-  BusinessCenter,
-  Map,
-  School,
-  HealthAndSafety,
-  AccountBalance,
-  ArrowForward,
-  Info,
-  Public,
-  ContactMail,
-} from "@mui/icons-material";
-
-// Tema khusus instansi pemerintah – palet biru-hijau resmi
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#1A5276",
-      light: "#2E86C1",
-      dark: "#0D3349",
-      contrastText: "#FFFFFF",
-    },
-    secondary: {
-      main: "#1E8449",
-      light: "#27AE60",
-      dark: "#145A32",
-      contrastText: "#FFFFFF",
-    },
-    background: {
-      default: "#F0F4F8",
-      paper: "#FFFFFF",
-    },
-    text: {
-      primary: "#1C2833",
-      secondary: "#5D6D7E",
-    },
-    info: { main: "#2E86C1" },
-    success: { main: "#1E8449" },
-    warning: { main: "#D4AC0D" },
-    error: { main: "#C0392B" },
-  },
-  typography: {
-    fontFamily: "'Noto Serif', 'Georgia', serif",
-    h1: { fontWeight: 700, letterSpacing: "-0.02em" },
-    h2: { fontWeight: 700 },
-    h3: { fontWeight: 600 },
-    h4: { fontWeight: 600 },
-    h5: { fontWeight: 600 },
-    h6: { fontWeight: 600 },
-    body1: { fontFamily: "'Source Sans 3', sans-serif", lineHeight: 1.75 },
-    body2: { fontFamily: "'Source Sans 3', sans-serif" },
-    button: {
-      fontFamily: "'Source Sans 3', sans-serif",
-      fontWeight: 600,
-      textTransform: "none",
-    },
-  },
-  shape: { borderRadius: 12 },
-  components: {
-    MuiCard: {
-      styleOverrides: {
-        root: {
-          boxShadow: "0 2px 12px rgba(26,82,118,0.08)",
-          transition: "box-shadow 0.25s, transform 0.25s",
-          "&:hover": {
-            boxShadow: "0 6px 24px rgba(26,82,118,0.16)",
-            transform: "translateY(-2px)",
-          },
-        },
-      },
-    },
-    MuiChip: {
-      styleOverrides: {
-        root: { fontFamily: "'Source Sans 3', sans-serif" },
-      },
-    },
-    MuiTab: {
-      styleOverrides: {
-        root: {
-          fontFamily: "'Source Sans 3', sans-serif",
-          fontWeight: 600,
-          textTransform: "none",
-          fontSize: "0.9rem",
-        },
-      },
-    },
-  },
-});
-
-// ─── DATA ───────────────────────────────────────────────────────────────────
-
-const profilData = {
-  nama: "Dinas Tenaga Kerja dan Transmigrasi Provinsi Jawa Tengah",
-  singkatan: "Disnakertrans Jateng",
-  tahunBerdiri: 1950,
-  alamat: "Jl. Pahlawan No. 16, Semarang, Jawa Tengah 50241",
-  telepon: "(024) 8311713",
-  email: "disnakertrans@jatengprov.go.id",
-  website: "https://disnakertrans.jatengprov.go.id",
-  jamOperasional: "Senin – Jumat: 07.30 – 15.30 WIB",
-  kepalaKantor: "Ahmad Aziz, S.E., M.Si.",
-  visi:
-    "Jawa Tengah Yang Mandiri, Maju, Sejahtera dan Lestari.",
-  misi: [
-    "Mewujudkan sumber daya manusia dan masyarakat Jawa Tengah yang berkualitas, beriman dan bertakwa kepada Tuhan Yang Maha Esa, cerdas, sehat, serta berbudaya.",
-    "Mewujudkan perekonomian daerah yang berbasis pada potensi unggulan daerah dengan dukungan rekayasa teknologi dan berorientasi pada ekonomi kerakyatan.",
-    "Menwujudkan kehidupan politik dan tata pemerintahan yang baik (good governance), demokratis, dan bertanggung jawab, didukung oleh kompetensi dan profesionalitas aparatur, bebas dari praktik korupsi, kolusi dan nepotisme (KKN), serta pengembangan jejaring",
-    "Mewujudkan pengelolaan sumber daya alam dan lingkungan hidup yang optimal dengan tetap menjaga kelestarian fungsinya dalam menopang kehidupan.",
-    "Mewujudkan kualitas dan kuantitas prasarana dan sarana yang menunjang pembagian wilayah, penyediaan pelayanan dasar dan pertumbuhan ekonomi daerah; dan",
-    "Mewujudkan kehidupan masyarakat yang sejahtera, aman, damai, dan bersatu dalam wadah Negara Kesatuan Republik Indonesia (NKRI) didukung dengan kepastian hukum dan penegakan HAM serta kesetaraan dan keadilan gender.",
-  ],
-};
-
-const statistikData = [
-  { label: "Tenaga Kerja Terdaftar", nilai: "18,4 Jt", icon: People, warna: "primary", persen: 82 },
-  { label: "Pelatihan Kerja", nilai: "320 BLK", icon: School, warna: "secondary", persen: 75 },
-  { label: "Kasus Hubungan Industrial", nilai: "1.240", icon: Gavel, warna: "warning", persen: 60 },
-  { label: "Program K3 Aktif", nilai: "4.800+", icon: HealthAndSafety, warna: "success", persen: 90 },
-];
-
-const layananData = [
-  {
-    judul: "Penempatan Tenaga Kerja",
-    deskripsi: "Fasilitasi penempatan tenaga kerja dalam dan luar negeri, serta bursa kerja.",
-    ikon: BusinessCenter,
-    warna: "#1A5276",
-    tags: ["AKL", "AKAD", "AKAN"],
-    link: "/layanan/penempatan",
-  },
-  {
-    judul: "Pelatihan & Sertifikasi",
-    deskripsi: "Pelatihan kerja berbasis kompetensi melalui jaringan BLK di seluruh Jawa Tengah.",
-    ikon: School,
-    warna: "#1E8449",
-    tags: ["BLK", "Sertifikasi BNSP", "Magang"],
-    link: "/layanan/pelatihan",
-  },
-  {
-    judul: "Hubungan Industrial",
-    deskripsi: "Mediasi, konsiliasi, dan arbitrase perselisihan hubungan industrial.",
-    ikon: Gavel,
-    warna: "#7D6608",
-    tags: ["PHK", "Upah", "PKB"],
-    link: "/layanan/hubungan-industrial",
-  },
-  {
-    judul: "Pengawasan Ketenagakerjaan",
-    deskripsi: "Pemeriksaan norma kerja dan K3 di perusahaan sesuai perundang-undangan.",
-    ikon: Assignment,
-    warna: "#922B21",
-    tags: ["Norma Kerja", "K3", "Inspeksi"],
-    link: "/layanan/pengawasan",
-  },
-  {
-    judul: "Transmigrasi",
-    deskripsi: "Program transmigrasi umum dan swakarsa mandiri bagi keluarga transmigran.",
-    ikon: Map,
-    warna: "#515A5A",
-    tags: ["TU", "TBS", "TSM"],
-    link: "/layanan/transmigrasi",
-  },
-  {
-    judul: "Jaminan Sosial Ketenagakerjaan",
-    deskripsi: "Koordinasi kepesertaan BPJS Ketenagakerjaan dan perlindungan pekerja.",
-    ikon: HealthAndSafety,
-    warna: "#154360",
-    tags: ["BPJS", "JHT", "JKK"],
-    link: "/layanan/jaminan-sosial",
-  },
-];
-
-const beritaData = [
-  {
-    id: 1,
-    judul: "Disnakertrans Jateng Gelar Job Fair Regional 2025",
-    tanggal: "12 April 2025",
-    kategori: "Event",
-    ringkasan:
-      "Lebih dari 200 perusahaan berpartisipasi dalam Job Fair Regional yang menawarkan ribuan lowongan kerja.",
-    warna: "primary",
-  },
-  {
-    id: 2,
-    judul: "Sosialisasi UMK Jawa Tengah 2025",
-    tanggal: "3 Maret 2025",
-    kategori: "Pengumuman",
-    ringkasan:
-      "Penetapan UMK 35 kabupaten/kota di Jawa Tengah tahun 2025 disosialisasikan kepada pengusaha dan serikat pekerja.",
-    warna: "secondary",
-  },
-  {
-    id: 3,
-    judul: "Pelatihan Wirausaha Baru bagi Transmigran Binaan",
-    tanggal: "22 Februari 2025",
-    kategori: "Program",
-    ringkasan:
-      "Sebanyak 150 transmigran mengikuti pelatihan kewirausahaan untuk meningkatkan kemandirian ekonomi.",
-    warna: "warning",
-  },
-];
-
-const strukturData = [
-  { jabatan: "Kepala Dinas", nama: "Ahmad Aziz, S.E., M.Si.", level: 1 },
-  { jabatan: "Sekretaris Dinas", nama: "Ir. Siti Rahayu, M.T.", level: 2 },
-  { jabatan: "Bid. Penempatan & Perluasan Kerja", nama: "Heru Santoso, S.E., M.M.", level: 2 },
-  { jabatan: "Bid. Pelatihan & Produktivitas", nama: "Dr. Wahyu Lestari, M.Pd.", level: 2 },
-  { jabatan: "Bid. Hubungan Industrial", nama: "Bambang Widodo, S.H., M.H.", level: 2 },
-  { jabatan: "Bid. Transmigrasi", nama: "Yuli Astuti, S.T., M.Si.", level: 2 },
-  { jabatan: "Bid. Pengawasan Ketenagakerjaan", nama: "Sigit Purnomo, S.H., M.H.", level: 2 },
-];
-
-// ─── SUB-KOMPONEN ────────────────────────────────────────────────────────────
-
-function HeroSection() {
-  const [shown, setShown] = useState(false);
-  useEffect(() => { setTimeout(() => setShown(true), 100); }, []);
-
-  return (
-    <Box
-      sx={{
-        background: "linear-gradient(135deg, #0D3349 0%, #1A5276 50%, #1E8449 100%)",
-        color: "#fff",
-        pt: { xs: 6, md: 10 },
-        pb: { xs: 8, md: 12 },
-        position: "relative",
-        overflow: "hidden",
-      }}
-    >
-      {/* Dekoratif lingkaran */}
-      {[160, 280, 420].map((size, i) => (
-        <Box
-          key={i}
-          sx={{
-            position: "absolute",
-            right: -size / 3,
-            top: -size / 4,
-            width: size,
-            height: size,
-            borderRadius: "50%",
-            border: "1.5px solid rgba(255,255,255,0.08)",
-            pointerEvents: "none",
-          }}
-        />
-      ))}
-
-      <Container maxWidth="lg">
-        <Fade in={shown} timeout={700}>
-          <Box>
-            <Stack direction="row" spacing={1} mb={2} flexWrap="wrap" useFlexGap>
-              <Chip
-                label="Pemerintah Provinsi Jawa Tengah"
-                size="small"
-                sx={{ bgcolor: "rgba(255,255,255,0.15)", color: "#fff", fontFamily: "'Source Sans 3', sans-serif" }}
-              />
-              <Chip
-                label="Dinas Teknis"
-                size="small"
-                sx={{ bgcolor: "rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.85)", fontFamily: "'Source Sans 3', sans-serif" }}
-              />
-            </Stack>
-
-            <Typography variant="h3" component="h1" fontWeight={700} mb={1.5} sx={{ lineHeight: 1.2, fontSize: { xs: "1.8rem", md: "2.5rem" } }}>
-              Dinas Tenaga Kerja
-              <br />& Transmigrasi
-            </Typography>
-            <Typography variant="h6" sx={{ color: "rgba(255,255,255,0.75)", fontFamily: "'Source Sans 3', sans-serif", fontWeight: 400, mb: 3, maxWidth: 560 }}>
-              Provinsi Jawa Tengah — Melayani, Memberdayakan, Memajukan
-            </Typography>
-
-            <Stack direction={{ xs: "column", sm: "row" }} spacing={1.5}>
-              <Button
-                variant="contained"
-                size="large"
-                endIcon={<ArrowForward />}
-                component={Link}
-                to="/layanan"
-                sx={{
-                  bgcolor: "#fff",
-                  color: "#1A5276",
-                  "&:hover": { bgcolor: "rgba(255,255,255,0.9)" },
-                  borderRadius: 2,
-                  px: 3,
-                }}
-              >
-                Lihat Layanan
-              </Button>
-              <Button
-                variant="outlined"
-                size="large"
-                endIcon={<ContactMail />}
-                component={Link}
-                to="/kontak"
-                sx={{
-                  borderColor: "rgba(255,255,255,0.5)",
-                  color: "#fff",
-                  "&:hover": { borderColor: "#fff", bgcolor: "rgba(255,255,255,0.08)" },
-                  borderRadius: 2,
-                  px: 3,
-                }}
-              >
-                Hubungi Kami
-              </Button>
-            </Stack>
-          </Box>
-        </Fade>
-      </Container>
-    </Box>
-  );
-}
-
-function StatCard({ data, delay = 0 }) {
-  const [shown, setShown] = useState(false);
-  useEffect(() => { const t = setTimeout(() => setShown(true), delay); return () => clearTimeout(t); }, [delay]);
-  const Ikon = data.icon;
-
-  return (
-    <Zoom in={shown} timeout={400}>
-      <Card sx={{ height: "100%", borderTop: `4px solid`, borderTopColor: `${data.warna}.main` }}>
-        <CardContent sx={{ p: 3 }}>
-          <Stack direction="row" alignItems="flex-start" justifyContent="space-between" mb={2}>
-            <Box>
-              <Typography variant="h4" fontWeight={700} color={`${data.warna}.main`}>
-                {data.nilai}
-              </Typography>
-              <Typography variant="body2" color="text.secondary" mt={0.5}>
-                {data.label}
-              </Typography>
-            </Box>
-            <Avatar sx={{ bgcolor: `${data.warna}.main`, width: 44, height: 44 }}>
-              <Ikon fontSize="small" />
-            </Avatar>
-          </Stack>
-          <LinearProgress
-            variant="determinate"
-            value={data.persen}
-            color={data.warna}
-            sx={{ borderRadius: 4, height: 6 }}
-          />
-          <Typography variant="caption" color="text.secondary" sx={{ fontFamily: "'Source Sans 3', sans-serif" }}>
-            Capaian {data.persen}%
-          </Typography>
-        </CardContent>
-      </Card>
-    </Zoom>
-  );
-}
-
-function LayananCard({ layanan, delay = 0 }) {
-  const [shown, setShown] = useState(false);
-  useEffect(() => { const t = setTimeout(() => setShown(true), delay); return () => clearTimeout(t); }, [delay]);
-  const Ikon = layanan.ikon;
-
-  return (
-    <Zoom in={shown} timeout={350}>
-      <Card
-        component={Link}
-        to={layanan.link}
-        sx={{
-          height: "100%",
-          textDecoration: "none",
-          display: "flex",
-          flexDirection: "column",
-          cursor: "pointer",
-          "&:hover .layanan-ikon": {
-            transform: "scale(1.12)",
-            bgcolor: layanan.warna,
-          },
-          "&:hover .layanan-ikon svg": { color: "#fff" },
-        }}
-      >
-        <CardContent sx={{ p: 3, flexGrow: 1 }}>
-          <Avatar
-            className="layanan-ikon"
-            sx={{
-              bgcolor: alpha(layanan.warna, 0.1),
-              width: 52,
-              height: 52,
-              mb: 2,
-              transition: "all 0.25s",
-            }}
-          >
-            <Ikon sx={{ color: layanan.warna, fontSize: 26 }} />
-          </Avatar>
-          <Typography variant="h6" fontWeight={600} gutterBottom color="text.primary">
-            {layanan.judul}
-          </Typography>
-          <Typography variant="body2" color="text.secondary" mb={2} sx={{ lineHeight: 1.6 }}>
-            {layanan.deskripsi}
-          </Typography>
-          <Stack direction="row" spacing={0.75} flexWrap="wrap" useFlexGap>
-            {layanan.tags.map((t) => (
-              <Chip
-                key={t}
-                label={t}
-                size="small"
-                sx={{
-                  bgcolor: alpha(layanan.warna, 0.1),
-                  color: layanan.warna,
-                  fontWeight: 600,
-                  fontSize: "0.72rem",
-                  fontFamily: "'Source Sans 3', sans-serif",
-                }}
-              />
-            ))}
-          </Stack>
-        </CardContent>
-        <Box sx={{ px: 3, pb: 2 }}>
-          <Typography
-            variant="caption"
-            color="primary"
-            sx={{ display: "flex", alignItems: "center", gap: 0.5, fontFamily: "'Source Sans 3', sans-serif", fontWeight: 600 }}
-          >
-            Selengkapnya <ArrowForward fontSize="inherit" />
-          </Typography>
-        </Box>
-      </Card>
-    </Zoom>
-  );
-}
-
-function BeritaCard({ berita }) {
-  const colorMap = { primary: "#1A5276", secondary: "#1E8449", warning: "#7D6608" };
-  return (
-    <Paper
-      variant="outlined"
-      sx={{
-        p: 2.5,
-        borderRadius: 2,
-        display: "flex",
-        gap: 2,
-        alignItems: "flex-start",
-        transition: "all 0.2s",
-        "&:hover": { borderColor: "primary.main", bgcolor: "primary.50" },
-        cursor: "pointer",
-      }}
-    >
-      <Box
-        sx={{
-          width: 6,
-          height: 56,
-          borderRadius: 4,
-          bgcolor: colorMap[berita.warna] || "#1A5276",
-          flexShrink: 0,
-          mt: 0.5,
-        }}
-      />
-      <Box flexGrow={1}>
-        <Stack direction="row" spacing={1} mb={0.75} alignItems="center">
-          <Chip label={berita.kategori} size="small" color={berita.warna} variant="outlined" sx={{ fontSize: "0.7rem", fontFamily: "'Source Sans 3', sans-serif" }} />
-          <Typography variant="caption" color="text.secondary" sx={{ fontFamily: "'Source Sans 3', sans-serif" }}>
-            {berita.tanggal}
-          </Typography>
-        </Stack>
-        <Typography variant="subtitle1" fontWeight={600} gutterBottom>
-          {berita.judul}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {berita.ringkasan}
-        </Typography>
-      </Box>
-    </Paper>
-  );
-}
-
-function TabPanel({ children, value, index }) {
-  return (
-    <Box role="tabpanel" hidden={value !== index} sx={{ pt: 3 }}>
-      {value === index && <Fade in timeout={400}><Box>{children}</Box></Fade>}
-    </Box>
-  );
-}
-
-// ─── HALAMAN UTAMA ───────────────────────────────────────────────────────────
+import React, { useState } from "react";
+import { Book, Users, Home, ShieldCheck, ChevronRight } from 'lucide-react';
 
 export const ProfilDinas = () => {
-  const [tabValue, setTabValue] = useState(0);
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const [openFaq, setOpenFaq] = useState(null);
+
+  const profilData = {
+    singkatan: "Dinas Tenaga Kerja dan Transmigrasi Provinsi Jawa Tengah",
+    alamat: "Jl. Pahlawan No. 16, Semarang, Jawa Tengah 50241",
+    telepon: "(024) 8311713 / (024) 8311711",
+    email: "disnakertrans@jatengprov.go.id",
+    jamOperasional: "Senin – Jumat: 07.30 – 15.30 WIB",
+    kepalaKantor: "Ahmad Aziz, S.E., M.Si.",
+  };
+
+  const s = {
+    wrapper: {
+      backgroundColor: "#F0F4F8",
+      minHeight: "100vh",
+      padding: "150px 20px 50px 20px", // mt: 8 + py: 6
+      fontFamily: "'Source Sans 3', sans-serif",
+      color: "#1C2833",
+    },
+    container: {
+      maxWidth: "1200px",
+      margin: "0 auto",
+      display: "flex",
+      flexWrap: "wrap",
+      gap: "30px",
+    },
+    mainCol: { flex: "2 1 600px" },
+    sideCol: { flex: "1 1 350px" },
+    card: {
+      backgroundColor: "#fff",
+      borderRadius: "12px",
+      padding: "30px",
+      boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
+      marginBottom: "25px",
+    },
+    header: { display: "flex", alignItems: "center", gap: "15px", marginBottom: "20px" },
+    iconCircle: {
+      width: "40px",
+      height: "40px",
+      borderRadius: "50%",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      color: "#fff",
+      fontSize: "1.2rem",
+    },
+    h2: { margin: 0, fontSize: "1.5rem", fontWeight: "700" },
+    alert: {
+      backgroundColor: "#E3F2FD",
+      padding: "20px",
+      borderRadius: "8px",
+      fontStyle: "italic",
+      borderLeft: "5px solid #1A5276",
+      color: "#1A5276",
+      lineHeight: "1.6",
+    },
+    divider: { border: "none", borderTop: "1px solid #eee", margin: "25px 0" },
+    list: { listStyle: "none", padding: 0 },
+    listItem: { display: "flex", gap: "12px", marginBottom: "15px", lineHeight: "1.5" },
+    infoRow: { display: "flex", gap: "15px", marginBottom: "20px" },
+    label: { fontSize: "1.2rem", color: "#5D6D7E", display: "block" },
+    value: { fontWeight: "600", fontSize: "1.2rem" },
+    accordion: {
+      backgroundColor: "#fff",
+      border: "1px solid #ddd",
+      borderRadius: "8px",
+      marginBottom: "10px",
+      overflow: "hidden",
+    },
+    accHeader: {
+      padding: "15px 20px",
+      cursor: "pointer",
+      display: "flex",
+      justifyContent: "space-between",
+      fontWeight: "600",
+    },
+    accBody: { padding: "0 20px 15px 20px", color: "#5D6D7E", fontSize: "1.2rem" },
+  };
+  const styles = {
+    container: {
+      maxWidth: '1000px',
+      margin: '40px auto',
+      padding: '100px',
+      backgroundColor: '#f8fafc',
+      color: '#1e293b',
+      fontFamily: "'Inter', sans-serif",
+      lineHeight: '1.6',
+    },
+    header: {
+      textAlign: 'center',
+      marginBottom: '50px',
+      paddingBottom: '20px',
+      borderBottom: '4px solid #dc2626',
+    },
+     headerLogos: { 
+      display: "flex", 
+      gap: "20px", 
+      marginBottom: "30px",
+      justifyContent: "center",
+      alignItems: "center"
+    },
+    sectionCard: {
+      backgroundColor: '#ffffff',
+      borderRadius: '12px',
+      padding: '24px',
+      marginBottom: '30px',
+      boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+      transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+      border: '1px solid #e2e8f0',
+    },
+    gridCard: {
+      backgroundColor: '#ffffff',
+      padding: '20px',
+      borderRadius: '8px',
+      borderLeft: '4px solid #ea580c',
+      cursor: 'pointer',
+      transition: 'all 0.2s ease-in-out',
+      boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+    },
+    listBadge: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      padding: '10px 15px',
+      backgroundColor: '#f1f5f9',
+      borderRadius: '6px',
+      fontSize: '1.2rem',
+      fontWeight: '500',
+      border: '1px solid #cbd5e1',
+      transition: 'background-color 0.2s',
+    }
+  };
+
+  const faqs = [
+    { q: "Bagaimana cara mendaftar pelatihan kerja?", a: "Pendaftaran dapat dilakukan melalui BLK terdekat atau portal resmi." },
+    { q: "Apa itu program transmigrasi?", a: "Program perpindahan penduduk untuk pemerataan kesejahteraan." },
+    { q: "Cara lapor pelanggaran?", a: "Laporan melalui email resmi atau datang langsung ke bidang pengawasan." },
+  ];
+
+  const fungsiList = [
+    "Perumusan Kebijakan teknis bidang ketenagakerjaan.",
+    "Pelaksanaan kebijakan di bidang pelatihan & produktivitas.",
+    "Pelaksanaan evaluasi dan pelaporan berkala.",
+    "Pembinaan administrasi internal unit kerja.",
+    "Pelaksanaan tugas kedinasan lain dari Gubernur."
+  ];
+
+  const strukturOrganisasi = [
+    { title: "Kepala Dinas", role: "Pimpinan Utama" },
+    { title: "Sekretariat", role: "Dukungan Administrasi" },
+    { title: "Bidang Pelatihan Kerja & Produktivitas", role: "Pelatihan & Sertifikasi" },
+    { title: "Bidang Penempatan Tenaga Kerja & Transmigrasi", role: "Kesempatan Kerja" },
+    { title: "Bidang HI & Jamsos", role: "Hubungan Industrial" },
+    { title: "Bidang Pengawasan Ketenagakerjaan", role: "Penegakan Hukum & K3" }
+  ];
+
+  const uptdList = [
+    "BLK Cilacap", "BLK Semarang 1", "BLK Semarang 2", 
+    "Balai Pelayanan Penyelesaian Perselisihan Tenaga Kerja (BP3TK)", "Balai Kesehatan dan Keselamatan Kerja",
+    "Satwasker Semarang", "Satwasker Pati",
+    "Satwasker Magelang", "Satwasker Surakarta",
+    "Satwasker Banyumas", "Satwasker Pekalongan"
+  ];
 
   return (
-    <ThemeProvider theme={theme}>
-      <Box sx={{ bgcolor: "background.default", minHeight: "100vh" }}>
+    <div style={styles.container}>
+      <header style={styles.header}>
+        <div style={styles.headerLogos}>
+          <img src="/img/jateng.png" alt="Jateng" style={{ height: "70px" }} />
+          <img src="/img/ayoKerjo.png" alt="Ayo Kerjo" style={{ height: "60px" }} />
+          <img src="/img/ngopeniNglakoni.png" alt="Slogan" style={{ height: "60px" }} />
+        </div> 
+        <h1 style={{ fontSize: '2.2rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>
+          Dinas Tenaga Kerja dan Transmigrasi
+        </h1>
+        <p style={{ fontSize: '1.2rem', color: '#0f30eb', fontWeight: '600' }}>
+          Provinsi Jawa Tengah
+        </p>
+      </header>
 
-        {/* ── HERO ── */}
-        <HeroSection />
+      <section 
+        style={styles.sectionCard}
+        onMouseOver={(e) => {
+          e.currentTarget.style.transform = 'translateY(-5px)';
+          e.currentTarget.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1)';
+        }}
+        onMouseOut={(e) => {
+          e.currentTarget.style.transform = 'translateY(0)';
+          e.currentTarget.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '15px' }}>
+          <Book style={{ color: '#2563eb', marginRight: '12px' }} />
+          <h3 style={{ fontSize: '1.4rem', fontWeight: '700' }}>Dasar Hukum</h3>
+        </div>
+        <p style={{ color: '#475569', textAlign: 'justify' }}>
+          Sesuai <strong>Perda No. 9 Tahun 2016</strong> dan <strong>Pergub No. 64 Tahun 2016</strong>, 
+          instansi ini berfungsi sebagai unsur pelaksana urusan pemerintahan bidang tenaga kerja dan transmigrasi 
+          di bawah naungan Gubernur Jawa Tengah.
+        </p>
+      </section>
 
-        {/* ── STATISTIK ── */}
-        <Container maxWidth="lg" sx={{ mt: -5, mb: 6, position: "relative", zIndex: 10 }}>
-          <Grid container spacing={2.5}>
-            {statistikData.map((s, i) => (
-              <Grid item xs={12} sm={6} md={3} key={s.label}>
-                <StatCard data={s} delay={i * 100} />
-              </Grid>
-            ))}
-          </Grid>
-        </Container>
-
-        {/* ── KONTAK CEPAT ── */}
-        <Box sx={{ bgcolor: "primary.main", color: "#fff", py: 2 }}>
-          <Container maxWidth="lg">
-            <Stack
-              direction={{ xs: "column", sm: "row" }}
-              spacing={{ xs: 1.5, sm: 4 }}
-              justifyContent="center"
-              alignItems={{ xs: "flex-start", sm: "center" }}
+      <div style={{ marginBottom: '40px' }}>
+        <h3 style={{ display: 'flex', alignItems: 'center', fontSize: '1.4rem', fontWeight: '700', marginBottom: '20px' }}>
+          <ShieldCheck style={{ color: '#16a34a', marginRight: '12px' }} />
+          Fungsi Strategis
+        </h3>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '15px' }}>
+          {fungsiList.map((item, idx) => (
+            <div 
+              key={idx} 
+              style={{ ...styles.listBadge, cursor: 'default' }}
+              onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#e2e8f0'}
+              onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#f1f5f9'}
             >
-              {[
-                { icon: Phone, label: profilData.telepon },
-                { icon: Email, label: profilData.email },
-                { icon: AccessTime, label: profilData.jamOperasional },
-              ].map(({ icon: Ic, label }) => (
-                <Stack key={label} direction="row" spacing={1} alignItems="center">
-                  <Ic fontSize="small" sx={{ opacity: 0.8 }} />
-                  <Typography variant="body2" sx={{ fontFamily: "'Source Sans 3', sans-serif" }}>
-                    {label}
-                  </Typography>
-                </Stack>
-              ))}
-            </Stack>
-          </Container>
-        </Box>
+              <ChevronRight size={16} style={{ marginRight: '8px', color: '#16a34a' }} />
+              {item}
+            </div>
+          ))}
+        </div>
+      </div>
 
-        {/* ── KONTEN UTAMA ── */}
-        <Container maxWidth="lg" sx={{ py: 6 }}>
-
-          {/* TABS NAVIGASI */}
-          <Paper variant="outlined" sx={{ mb: 4, borderRadius: 2, overflow: "hidden" }}>
-            <Tabs
-              value={tabValue}
-              onChange={(_, v) => setTabValue(v)}
-              variant={isMobile ? "scrollable" : "fullWidth"}
-              scrollButtons="auto"
-              textColor="primary"
-              indicatorColor="primary"
-              sx={{ bgcolor: "background.paper" }}
+      <div style={{ marginBottom: '40px' }}>
+        <h3 style={{ display: 'flex', alignItems: 'center', fontSize: '1.4rem', fontWeight: '700', marginBottom: '20px' }}>
+          <Users style={{ color: '#ea580c', marginRight: '12px' }} />
+          Struktur Organisasi
+        </h3>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px' }}>
+          {strukturOrganisasi.map((org, idx) => (
+            <div 
+              key={idx} 
+              style={styles.gridCard}
+              onMouseOver={(e) => {
+                e.currentTarget.style.backgroundColor = '#fff7ed';
+                e.currentTarget.style.transform = 'scale(1.02)';
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.backgroundColor = '#ffffff';
+                e.currentTarget.style.transform = 'scale(1)';
+              }}
             >
-              {["Profil", "Layanan", "Berita", "Struktur"].map((label, i) => (
-                <Tab key={label} label={label} id={`tab-${i}`} />
-              ))}
-            </Tabs>
-          </Paper>
-
-          {/* ──────────── TAB: PROFIL ──────────── */}
-          <TabPanel value={tabValue} index={0}>
-            <Grid container spacing={4}>
-              {/* Visi & Misi */}
-              <Grid item xs={12} md={7}>
-                <Card sx={{ mb: 3 }}>
-                  <CardContent sx={{ p: 3.5 }}>
-                    <Stack direction="row" spacing={1.5} alignItems="center" mb={2}>
-                      <Avatar sx={{ bgcolor: "primary.main", width: 36, height: 36 }}>
-                        <Star fontSize="small" />
-                      </Avatar>
-                      <Typography variant="h6" fontWeight={700}>Visi</Typography>
-                    </Stack>
-                    <Alert severity="info" icon={false} sx={{ borderRadius: 2, fontStyle: "italic", fontFamily: "'Noto Serif', serif" }}>
-                      "{profilData.visi}"
-                    </Alert>
-
-                    <Divider sx={{ my: 3 }} />
-
-                    <Stack direction="row" spacing={1.5} alignItems="center" mb={2}>
-                      <Avatar sx={{ bgcolor: "secondary.main", width: 36, height: 36 }}>
-                        <TrendingUp fontSize="small" />
-                      </Avatar>
-                      <Typography variant="h6" fontWeight={700}>Misi</Typography>
-                    </Stack>
-                    <List dense>
-                      {profilData.misi.map((m, i) => (
-                        <ListItem key={i} disableGutters sx={{ alignItems: "flex-start", py: 0.75 }}>
-                          <ListItemIcon sx={{ minWidth: 32, mt: 0.3 }}>
-                            <CheckCircle color="secondary" fontSize="small" />
-                          </ListItemIcon>
-                          <ListItemText
-                            primary={m}
-                            primaryTypographyProps={{ variant: "body2", sx: { fontFamily: "'Source Sans 3', sans-serif" } }}
-                          />
-                        </ListItem>
-                      ))}
-                    </List>
-                  </CardContent>
-                </Card>
-              </Grid>
-
-              {/* Info & Kontak */}
-              <Grid item xs={12} md={5}>
-                <Card>
-                  <CardContent sx={{ p: 3.5 }}>
-                    <Typography variant="h6" fontWeight={700} mb={2.5}>
-                      Informasi Kantor
-                    </Typography>
-                    {[
-                      { icon: AccountBalance, label: "Nama Instansi", nilai: profilData.singkatan },
-                      { icon: People, label: "Kepala Dinas", nilai: profilData.kepalaKantor },
-                      { icon: AccessTime, label: "Berdiri Sejak", nilai: profilData.tahunBerdiri },
-                      { icon: LocationOn, label: "Alamat", nilai: profilData.alamat },
-                      { icon: Phone, label: "Telepon", nilai: profilData.telepon },
-                      { icon: Email, label: "Email", nilai: profilData.email },
-                      { icon: Language, label: "Website", nilai: profilData.website },
-                      { icon: AccessTime, label: "Jam Kerja", nilai: profilData.jamOperasional },
-                    ].map(({ icon: Ic, label, nilai }) => (
-                      <Box key={label}>
-                        <Stack direction="row" spacing={1.5} py={1.5} alignItems="flex-start">
-                          <Ic fontSize="small" color="primary" sx={{ mt: 0.2, flexShrink: 0 }} />
-                          <Box>
-                            <Typography variant="caption" color="text.secondary" sx={{ fontFamily: "'Source Sans 3', sans-serif" }}>
-                              {label}
-                            </Typography>
-                            <Typography variant="body2" fontWeight={500} sx={{ fontFamily: "'Source Sans 3', sans-serif" }}>
-                              {nilai}
-                            </Typography>
-                          </Box>
-                        </Stack>
-                        <Divider />
-                      </Box>
-                    ))}
-                  </CardContent>
-                </Card>
-              </Grid>
-            </Grid>
-
-            {/* FAQ Sekilas */}
-            <Typography variant="h6" fontWeight={700} mt={5} mb={2}>
-              Pertanyaan Umum
-            </Typography>
+              <h4 style={{ fontWeight: '700', fontSize: '1.3rem', marginBottom: '5px' }}>{org.title}</h4>
+              <p style={{ fontSize: '1rem', color: '#64748b' }}>{org.role}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div style={s.card}>
+            <h2 style={{ ...s.h2, marginBottom: "20px" }}>Informasi Kantor</h2>
             {[
-              { q: "Bagaimana cara mendaftar pelatihan kerja?", a: "Pendaftaran pelatihan kerja dapat dilakukan melalui BLK terdekat di kabupaten/kota atau melalui portal siap kerja di website resmi kami." },
-              { q: "Apa itu program transmigrasi swakarsa mandiri?", a: "Transmigrasi Swakarsa Mandiri (TSM) adalah program transmigrasi yang dibiayai secara mandiri oleh peserta dengan difasilitasi oleh pemerintah dalam hal penempatan lahan dan pembinaan." },
-              { q: "Bagaimana cara melaporkan pelanggaran norma ketenagakerjaan?", a: "Laporan dapat disampaikan langsung ke bidang pengawasan ketenagakerjaan Disnakertrans, melalui surat elektronik, atau melalui mekanisme pengaduan online di website resmi." },
+              { icon: "🏢", label: "Instansi", val: profilData.singkatan },
+              { icon: "👤", label: "Kepala Dinas", val: profilData.kepalaKantor },
+              { icon: "📍", label: "Alamat", val: profilData.alamat },
+              { icon: "📞", label: "Telepon", val: profilData.telepon },
+              { icon: "📧", label: "Email", val: profilData.email },
             ].map((item, i) => (
-              <Accordion key={i} variant="outlined" sx={{ mb: 1, borderRadius: "12px !important", "&:before": { display: "none" } }}>
-                <AccordionSummary expandIcon={<ExpandMore />}>
-                  <Typography variant="body1" fontWeight={600}>{item.q}</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography variant="body2" color="text.secondary" sx={{ fontFamily: "'Source Sans 3', sans-serif" }}>
-                    {item.a}
-                  </Typography>
-                </AccordionDetails>
-              </Accordion>
+              <div key={i} style={s.infoRow}>
+                <span>{item.icon}</span>
+                <div>
+                  <span style={s.label}>{item.label}</span>
+                  <span style={s.value}>{item.val}</span>
+                </div>
+              </div>
             ))}
-          </TabPanel>
-
-          {/* ──────────── TAB: LAYANAN ──────────── */}
-          <TabPanel value={tabValue} index={1}>
-            <Typography variant="h5" fontWeight={700} mb={3}>
-              Layanan Unggulan
-            </Typography>
-            <Grid container spacing={3}>
-              {layananData.map((l, i) => (
-                <Grid item xs={12} sm={6} md={4} key={l.judul}>
-                  <LayananCard layanan={l} delay={i * 80} />
-                </Grid>
-              ))}
-            </Grid>
-
-            <Alert severity="info" sx={{ mt: 4, borderRadius: 2 }}>
-              <Typography variant="body2" sx={{ fontFamily: "'Source Sans 3', sans-serif" }}>
-                Untuk informasi lebih lanjut atau pengaduan, silakan hubungi kami melalui telepon{" "}
-                <strong>{profilData.telepon}</strong> atau email{" "}
-                <strong>{profilData.email}</strong>.
-              </Typography>
-            </Alert>
-          </TabPanel>
-
-          {/* ──────────── TAB: BERITA ──────────── */}
-          <TabPanel value={tabValue} index={2}>
-            <Stack direction="row" justifyContent="space-between" alignItems="center" mb={3}>
-              <Typography variant="h5" fontWeight={700}>
-                Berita & Pengumuman
-              </Typography>
-              <Button
-                endIcon={<ArrowForward />}
-                component={Link}
-                to="/berita"
-                size="small"
-                sx={{ fontFamily: "'Source Sans 3', sans-serif" }}
-              >
-                Semua Berita
-              </Button>
-            </Stack>
-            <Stack spacing={2}>
-              {beritaData.map((b) => (
-                <BeritaCard key={b.id} berita={b} />
-              ))}
-            </Stack>
-          </TabPanel>
-
-          {/* ──────────── TAB: STRUKTUR ──────────── */}
-          <TabPanel value={tabValue} index={3}>
-            <Typography variant="h5" fontWeight={700} mb={3}>
-              Struktur Organisasi
-            </Typography>
-
-            {/* Kepala Dinas */}
-            <Box display="flex" justifyContent="center" mb={3}>
-              <Card sx={{ maxWidth: 340, width: "100%", border: "2px solid", borderColor: "primary.main" }}>
-                <CardContent sx={{ textAlign: "center", py: 3 }}>
-                  <Badge
-                    badgeContent={<Star sx={{ fontSize: 14 }} />}
-                    color="primary"
-                    overlap="circular"
-                    anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-                  >
-                    <Avatar sx={{ width: 64, height: 64, bgcolor: "primary.main", fontSize: 24, mx: "auto", mb: 1.5 }}>
-                      {strukturData[0].nama[0]}
-                    </Avatar>
-                  </Badge>
-                  <Typography variant="subtitle1" fontWeight={700}>{strukturData[0].nama}</Typography>
-                  <Chip label={strukturData[0].jabatan} size="small" color="primary" sx={{ mt: 1, fontFamily: "'Source Sans 3', sans-serif" }} />
-                </CardContent>
-              </Card>
-            </Box>
-
-            {/* Garis */}
-            <Box display="flex" justifyContent="center" mb={1}>
-              <Box sx={{ width: 2, height: 32, bgcolor: "primary.light" }} />
-            </Box>
-            <Box display="flex" justifyContent="center" mb={3}>
-              <Box sx={{ width: "70%", height: 2, bgcolor: "primary.light" }} />
-            </Box>
-
-            {/* Eselon II */}
-            <Grid container spacing={2.5} justifyContent="center">
-              {strukturData.slice(1).map((s, i) => (
-                <Grid item xs={12} sm={6} md={4} key={i}>
-                  <Slide in direction="up" timeout={300 + i * 80}>
-                    <Card>
-                      <CardContent sx={{ p: 2.5 }}>
-                        <Stack direction="row" spacing={1.5} alignItems="center">
-                          <Avatar sx={{ bgcolor: "secondary.light", width: 40, height: 40, fontSize: 16 }}>
-                            {s.nama[0]}
-                          </Avatar>
-                          <Box>
-                            <Typography variant="caption" color="text.secondary" sx={{ fontFamily: "'Source Sans 3', sans-serif" }}>
-                              {s.jabatan}
-                            </Typography>
-                            <Typography variant="body2" fontWeight={600}>
-                              {s.nama}
-                            </Typography>
-                          </Box>
-                        </Stack>
-                      </CardContent>
-                    </Card>
-                  </Slide>
-                </Grid>
-              ))}
-            </Grid>
-          </TabPanel>
-        </Container>
-
-      </Box>
-    </ThemeProvider>
+          </div>
+      <h2 style={{ ...s.h2, margin: "20px 0 15px" }}>FAQ</h2>
+          {faqs.map((f, i) => (
+            <div key={i} style={s.accordion}>
+              <div style={s.accHeader} onClick={() => setOpenFaq(openFaq === i ? null : i)}>
+                {f.q} <span>{openFaq === i ? "−" : "+"}</span>
+              </div>
+              {openFaq === i && <div style={s.accBody}>{f.a}</div>}
+            </div>
+          ))}
+    <section style={{ backgroundColor: '#1e293b', color: '#f8fafc', padding: '30px', borderRadius: '12px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
+          <Home style={{ color: '#facc15', marginRight: '12px' }} />
+          <h3 style={{ fontSize: '1.4rem', fontWeight: '700', color: 'white' }}>Unit Pelaksana Teknis (UPTD)</h3>
+        </div>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+          {uptdList.map((uptd, idx) => (
+            <span 
+              key={idx} 
+              style={{ 
+                padding: '6px 12px', 
+                border: '1px solid #475569', 
+                borderRadius: '20px', 
+                fontSize: '1.2rem',
+                transition: 'all 0.2s'
+              }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.borderColor = '#facc15';
+                e.currentTarget.style.color = '#facc15';
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.borderColor = '#475569';
+                e.currentTarget.style.color = '#f8fafc';
+              }}
+            >
+              {uptd}
+            </span>
+          ))}
+        </div>
+      </section>
+    </div>
   );
-}
+};
