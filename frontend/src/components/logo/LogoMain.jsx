@@ -9,11 +9,7 @@ export default function LogoMain() {
     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
       {/* Logo Gambar */}
       <img 
-<<<<<<< HEAD
         src="/img/jateng.png" 
-=======
-        src="/img/ppid.png" 
->>>>>>> 5b43cb788d1e8c7c08b3c7160665734c8edc3a60
         alt="Logo PPID" 
         style={{ 
           height: '50px',
@@ -23,11 +19,9 @@ export default function LogoMain() {
       />
 
       <Typography
-<<<<<<< HEAD
         variant="h6"
         sx={{
           fontWeight: 700,
-          color: 'text.primary',
           lineHeight: 1.2,
           fontFamily: "'Public Sans', sans-serif",
           letterSpacing: '0.02em',
@@ -37,19 +31,7 @@ export default function LogoMain() {
         }}
       >
         Disnakertrans Jateng
-=======
-        variant="h3"
-        sx={{
-          fontWeight: 800,
-          color: theme.vars.palette.common.black,
-          opacity: 0.85,
-          lineHeight: 1,
-          fontFamily: 'Public Sans, sans-serif'
-        }}
-      >
-        PPID Disnakertrans Jateng
->>>>>>> 5b43cb788d1e8c7c08b3c7160665734c8edc3a60
       </Typography>
-    </Box>
+      </Box>
   );
-}
+  }

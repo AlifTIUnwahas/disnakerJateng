@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 
 // material-ui
 import Button from '@mui/material/Button';
@@ -30,6 +30,7 @@ import EyeInvisibleOutlined from '@ant-design/icons/EyeInvisibleOutlined';
 // ============================|| JWT - LOGIN ||============================ //
 
 export default function AuthLogin({ isDemo = false }) {
+  const navigate = useNavigate();
   const [checked, setChecked] = React.useState(false);
 
   const [showPassword, setShowPassword] = React.useState(false);
@@ -45,23 +46,55 @@ export default function AuthLogin({ isDemo = false }) {
     <>
       <Formik
         initialValues={{
-          email: 'info@codedthemes.com',
-          password: '123456',
+          email: '',
+          password: '',
           submit: null
         }}
         validationSchema={Yup.object().shape({
           email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
-          password: Yup.string()
-            .required('Password is required')
-            .test('no-leading-trailing-whitespace', 'Password cannot start or end with spaces', (value) => value === value.trim())
-            .max(10, 'Password must be less than 10 characters')
+          password: Yup.string().required('Password is required')
         })}
+        onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
+          try {
+            const response = await fetch('http://localhost:5000/api/auth/login', { // Sesuaikan URL API Anda
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                email: values.email,
+                password: values.password
+              })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+
+              localStorage.setItem('token', data.token);
+              localStorage.setItem('user', JSON.stringify(data.user));
+              
+              setStatus({ success: true });
+              setSubmitting(false);
+
+              navigate('/dashboard');
+            } else {
+              setStatus({ success: false });
+              setErrors({ submit: data.message });
+              setSubmitting(false);
+            }
+          } catch (err) {
+            setStatus({ success: false });
+            setErrors({ submit: 'Gagal terhubung ke server' });
+            setSubmitting(false);
+          }
+        }}
       >
-        {({ errors, handleBlur, handleChange, touched, values }) => (
-          <form noValidate>
-            <Grid container spacing={3}>
-              <Grid size={12}>
-                <Stack sx={{ gap: 1 }}>
+        {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
+          <form noValidate onSubmit={handleSubmit}>
+            <Grid container spacing={3} direction="column">
+              <Grid item xs={12}>
+                <Stack spacing={1}>
                   <InputLabel htmlFor="email-login">Email Address</InputLabel>
                   <OutlinedInput
                     id="email-login"
@@ -81,13 +114,13 @@ export default function AuthLogin({ isDemo = false }) {
                   </FormHelperText>
                 )}
               </Grid>
-              <Grid size={12}>
-                <Stack sx={{ gap: 1 }}>
+              <Grid item xs={12}>
+                <Stack spacing={1}>
                   <InputLabel htmlFor="password-login">Password</InputLabel>
                   <OutlinedInput
                     fullWidth
                     error={Boolean(touched.password && errors.password)}
-                    id="-password-login"
+                    id="password-login"
                     type={showPassword ? 'text' : 'password'}
                     value={values.password}
                     name="password"
@@ -115,7 +148,14 @@ export default function AuthLogin({ isDemo = false }) {
                   </FormHelperText>
                 )}
               </Grid>
-              <Grid sx={{ mt: -1 }} size={12}>
+
+              {errors.submit && (
+                <Grid item xs={12}>
+                  <FormHelperText error>{errors.submit}</FormHelperText>
+                </Grid>
+              )}
+
+              <Grid item xs={12} sx={{ mt: -1 }}>
                 <Stack direction="row" sx={{ gap: 2, alignItems: 'baseline', justifyContent: 'space-between' }}>
                   <FormControlLabel
                     control={
@@ -134,9 +174,17 @@ export default function AuthLogin({ isDemo = false }) {
                   </Link>
                 </Stack>
               </Grid>
-              <Grid size={12}>
+              <Grid item xs={12}>
                 <AnimateButton>
-                  <Button fullWidth size="large" variant="contained" color="primary">
+                  <Button 
+                    disableElevation 
+                    disabled={isSubmitting}
+                    fullWidth 
+                    size="large" 
+                    type="submit"
+                    variant="contained" 
+                    color="primary"
+                  >
                     Login
                   </Button>
                 </AnimateButton>

@@ -7,7 +7,7 @@ const generateToken = (id) =>
 // REGISTER
 exports.register = async (req, res) => {
   try {
-    const { username, email, password, role } = req.body;
+    const { username, email, password } = req.body;
 
     const existingUser = await User.findOne({ email });
     if (existingUser)
@@ -19,7 +19,7 @@ exports.register = async (req, res) => {
 
     // Hanya izinkan role yang valid, default ke 'viewer'
     const allowedRoles = ['admin', 'editor', 'viewer'];
-    const userRole = allowedRoles.includes(role) ? role : 'viewer';
+    const userRole = 'viewer';
 
     const user = await User.create({ username, email, password, role: userRole });
     const token = generateToken(user._id);
@@ -35,7 +35,11 @@ exports.register = async (req, res) => {
       }
     });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    if (typeof next === 'function') {
+      next(err); 
+    } else {
+      res.status(500).json({ message: err.message });
+    }
   }
 };
 
@@ -65,7 +69,11 @@ exports.login = async (req, res) => {
       }
     });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    if (typeof next === 'function') {
+      next(err);
+    } else {
+      res.status(500).json({ message: err.message });
+    }
   }
 };
 
@@ -78,6 +86,10 @@ exports.getMe = async (req, res) => {
 
     res.json(user);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    if (typeof next === 'function') {
+      next(err);
+    } else {
+      res.status(500).json({ message: err.message });
+    }
   }
 };

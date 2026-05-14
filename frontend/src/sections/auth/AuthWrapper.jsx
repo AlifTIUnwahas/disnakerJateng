@@ -19,19 +19,11 @@ export default function AuthWrapper({ children }) {
   return (
     <Box sx={{ minHeight: '100vh' }}>
       <AuthBackground />
-<<<<<<< HEAD
       <Stack sx={{ minHeight: '100vh', flexGrow: 1, display: 'flex', alignItems: 'center' }}>
         <Box sx={{ px: 3, mt: 3 }} size={12}>
           <Logo to="/" />
         </Box>
         <Box size={12} sx={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}>
-=======
-      <Stack sx={{ minHeight: '100vh', justifyContent: 'flex-end' }}>
-        <Box sx={{ px: 3, mt: 3 }} size={12}>
-          <Logo to="/" />
-        </Box>
-        <Box size={12}>
->>>>>>> 5b43cb788d1e8c7c08b3c7160665734c8edc3a60
           <Grid
             container
             justifyContent="center"
