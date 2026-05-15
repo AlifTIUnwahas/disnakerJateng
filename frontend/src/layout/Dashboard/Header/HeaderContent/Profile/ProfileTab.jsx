@@ -50,12 +50,6 @@ export default function ProfileTab() {
       </ListItemButton>
       <ListItemButton>
         <ListItemIcon>
-          <WalletOutlined />
-        </ListItemIcon>
-        <ListItemText primary="Billing" />
-      </ListItemButton>
-      <ListItemButton>
-        <ListItemIcon>
           <LogoutOutlined />
         </ListItemIcon>
         <ListItemText primary="Logout" onClick={handleLogout}/>

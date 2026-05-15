@@ -1,34 +1,43 @@
 // assets
-import { LoginOutlined, ProfileOutlined } from '@ant-design/icons';
+import { FormOutlined, UnorderedListOutlined, FolderOpenOutlined} from '@ant-design/icons';
 
 // icons
 const icons = {
-  LoginOutlined,
-  ProfileOutlined
+  FormOutlined,
+  UnorderedListOutlined,
+  FolderOpenOutlined
 };
 
 // ==============================|| MENU ITEMS - EXTRA PAGES ||============================== //
 
 const pages = {
   id: 'authentication',
-  title: 'Authentication',
+  title: 'Kelola Website',
   type: 'group',
   children: [
     {
-      id: 'login1',
-      title: 'Login',
+      id: 'berita1',
+      title: 'Berita',
       type: 'item',
-      url: '/login',
-      icon: icons.LoginOutlined,
-      target: true
+      url: '/admin/berita',
+      icon: icons.UnorderedListOutlined,
+      target: false
     },
     {
-      id: 'register1',
-      title: 'Register',
+      id: 'info1',
+      title: 'Daftar Informasi',
       type: 'item',
-      url: '/register',
-      icon: icons.ProfileOutlined,
-      target: true
+      url: '/admin/informasi',
+      icon: icons.FolderOpenOutlined,
+      target: false
+    },
+    {
+      id: 'aduan1',
+      title: 'Aduan',
+      type: 'item',
+      url: '/admin/pengaduan',
+      icon: icons.FormOutlined,
+      target: false
     }
   ]
 };

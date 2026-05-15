@@ -20,6 +20,7 @@ import { ProfilDinas } from "./pages/sejarahDinas";
 import { VisiDinas } from "./pages/visiMisiDinas"
 import { TusiDinas } from "./pages/tusiDinas";
 import { StrukturDinas } from "./pages/strukturDinas";
+import { DashboardPosts } from "./pages/dashboard/Post/posts";
 import AuthGuard from './components/AuthGuard';
 import JsonData from "./data/data.json";
 import ThemeCustomization from './themes';
@@ -90,7 +91,8 @@ const App = () => {
                     <DashboardLayout />
                   </AuthGuard>}>
               <Route index element={<Navigate to="dashboard/default" replace />} />
-              <Route path="dashboard/default" element={<DashboardDefault />} />
+              <Route path="/admin/dashboard/default" element={<DashboardDefault />} />
+              <Route path="/admin/berita" element={<DashboardPosts />} />
               {/* Tambahkan sub-route admin lainnya di sini */}
             </Route>
           </Routes>

@@ -41,8 +41,7 @@ const InfoCard = ({ title, desc, link }) => (
       }
     }}
   >
-    <CardContent sx={{ p: 5, position: 'relative', zIndex: 2 }}>
-      {/* Judul */}
+    <CardContent sx={{ p: 4, position: 'relative', zIndex: 2 }}>
       <Typography 
         className="text-target"
         sx={{ 
@@ -57,7 +56,6 @@ const InfoCard = ({ title, desc, link }) => (
         {title}
       </Typography>
 
-      {/* Deskripsi */}
       <Typography 
         className="text-target"
         sx={{ 
@@ -67,13 +65,12 @@ const InfoCard = ({ title, desc, link }) => (
           lineHeight: 1.6,
           minHeight: '60px',
           transition: '0.3s',
-          maxWidth: '85%' // Memberi ruang agar teks tidak menabrak background di kanan
+          maxWidth: '85%'
         }}
       >
         {desc}
       </Typography>
 
-      {/* Tombol Link */}
       <Stack 
         direction="row" 
         alignItems="center" 
@@ -85,7 +82,6 @@ const InfoCard = ({ title, desc, link }) => (
         <ArrowRight size={20} />
       </Stack>
 
-      {/* Dekorasi Titik-titik */}
       <Box 
         className="decoration-dots"
         sx={{ 

@@ -41,7 +41,7 @@ const InfoCard = ({ title, desc, link }) => (
       }
     }}
   >
-    <CardContent sx={{ p: 5, position: 'relative', zIndex: 2 }}>
+    <CardContent sx={{ p: 4, position: 'relative', zIndex: 2 }}>
       {/* Judul */}
       <Typography 
         className="text-target"

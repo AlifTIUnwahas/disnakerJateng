@@ -41,7 +41,7 @@ const InfoCard = ({ title, desc, link }) => (
       }
     }}
   >
-    <CardContent sx={{ p: 5, position: 'relative', zIndex: 2 }}>
+    <CardContent sx={{ p: 4, position: 'relative', zIndex: 2 }}>
       {/* Judul */}
       <Typography 
         className="text-target"
@@ -136,7 +136,7 @@ export const Berkala = (props) => {
 
       {/* Main Content */}
       <Container maxWidth="xl" sx={{ mt: -10, pb: 10, position: 'relative', zIndex: 10, display: 'flex', justifyContent: 'center' }}>
-        <Card sx={{ borderRadius: 6, p: { xs: 3, md: 4 }, boxShadow: "0 15px 40px rgba(0,0,0,0.12)" }}>
+        <Card sx={{ borderRadius: 6, p: { xs: 3, md: 6 }, boxShadow: "0 15px 40px rgba(0,0,0,0.12)" }}>
           {/* Grid Cards */}
           <Grid container spacing={4}>
             <Grid item xs={12} md={6} sx={{ display: 'flex' }}>
