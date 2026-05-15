@@ -11,13 +11,13 @@ export default function Footer() {
     >
       <Typography variant="caption">
         &copy; All rights reserved{' '}
-        <Link href="https://codedthemes.com/" target="_blank" underline="hover">
-          CodedThemes
+        <Link href="https://disnakertrans.jatengprov.go.id" target="_blank" underline="hover">
+          Disnakertrans Jateng
         </Link>
       </Typography>
       <Stack direction="row" sx={{ gap: 1.5, alignItems: 'center', justifyContent: 'space-between' }}>
         <Link href="https://codedthemes.com/hire-us/" target="_blank" variant="caption" color="text.primary">
-          Hire us
+          Template
         </Link>
         <Link href="https://mui.com/store/license/" target="_blank" variant="caption" color="text.primary">
           License
@@ -25,9 +25,12 @@ export default function Footer() {
         <Link href="https://mui.com/store/terms/" target="_blank" variant="caption" color="text.primary">
           Terms
         </Link>
-        <Link href="https://links.codedthemes.com/dAAOP" target="_blank" variant="caption" color="text.primary">
-          Figma Design System
+        <Typography variant="subtitle2" >
+          Dev by Team{' '}
+        <Link href="https://id.linkedin.com/in/alif-azizy" target="_blank" variant="caption" color="text.primary">
+          Teknik Informatika Unwahas
         </Link>
+        </Typography>
       </Stack>
     </Stack>
   );

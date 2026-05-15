@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const connectDB = require('./config/db');
@@ -15,6 +16,13 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/auth', authRoutes);
 app.get('/api/data', (req, res) => {
     res.json({ message: "Halo, ini data dari backend Node.js!" });
+});
+
+app.use((err, req, res, next) => {
+    console.error(err);
+    res.status(err.status || 500).json({
+        message: err.message || 'Internal Server Error'
+    });
 });
 
 app.listen(PORT, () => {

@@ -20,6 +20,7 @@ import { ProfilDinas } from "./pages/sejarahDinas";
 import { VisiDinas } from "./pages/visiMisiDinas"
 import { TusiDinas } from "./pages/tusiDinas";
 import { StrukturDinas } from "./pages/strukturDinas";
+import AuthGuard from './components/AuthGuard';
 import JsonData from "./data/data.json";
 import ThemeCustomization from './themes';
 import { ConfigProvider } from './contexts/ConfigContext';
@@ -84,7 +85,10 @@ const App = () => {
             <Route path="register" element={<RegisterPage />} />
 
             {/* 3. Rute Admin Dashboard (Menggunakan DashboardLayout Mantis) */}
-            <Route path="/admin" element={<DashboardLayout />}>
+            <Route path="/admin" element={
+                  <AuthGuard>
+                    <DashboardLayout />
+                  </AuthGuard>}>
               <Route index element={<Navigate to="dashboard/default" replace />} />
               <Route path="dashboard/default" element={<DashboardDefault />} />
               {/* Tambahkan sub-route admin lainnya di sini */}

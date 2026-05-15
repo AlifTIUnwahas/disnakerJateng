@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import { useRef, useState } from 'react';
 
 // material-ui
@@ -50,6 +51,17 @@ function a11yProps(index) {
 
 export default function Profile() {
   const theme = useTheme();
+  const userData = JSON.parse(localStorage.getItem('user'));
+  const username = userData?.username || 'Guest';
+  const role = userData?.role || 'User';
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem('token'); 
+    localStorage.removeItem('user');
+    
+    navigate('/login', { replace: true });
+  };
 
   const anchorRef = useRef(null);
   const [open, setOpen] = useState(false);
@@ -117,16 +129,16 @@ export default function Profile() {
                         <Stack direction="row" sx={{ gap: 1.25, alignItems: 'center' }}>
                           <Avatar alt="profile user" src={avatar1} sx={{ width: 32, height: 32 }} />
                           <Stack>
-                            <Typography variant="h6">John Doe</Typography>
+                            <Typography variant="h6">{username}</Typography>
                             <Typography variant="body2" color="text.secondary">
-                              UI/UX Designer
+                              {role}
                             </Typography>
                           </Stack>
                         </Stack>
                       </Grid>
                       <Grid>
                         <Tooltip title="Logout">
-                          <IconButton size="large" sx={{ color: 'text.primary' }}>
+                          <IconButton size="large" sx={{ color: 'text.primary' }} onClick={handleLogout}>
                             <LogoutOutlined />
                           </IconButton>
                         </Tooltip>

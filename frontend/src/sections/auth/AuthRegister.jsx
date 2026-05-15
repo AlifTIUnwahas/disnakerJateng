@@ -87,7 +87,14 @@ export default function AuthRegister() {
               })
             });
 
-            const data = await response.json();
+            let data = null;
+            const contentType = response.headers.get('content-type');
+            if (contentType && contentType.includes('application/json')) {
+              data = await response.json();
+            } else {
+              const text = await response.text();
+              data = { message: text || response.statusText };
+            }
 
             if (response.ok) {
               setStatus({ success: true });
@@ -96,7 +103,7 @@ export default function AuthRegister() {
               navigate('/login');
             } else {
               setStatus({ success: false });
-              setErrors({ submit: data.message || 'Registration failed' });
+              setErrors({ submit: data.message || response.statusText || 'Registration failed' });
               setSubmitting(false);
             }
           } catch (err) {

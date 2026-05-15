@@ -77,7 +77,7 @@ export default function AuthLogin({ isDemo = false }) {
               setStatus({ success: true });
               setSubmitting(false);
 
-              navigate('/dashboard');
+              navigate('/admin');
             } else {
               setStatus({ success: false });
               setErrors({ submit: data.message });
