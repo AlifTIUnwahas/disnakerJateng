@@ -10,7 +10,7 @@ export const Berita = () => {
     // Fungsi untuk mengambil data dari backend
     const fetchNews = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/admin/berita");
+        const res = await axios.get("http://localhost:5000/api/berita");
       
       const sortedData = res.data.sort((a, b) => {
         return new Date(b.date) - new Date(a.date);
@@ -27,7 +27,7 @@ export const Berita = () => {
 
   return (
     <div id="news" className="text-center">
-      <div className="container">
+      <div className="container-fluid">
         <div className="section-title">
           <h2>Berita</h2>
         </div>
@@ -47,7 +47,7 @@ export const Berita = () => {
                   alt={item.photo.context}
                     style={{
                             width: '100%',
-                            height: '220px',
+                            height: '300px',
                             objectFit: 'cover',
                             display: 'block'
                           }}

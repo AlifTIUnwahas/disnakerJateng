@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { 
   Dialog, DialogTitle, DialogContent, DialogActions, 
-  Button, TextField, Stack, Typography, Box, MenuItem 
+  Button, TextField, Stack, Box, MenuItem 
 } from '@mui/material';
 import { PictureOutlined, TagOutlined } from '@ant-design/icons';
 
@@ -141,7 +141,7 @@ const PostForm = ({ open, onClose, onSave, selectedData }) => {
       <DialogActions sx={{ p: 2 }}>
         <Button onClick={onClose} color="inherit">Batal</Button>
         <Button onClick={handleSubmit} variant="contained" sx={{ px: 4 }}>
-          {selectedData?._id ? 'Update Berita' : 'Terbitkan Berita'}
+          {selectedData?._id ? 'Update Berita' : 'Tambah Artikel'}
         </Button>
       </DialogActions>
     </Dialog>

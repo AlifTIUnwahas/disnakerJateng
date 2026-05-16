@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 
 // material-ui
 import { 
-  Box, Typography, Button, Paper, Checkbox, Select, MenuItem, 
+  Box, Typography, Button, Paper,
   TextField, Table, TableBody, TableCell, TableContainer, 
   TableHead, TableRow, Stack, IconButton, Tooltip 
 } from '@mui/material';
@@ -19,83 +18,77 @@ import DeleteOutlined from '@ant-design/icons/DeleteOutlined';
 
 
 export const DashboardPosts = () => {
-  const [newsData, setNewsData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  
-  const [modalOpen, setModalOpen] = useState(false);
+  const [newsData,     setNewsData]     = useState([]);
+  const [loading,      setLoading]      = useState(true);
+  const [modalOpen,    setModalOpen]    = useState(false);
   const [selectedPost, setSelectedPost] = useState(null);
-
-  const API_URL = "http://localhost:5000/api/admin/berita";
-
+ 
   const fetchNews = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(API_URL);
-      const sortedData = res.data.sort((a, b) => new Date(b.date) - new Date(a.date));
-      setNewsData(sortedData);
+      const res = await PostService.getAll();
+      const posts = Array.isArray(res.data) ? res.data : [];
+      const sorted = [...posts].sort(
+        (a, b) => new Date(b.date) - new Date(a.date)
+      );
+      setNewsData(sorted);
     } catch (error) {
-      console.error("Gagal mengambil berita:", error);
+      console.error('Gagal mengambil berita:', error);
     } finally {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    fetchNews();
-  }, []);
-
+ 
+  useEffect(() => { fetchNews(); }, []);
+ 
   const handleDelete = async (id) => {
-    if (window.confirm("Apakah Anda yakin ingin menghapus artikel ini?")) {
-      try {
-        await axios.delete(`${API_URL}/${id}`);
-        fetchNews();
-      } catch (error) {
-        alert("Gagal menghapus artikel");
-      }
+    if (!window.confirm('Apakah Anda yakin ingin menghapus artikel ini?')) return;
+    try {
+      await PostService.delete(id);
+      fetchNews();
+      alert('Artikel berhasil dihapus');
+    } catch (error) {
+      console.error('Gagal menghapus:', error);
+      alert('Gagal menghapus artikel');
     }
   };
-
-
+ 
   const handleSave = async (formData) => {
     try {
-      const config = { headers: { 'Content-Type': 'multipart/form-data' } };
-      
-      if (selectedPost && selectedPost._id) {
-        // Mode Edit
-        await axios.put(`${API_URL}/${selectedPost._id}`, formData, config);
+      if (selectedPost?._id) {
+        await PostService.update(selectedPost._id, formData);
       } else {
-        // Mode Tambah
-        await axios.post(API_URL, formData, config);
+        await PostService.create(formData);
       }
-      
       setModalOpen(false);
       fetchNews();
     } catch (error) {
-      console.error("Gagal menyimpan:", error);
-      alert("Terjadi kesalahan saat menyimpan data");
+      console.error('Gagal menyimpan:', error);
+      alert(error.response?.data?.message || 'Terjadi kesalahan saat menyimpan data');
     }
   };
-
+ 
   const handleOpenModal = (post = null) => {
     setSelectedPost(post);
     setModalOpen(true);
   };
-
   const formatDate = (dateString) => {
+    if (!dateString) return '-';
     const d = new Date(dateString);
-    return d.toLocaleDateString('id-ID', {
-      year: 'numeric', month: 'short', day: '2-digit'
-    }) + ` Pukul ${d.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })}`;
+    return (
+      d.toLocaleDateString('id-ID', { year: 'numeric', month: 'short', day: '2-digit' }) +
+      ` Pukul ${d.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })}`
+    );
   };
-
+ 
   return (
     <Box sx={{ p: 3, backgroundColor: '#f0f2f5', minHeight: '100vh' }}>
       {/* Header */}
       <Stack direction="row" spacing={1} alignItems="center" sx={{ mb: 2 }}>
         <Typography variant="h5" sx={{ fontWeight: '500' }}>Artikel</Typography>
-        <Button 
-          variant="contained" 
-          size="small" 
+        <Button
+          variant="contained"
+          size="small"
           startIcon={<PlusOutlined />}
           onClick={() => handleOpenModal()}
           sx={{ textTransform: 'none' }}
@@ -103,21 +96,18 @@ export const DashboardPosts = () => {
           Buat Artikel
         </Button>
       </Stack>
-
-      {/* Stats */}
+ 
       <Typography variant="body2" sx={{ mb: 2 }}>
         <Box component="span" sx={{ fontWeight: 'bold' }}>Semua</Box> ({newsData.length})
       </Typography>
-
-      {/* Toolbar Filter */}
+ 
       <Stack direction="row" justifyContent="space-between" sx={{ mb: 2 }}>
         <Stack direction="row" spacing={1}>
           <TextField size="small" placeholder="Cari Artikel" sx={{ bgcolor: 'white' }} />
           <Button variant="outlined" size="small" sx={{ borderColor: '#ccc', color: '#333' }}>Cari</Button>
         </Stack>
       </Stack>
-
-      {/* Tabel Utama */}
+ 
       <TableContainer component={Paper} sx={{ borderRadius: 0, boxShadow: 'none', border: '1px solid #e0e0e0' }}>
         <Table size="small">
           <TableHead sx={{ bgcolor: '#fafafa' }}>
@@ -130,36 +120,38 @@ export const DashboardPosts = () => {
           </TableHead>
           <TableBody>
             {loading ? (
-              <TableRow><TableCell colSpan={7} align="center">Memuat data...</TableCell></TableRow>
+              <TableRow>
+                <TableCell colSpan={4} align="center">Memuat data...</TableCell>
+              </TableRow>
             ) : newsData.map((item) => (
               <TableRow key={item._id} hover>
                 <TableCell>
                   <Stack direction="row" spacing={2} alignItems="center">
-                    <Box 
-                      component="img"
-                      src={item.photo?.url} 
-                      sx={{ width: '50%', height: 'auto', objectFit: 'cover', border: '1px solid #ddd', display: item.photo?.url ? 'block' : 'none' }}
-                    />
-                    {!item.photo?.url && (
-                      <Box sx={{ width: 45, height: 45, bgcolor: '#eee', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    {item.photo?.url ? (
+                      <Box
+                        component="img"
+                        src={item.photo.url}
+                        sx={{ width: '50%', height: 'auto', objectFit: 'cover', border: '1px solid #ddd', flexShrink: 0 }}
+                      />
+                    ) : (
+                      <Box sx={{ width: '50%', height: 'auto', bgcolor: '#eee', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                         <PictureOutlined style={{ color: '#999' }} />
                       </Box>
                     )}
-                    <Typography 
-                      variant="body1" 
+                    <Typography
+                      variant="body2"
                       onClick={() => handleOpenModal(item)}
-                      sx={{ color: '#000000', fontWeight: '600', cursor: 'pointer', '&:hover': { textDecoration: 'underline' } }}
+                      sx={{ fontWeight: 600, cursor: 'pointer', '&:hover': { textDecoration: 'underline' } }}
                     >
                       {item.title}
                     </Typography>
                   </Stack>
                 </TableCell>
-                <TableCell>{item.author}</TableCell>
+                <TableCell>{item.author || '-'}</TableCell>
                 <TableCell>
                   <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5 }}>
-                    <Typography variant="caption" sx={{ color: 'text.secondary', lineHeight: 1.2 }}>
-                      Dibuat
-                    </Typography>
+                    <Typography variant="caption" sx={{ color: 'text.secondary', lineHeight: 1.2 }}>Dibuat</Typography>
+                    {/* ✅ createdAt dari Mongoose timestamps */}
                     <Typography variant="caption" sx={{ fontWeight: 'bold', lineHeight: 1.2 }}>
                       {formatDate(item.date)}
                     </Typography>
@@ -184,13 +176,12 @@ export const DashboardPosts = () => {
           </TableBody>
         </Table>
       </TableContainer>
-
-      {/* Integrasi PostForm */}
-      <PostForm 
-        open={modalOpen} 
-        onClose={() => setModalOpen(false)} 
-        onSave={handleSave} 
-        selectedData={selectedPost} 
+ 
+      <PostForm
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        onSave={handleSave}
+        selectedData={selectedPost}
       />
     </Box>
   );

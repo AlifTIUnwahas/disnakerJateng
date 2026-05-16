@@ -11,7 +11,7 @@ export const DetailBerita = () => {
   useEffect(() => {
     const fetchDetail = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/admin/berita/${slug}`);
+        const res = await axios.get(`http://localhost:5000/api/berita/${slug}`);
         setNews(res.data);
       } catch (error) {
         console.error("Gagal mengambil detail berita:", error);

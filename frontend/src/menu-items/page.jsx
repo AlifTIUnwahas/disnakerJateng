@@ -1,11 +1,13 @@
 // assets
-import { FormOutlined, UnorderedListOutlined, FolderOpenOutlined} from '@ant-design/icons';
+import { FormOutlined, UnorderedListOutlined, FolderOpenOutlined, ContainerOutlined, CalendarOutlined} from '@ant-design/icons';
 
 // icons
 const icons = {
   FormOutlined,
+  ContainerOutlined,
   UnorderedListOutlined,
-  FolderOpenOutlined
+  FolderOpenOutlined,
+  CalendarOutlined
 };
 
 // ==============================|| MENU ITEMS - EXTRA PAGES ||============================== //
@@ -32,11 +34,27 @@ const pages = {
       target: false
     },
     {
+      id: 'bursa1',
+      title: 'Bursa Kerja',
+      type: 'item',
+      url: '/admin/bursa-kerja',
+      icon: icons.ContainerOutlined,
+      target: false
+    },
+    {
       id: 'aduan1',
       title: 'Aduan',
       type: 'item',
       url: '/admin/pengaduan',
       icon: icons.FormOutlined,
+      target: false
+    },
+    {
+      id: 'agenda1',
+      title: 'Agenda Dinas',
+      type: 'item',
+      url: '/admin/agenda',
+      icon: icons.CalendarOutlined,
       target: false
     }
   ]

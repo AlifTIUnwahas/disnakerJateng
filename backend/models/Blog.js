@@ -11,7 +11,11 @@ const PostSchema = new mongoose.Schema({
     author: { type: String },
     category: { type: String },
     tags: [String],
-    status: { type: String, default: 'draft' }
-}, { timestamps: true, collection: 'posts' });
+    status: { type: String, default: 'draft' },
+    date: { 
+        type: Date, 
+        default: Date.now 
+    }
+}, { collection: 'posts' });
 
 module.exports = mongoose.model('Post', PostSchema);

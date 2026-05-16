@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const path = require('path');
 const cors = require('cors');
 const connectDB = require('./config/db');
 const app = express();
@@ -9,11 +10,14 @@ const PORT = 5000;
 
 connectDB();
 app.use(cors({
-    origin: 'http://localhost:3000' 
+    origin: 'http://localhost:3000'
 }));
-app.use(express.json()); 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use('/api/admin', adminRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/berita', require('./routes/publicBerita'));
+app.use('/images', express.static(path.join(__dirname, 'public/images')));
 app.get('/api/data', (req, res) => {
     res.json({ message: "Halo, ini data dari backend Node.js!" });
 });

@@ -23,7 +23,21 @@ const UserSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now
-    }
+    },
+    socialLinks: {
+        linkedin: {
+            url: { type: String, default: "" },
+            isEnabled: { type: Boolean, default: false }
+        },
+        github: {
+            url: { type: String, default: "" },
+            isEnabled: { type: Boolean, default: false }
+        },
+        instagram: {
+            url: { type: String, default: "" },
+            isEnabled: { type: Boolean, default: false }
+        }
+    },
 });
 
 UserSchema.pre('save', async function () {
