@@ -27,14 +27,14 @@ export const Contact = (props) => {
   };
   
   return (
-        <Box sx={{ bgcolor: "#41a3db", color: "rgba(255,255,255,0.7)", py: 4, mt: 4 }}>
+        <Box sx={{ bgcolor: "#2B689C", color: "rgb(255, 255, 255)", py: 4, mt: 4 }}>
           <Container maxWidth="lg">
             <Grid container spacing={3}>
               <Grid item xs={12} md={6}>
-                <Typography variant="h3" fontWeight={700} mb={1} >
+                <Typography variant="h3"  fontWeight={700} mb={1} sx={{color: "white"}} >
                   {profilData.singkatan}
                 </Typography>
-                <Typography variant="h4"  sx={{ fontFamily: "'Source Sans 3', sans-serif", lineHeight: 1.8 }}>
+                <Typography variant="h4"  sx={{ fontFamily: "'Source Sans 3', sans-serif", color: "white", lineHeight: 1.8 }}>
                   {profilData.alamat}
                 </Typography>
               </Grid>
@@ -46,7 +46,7 @@ export const Contact = (props) => {
                   ].map(({ label, icon: Ic }) => (
                     <Stack key={label} direction="row" spacing={1} alignItems="center">
                       <Ic fontSize="small" />
-                      <Typography variant="h4" color="white" sx={{ fontFamily: "'Source Sans 3', sans-serif" }}>{label}</Typography>
+                      <Typography variant="h4" color="white" sx={{ fontFamily: "'Source Sans 3', sans-serif", color: "white" }}>{label}</Typography>
                     </Stack>
                   ))}
                 </Stack>

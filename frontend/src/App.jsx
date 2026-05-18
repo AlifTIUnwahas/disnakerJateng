@@ -23,6 +23,7 @@ import { VisiDinas } from "./pages/visiMisiDinas";
 import { TusiDinas } from "./pages/tusiDinas";
 import { StrukturDinas } from "./pages/strukturDinas";
 import { DashboardPosts } from "./pages/dashboard/Post/posts";
+import { Team } from "./components/Team";
 import AuthGuard from './components/AuthGuard';
 import JsonData from "./data/data.json";
 import ThemeCustomization from './themes';
@@ -53,6 +54,7 @@ const Home = ({ data }) => (
     <SwiperHome />
     <Berita data={data.Berita} />
     <About data={data.About} />
+    <Team data={data.Team} />
     <Gallery data={data.Gallery} />
     <Testimonials data={data.Testimonials} />
   </div>

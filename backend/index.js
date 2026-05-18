@@ -6,6 +6,8 @@ const connectDB = require('./config/db');
 const app = express();
 const adminRoutes = require('./routes/admin');
 const authRoutes = require('./routes/auth');
+const bursaKerjaRoutes = require('./routes/bursaKerja');
+const agendaRoutes = require('./routes/agenda');
 const PORT = 5000;
 
 connectDB();
@@ -16,6 +18,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/api/admin', adminRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/bursa-kerja', bursaKerjaRoutes);
+app.use('/api/agenda', agendaRoutes);
 app.use('/api/berita', require('./routes/publicBerita'));
 app.use('/images', express.static(path.join(__dirname, 'public/images')));
 app.get('/api/data', (req, res) => {
