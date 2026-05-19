@@ -23,6 +23,10 @@ import { VisiDinas } from "./pages/visiMisiDinas";
 import { TusiDinas } from "./pages/tusiDinas";
 import { StrukturDinas } from "./pages/strukturDinas";
 import { DashboardPosts } from "./pages/dashboard/Post/posts";
+import { DashboardInformasi } from "./pages/dashboard/Informasi/index";
+import { DashboardBursa } from "./pages/dashboard/Bursa/index";
+import { DashboardAgenda } from "./pages/dashboard/Agenda/index";
+import { DashboardAduan } from "./pages/dashboard/Aduan/index";
 import { Team } from "./components/Team";
 import AuthGuard from './components/AuthGuard';
 import JsonData from "./data/data.json";
@@ -103,6 +107,10 @@ const App = () => {
                 <Route index element={<Navigate to="dashboard/default" replace />} />
                 <Route path="/admin/dashboard/default" element={<DashboardDefault />} />
                 <Route path="/admin/berita" element={<DashboardPosts />} />
+                <Route path="/admin/informasi" element={<DashboardInformasi />} />
+                <Route path="/admin/bursa-kerja" element={<DashboardBursa />} />
+                <Route path="/admin/agenda" element={<DashboardAgenda />} />
+                <Route path="/admin/pengaduan" element={<DashboardAduan />} />
               </Route>
             </Routes>
           </Router>
