@@ -70,18 +70,19 @@ export default function AuthLogin({ isDemo = false }) {
             const data = await response.json();
 
             if (response.ok) {
-
-              localStorage.setItem('token', data.token);
-              localStorage.setItem('user', JSON.stringify(data.user));
-              
-              setStatus({ success: true });
-              setSubmitting(false);
-
-              navigate('/admin');
-            } else {
-              setStatus({ success: false });
-              setErrors({ submit: data.message });
-              setSubmitting(false);
+                const storage = checked ? localStorage : sessionStorage;
+                storage.setItem('token', data.token);
+                storage.setItem('user', JSON.stringify(data.user));
+                if (checked) {
+                  sessionStorage.removeItem('token');
+                  sessionStorage.removeItem('user');
+                } else {
+                  localStorage.removeItem('token');
+                  localStorage.removeItem('user');
+                }
+                setStatus({ success: true });
+                setSubmitting(false);
+                navigate('/admin');
             }
           } catch (err) {
             setStatus({ success: false });

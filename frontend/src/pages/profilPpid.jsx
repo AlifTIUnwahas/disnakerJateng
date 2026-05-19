@@ -3,6 +3,7 @@ import {
   Box, 
   Container, 
   Typography, 
+  Grid
 } from "@mui/material";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
@@ -14,7 +15,9 @@ import {
   faDatabase, 
   faBoxArchive, 
   faHandHoldingHand, 
-  faScaleBalanced 
+  faScaleBalanced,
+  faFilePen,
+  faFileCircleXmark
 } from '@fortawesome/free-solid-svg-icons';
 
 export const ProfilPpid = () => {
@@ -108,6 +111,40 @@ export const ProfilPpid = () => {
             font-size: 1.2rem;
             width: 25px;
           }
+
+          /* Style baru untuk Tombol Form PPID sesuai gambar */
+          .form-ppid-card {
+            background: #0d235c;
+            color: #ffffff;
+            border-radius: 16px;
+            border: 2px solid #ffffff;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 220px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+          }
+          .form-ppid-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(13, 35, 92, 0.3);
+            background: #112d75;
+          }
+          .form-ppid-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+          }
+          .form-ppid-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            line-height: 1.4;
+          }
+
           @media (max-width: 900px) {
             .task-grid-layout { grid-template-columns: 1fr; }
           }
@@ -139,6 +176,26 @@ export const ProfilPpid = () => {
       <Container maxWidth="lg" sx={{ mt: -8, pb: 10, position: 'relative', zIndex: 10 }}>
         <div className="ppid-interactive-content">
           
+          {/* Tambahan Bagian: Form Permohonan & Keberatan (Mirip Gambar Banner) */}
+          <Grid container spacing={3} sx={{ mb: 5, justifyContent: 'center' }}>
+            <Grid item xs={12} sm={6} md={4}>
+              <div className="form-ppid-card" onClick={() => alert('Menuju Form Permohonan Informasi')}>
+                <FontAwesomeIcon icon={faFilePen} className="form-ppid-icon" />
+                <div className="form-ppid-title">
+                  Form <br /> Permohonan <br /> Informasi Publik
+                </div>
+              </div>
+            </Grid>
+            <Grid item xs={12} sm={6} md={4}>
+              <div className="form-ppid-card" onClick={() => alert('Menuju Form Pengajuan Keberatan')}>
+                <FontAwesomeIcon icon={faFileCircleXmark} className="form-ppid-icon" />
+                <div className="form-ppid-title">
+                  Form <br /> Pengajuan Keberatan
+                </div>
+              </div>
+            </Grid>
+          </Grid>
+
           {/* Bagian 1: Latar Belakang */}
           <div className="custom-card hero-card">
             <div className="section-header">

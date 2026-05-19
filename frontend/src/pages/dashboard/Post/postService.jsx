@@ -3,7 +3,7 @@ import API from 'api/axiosInstance';
 const API_BASE_URL = '/admin/berita';
  
 const authHeaders = () => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('token') || sessionStorage.getItem('token');
   return token ? { Authorization: `Bearer ${token}` } : {};
 };
  
