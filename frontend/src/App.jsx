@@ -8,7 +8,6 @@ import { Header } from "./components/header";
 import { Berita } from "./components/berita";
 import { Berkala } from "./pages/berkala";
 import { About } from "./components/about";
-import { Gallery } from "./components/gallery";
 import { Testimonials } from "./components/testimonials";
 import { DetailBerita } from "./components/detailBerita";
 import { Layout } from "./components/layout";
@@ -59,7 +58,6 @@ const Home = ({ data }) => (
     <Berita data={data.Berita} />
     <About data={data.About} />
     <Team data={data.Team} />
-    <Gallery data={data.Gallery} />
     <Testimonials data={data.Testimonials} />
   </div>
 );

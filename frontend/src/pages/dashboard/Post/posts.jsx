@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 // material-ui
 import { 
-  Box, Typography, Button, Paper,
-  TextField, Table, TableBody, TableCell, TableContainer, 
+  Box, Typography, Button, Paper, Table, TableBody, TableCell, TableContainer, 
   TableHead, TableRow, Stack, IconButton, Tooltip 
 } from '@mui/material';
 
@@ -82,10 +81,10 @@ export const DashboardPosts = () => {
   };
  
   return (
-    <Box sx={{ p: 3, backgroundColor: '#f0f2f5', minHeight: '100vh' }}>
+    <Box sx={{ p: 3, minHeight: '100vh' }}>
       {/* Header */}
       <Stack direction="row" spacing={1} alignItems="center" sx={{ mb: 2 }}>
-        <Typography variant="h5" sx={{ fontWeight: '500' }}>Artikel</Typography>
+        <Typography variant="h4" sx={{ fontWeight: '700' }}>Artikel</Typography>
         <Button
           variant="contained"
           size="small"
@@ -101,21 +100,16 @@ export const DashboardPosts = () => {
         <Box component="span" sx={{ fontWeight: 'bold' }}>Semua</Box> ({newsData.length})
       </Typography>
  
-      <Stack direction="row" justifyContent="space-between" sx={{ mb: 2 }}>
-        <Stack direction="row" spacing={1}>
-          <TextField size="small" placeholder="Cari Artikel" sx={{ bgcolor: 'white' }} />
-          <Button variant="outlined" size="small" sx={{ borderColor: '#ccc', color: '#333' }}>Cari</Button>
-        </Stack>
-      </Stack>
- 
-      <TableContainer component={Paper} sx={{ borderRadius: 0, boxShadow: 'none', border: '1px solid #e0e0e0' }}>
+      <TableContainer component={Paper} sx={{ borderRadius: 3, boxShadow: 'none' }}>
         <Table size="small">
-          <TableHead sx={{ bgcolor: '#fafafa' }}>
+          <TableHead sx={{ bgcolor: '#2B689C' }}>
             <TableRow>
-              <TableCell sx={{ fontWeight: 'bold', color: '#1976d2' }}>Judul</TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }}>Penulis</TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }}>Tanggal</TableCell>
-              <TableCell align="right">Aksi</TableCell>
+              <TableCell sx={{ fontWeight: 'bold', color: '#ffffff' }}>Judul</TableCell>
+              <TableCell sx={{ fontWeight: 'bold', color: '#ffffff' }}>Penulis</TableCell>
+              <TableCell sx={{ fontWeight: 'bold', color: '#ffffff' }}>Tanggal</TableCell>
+              <TableCell align="right" sx={{ fontWeight: 'bold', color: '#ffffff' }}>
+                Aksi
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

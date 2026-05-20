@@ -65,7 +65,7 @@ export const About = () => {
 
     const formattedDate = deadlineDate.toLocaleDateString('id-ID', { year: 'numeric', month: '2-digit', day: '2-digit' });
 
-    if (daysDiff < 0) return { label: "Ditutup", color: "error" };
+    if (daysDiff < 0) return { label: "Selesai", color: "error" };
     if (daysDiff === 0) return { label: "Hari Ini Terakhir!", color: "error" };
     if (daysDiff <= 3) return { label: `Sisa ${daysDiff} Hari!`, color: "warning" };
     return { label: formattedDate, color: "secondary" };

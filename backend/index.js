@@ -8,6 +8,8 @@ const adminRoutes = require('./routes/admin');
 const authRoutes = require('./routes/auth');
 const bursaKerjaRoutes = require('./routes/bursaKerja');
 const agendaRoutes = require('./routes/agenda');
+const infoRoutes = require('./routes/info');
+const aduanRoutes = require('./routes/aduan');
 const PORT = 5000;
 
 connectDB();
@@ -21,6 +23,8 @@ app.use('/api/auth', authRoutes);
 app.use('/api/bursa-kerja', bursaKerjaRoutes);
 app.use('/api/agenda', agendaRoutes);
 app.use('/api/berita', require('./routes/publicBerita'));
+app.use('/api/informasi', infoRoutes);
+app.use('/api/aduan', aduanRoutes);
 app.use('/images', express.static(path.join(__dirname, 'public/images')));
 app.get('/api/data', (req, res) => {
     res.json({ message: "Halo, ini data dari backend Node.js!" });
