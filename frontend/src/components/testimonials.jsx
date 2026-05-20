@@ -1,4 +1,23 @@
 import React, { useState, useEffect } from "react";
+import {
+  Container,
+  Grid,
+  Card,
+  CardContent,
+  Typography,
+  Box,
+  Chip,
+  Alert,
+  Zoom,
+} from "@mui/material";
+import {
+  IdcardOutlined,
+  SafetyCertificateOutlined,
+  ReconciliationOutlined,
+  EyeOutlined,
+  EnvironmentOutlined,
+  InsuranceOutlined,
+} from "@ant-design/icons";
 
 const LAYANAN_DATA = [
   {
@@ -7,6 +26,7 @@ const LAYANAN_DATA = [
     warna: "#1A5276",
     tags: ["AKL", "AKAD", "AKAN"],
     link: "/layanan/penempatan",
+    icon: <IdcardOutlined />,
   },
   {
     judul: "Pelatihan & Sertifikasi",
@@ -14,6 +34,7 @@ const LAYANAN_DATA = [
     warna: "#1E8449",
     tags: ["BLK", "Sertifikasi BNSP", "Magang"],
     link: "/layanan/pelatihan",
+    icon: <SafetyCertificateOutlined />,
   },
   {
     judul: "Hubungan Industrial",
@@ -21,6 +42,7 @@ const LAYANAN_DATA = [
     warna: "#7D6608",
     tags: ["PHK", "Upah", "PKB"],
     link: "/layanan/hubungan-industrial",
+    icon: <ReconciliationOutlined />,
   },
   {
     judul: "Pengawasan Ketenagakerjaan",
@@ -28,6 +50,7 @@ const LAYANAN_DATA = [
     warna: "#922B21",
     tags: ["Norma Kerja", "K3", "Inspeksi"],
     link: "/layanan/pengawasan",
+    icon: <EyeOutlined />,
   },
   {
     judul: "Transmigrasi",
@@ -35,6 +58,7 @@ const LAYANAN_DATA = [
     warna: "#515A5A",
     tags: ["TU", "TBS", "TSM"],
     link: "/layanan/transmigrasi",
+    icon: <EnvironmentOutlined />,
   },
   {
     judul: "Jaminan Sosial Ketenagakerjaan",
@@ -42,12 +66,13 @@ const LAYANAN_DATA = [
     warna: "#154360",
     tags: ["BPJS", "JHT", "JKK"],
     link: "/layanan/jaminan-sosial",
+    icon: <InsuranceOutlined />,
   },
 ];
 
 const PROFIL_DATA = {
   telepon: "(024) 8311713 / (024) 8311711",
-  email: "disnakertrans@jatengprov.go.id"
+  email: "disnakertrans@jatengprov.go.id",
 };
 
 const LayananCard = ({ layanan, delay }) => {
@@ -59,141 +84,127 @@ const LayananCard = ({ layanan, delay }) => {
   }, [delay]);
 
   return (
-    <div className={`col-md-4 mb-4 card-anim ${shown ? "is-visible" : ""}`}>
-      <div className="layanan-card-root h-100 d-flex flex-column">
-        <div className="layanan-content flex-grow-1">
-          <div 
-            className="layanan-ikon-circle" 
-            style={{ backgroundColor: `${layanan.warna}1a`, color: layanan.warna }}
-          >
-            {/* Placeholder Ikon (Bisa diganti SVG spesifik) */}
-            <img src="/img/jateng.png" alt="Logo" width="26" height="26" style={{ display: 'block', objectFit: 'contain' }} />
-          </div>
-          
-          <h3 className="layanan-judul">{layanan.judul}</h3>
-          <p className="layanan-deskripsi">{layanan.deskripsi}</p>
-          
-          <div className="layanan-tags-wrapper d-flex flex-wrap gap-2 mt-3">
-            {layanan.tags.map((tag) => (
-              <span 
-                key={tag} 
-                className="layanan-tag"
-                style={{ backgroundColor: `${layanan.warna}1a`, color: layanan.warna }}
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
+    <Grid item xs={12} sm={6} md={4} display="flex">
+      <Zoom in={shown} style={{ transitionDelay: shown ? `${delay}ms` : "0ms" }}>
+        <Card
+          sx={{
+            height: "100%",
+            width: "415px",
+            display: "flex",
+            flexDirection: "column",
+            borderRadius: 3,
+            border: "1px solid #eee",
+            boxShadow: "none",
+            transition: "all 0.3s ease",
+            cursor: "pointer",
+            "&:hover": {
+              transform: "translateY(-8px)",
+              boxShadow: "0 10px 20px rgba(0,0,0,0.1)",
+            },
+            "&:hover .ikon-circle": {
+              backgroundColor: layanan.warna,
+              color: "#fff",
+            },
+          }}
+          onClick={() => window.location.href = layanan.link}
+        >
+          <CardContent sx={{ flexGrow: 1, p: 2, display: "flex", flexDirection: "column" }}>
+            <Box
+              className="ikon-circle"
+              sx={{
+                width: 52,
+                height: 52,
+                borderRadius: "50%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                mb: 2,
+                backgroundColor: `${layanan.warna}1a`,
+                color: layanan.warna,
+                transition: "all 0.3s ease",
+                fontSize: 28,
+              }}
+            >
+              {layanan.icon}
+            </Box>
+
+            <Typography variant="h4" component="h3" fontWeight="bold" gutterBottom color="text.primary">
+              {layanan.judul}
+            </Typography>
+            
+            <Typography variant="h5" color="text.secondary" sx={{ mb: 3, lineHeight: 1.6 }}>
+              {layanan.deskripsi}
+            </Typography>
+
+            <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1, mt: "auto" }}>
+              {layanan.tags.map((tag) => (
+                <Chip
+                  key={tag}
+                  label={tag}
+                  size="small"
+                  sx={{
+                    backgroundColor: `${layanan.warna}1a`,
+                    color: layanan.warna,
+                    fontWeight: 700,
+                    borderRadius: 1,
+                  }}
+                />
+              ))}
+            </Box>
+          </CardContent>
+        </Card>
+      </Zoom>
+    </Grid>
   );
 };
 
 export const Testimonials = () => {
   return (
-    <div id="layanan" className="py-5 bg-light">
-      <style>{`
-        .layanan-card-root {
-          display: flex;
-          flex-direction: column;
-          height: 30%;
-          background: #fff;
-          border-radius: 12px;
-          text-decoration: none !important;
-          border: 1px solid #eee;
-          transition: all 0.3s ease;
-          overflow: hidden;
-        }
-        .layanan-card-root:hover {
-          transform: translateY(-8px);
-          box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        .layanan-content {
-          padding: 24px;
-          flex-grow: 1;
-        }
-        .layanan-ikon-circle {
-          width: 52px;
-          height: 52px;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin-bottom: 16px;
-          transition: all 0.3s ease;
-        }
-        .layanan-card-root:hover .layanan-ikon-circle {
-          background-color: currentColor !important;
-          color: #fff !important;
-        }
-        .layanan-judul {
-          font-size: 1.5rem;
-          font-weight: 600;
-          color: #222;
-          margin-bottom: 10px;
-        }
-        .layanan-deskripsi {
-          font-size: 1.2rem;
-          color: #666;
-          line-height: 1.6;
-          margin-bottom: 16px;
-        }
-        .layanan-tags-wrapper {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 6px;
-        }
-        .layanan-tag {
-          font-size: 0.9rem;
-          font-weight: 700;
-          padding: 4px 10px;
-          border-radius: 4px;
-          text-transform: uppercase;
-        }
-        .layanan-footer {
-          padding: 16px 24px;
-          border-top: 1px solid #f5f5f5;
-          font-size: 0.9rem;
-          font-weight: 600;
-        }
-        .card-anim {
-          opacity: 0;
-          transform: scale(0.9);
-          transition: all 0.35s ease-out;
-        }
-        .card-anim.is-visible {
-          opacity: 1;
-          transform: scale(1);
-        }
-        .custom-alert {
-          background-color: #d1ecf1;
-          border-left: 5px solid #17a2b8;
-          border-radius: 8px;
-          padding: 20px;
-          margin-top: 40px;
-          text-align: center;
-        }
-      `}</style>
-
-      <div className="container">
-          <div className="section-title text-center">
-            <h2>Layanan</h2>
-          </div>
-        <div className="row g-4">
+    <Box id="layanan" sx={{ py: 6 }}>
+      <Box sx={{ textAlign: 'center', mb: 5 }}>
+          <Typography variant="h2" sx={{ fontWeight: 700, color: "#1a365d", mb: 1, fontSize: "3rem", fontFamily: "'Source Sans 3', sans-serif" }}>
+            LAYANAN
+          </Typography>
+          <Box sx={{ width: "80px", height: "4px", bgcolor: "#2B689C", mx: "auto", mb: 2, borderRadius: "2px" }} />
+      </Box>
+      <Container maxWidth={false} disableGutters sx={{ px: { xs: 3, sm: 5, md: 8 } }}>
+        <Grid container spacing={4} alignItems="center"> 
           {LAYANAN_DATA.map((l, i) => (
             <LayananCard key={l.judul} layanan={l} delay={i * 80} />
           ))}
-        </div>
+        </Grid>
 
-        <div className="custom-alert">
-          <p className="mb-0" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
+        <Alert
+          icon={false}
+          sx={{
+            mt: 6,
+            backgroundColor: "#ecebeb",
+            borderLeft: "5px solid #17a2b8",
+            borderRadius: 2,
+            p: 3,
+            color: "#0c2060",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            textAlign: "center"
+          }}
+        >
+          <Typography
+            variant="h3"
+            sx={{ fontFamily: "'Source Sans 3', sans-serif" }}
+          >
             Untuk informasi lebih lanjut atau pengaduan, silakan hubungi kami melalui telepon{" "}
-            <strong>{PROFIL_DATA.telepon}</strong> atau email{" "}
-            <strong>{PROFIL_DATA.email}</strong>.
-          </p>
-        </div>
-      </div>
-    </div>
+            <strong>{PROFIL_DATA.telepon}</strong> atau email ke{" "}
+            <a href={`https://mail.google.com/mail/?view=cm&fs=1&to=${PROFIL_DATA.email}&su=Tanya%20Informasi&body=Halo%20Disnakertrans,...`} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={{ color: '#007bff', textDecoration: 'underline' }}
+            >
+              {PROFIL_DATA.email}
+            </a>
+          </Typography>
+        </Alert>
+      </Container>
+    </Box>
   );
 };

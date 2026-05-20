@@ -108,7 +108,7 @@ export const About = () => {
                   <Card 
                     elevation={0}
                     sx={{
-                      width: '100%', 
+                      width: '350px', 
                       height: '100%', 
                       display: 'flex',
                       justifyContent: 'space-between', 

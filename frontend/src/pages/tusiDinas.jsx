@@ -46,7 +46,7 @@ export const TusiDinas = () => {
 
   const s = {
     wrapper: {
-      backgroundColor: "#F4F7F9",
+      backgroundColor: "#ffffff",
       minHeight: "100vh",
       padding: "120px 20px 50px 20px",
       fontFamily: "'Source Sans 3', sans-serif",

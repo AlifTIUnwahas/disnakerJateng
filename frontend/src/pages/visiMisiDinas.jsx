@@ -40,7 +40,7 @@ export const VisiDinas = () => {
 
   const s = {
     wrapper: {
-      backgroundColor: "#F0F4F8",
+      backgroundColor: "#ffffff",
       minHeight: "100vh",
       padding: "150px 20px 50px 20px", // mt: 8 + py: 6
       fontFamily: "'Source Sans 3', sans-serif",
@@ -125,7 +125,7 @@ export const VisiDinas = () => {
         <div style={s.mainCol}>
           <div style={s.card}>
             <div style={s.header}>
-              <div style={{ ...s.iconCircle, backgroundColor: "#1A5276" }}><Star size={24} color="#FFD700" fill="#FFD700" /></div>
+              <div style={{ ...s.iconCircle, backgroundColor: "#89949b" }}><Star size={24} color="#FFD700" fill="#FFD700" /></div>
               <h2 style={s.h2}>Visi</h2>
             </div>
             <div style={s.alert}>"{profilData.visi}"</div>

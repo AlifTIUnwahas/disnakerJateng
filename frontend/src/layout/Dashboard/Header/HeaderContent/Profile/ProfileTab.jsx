@@ -43,7 +43,7 @@ export default function ProfileTab() {
   // FIX 1: Baca userData lewat fungsi helper agar selalu fresh
   const getUserData = () => {
     try {
-      return JSON.parse(localStorage.getItem('user')) || {};
+      return JSON.parse(sessionStorage.getItem('user')) || {};
     } catch {
       return {};
     }
@@ -102,7 +102,7 @@ export default function ProfileTab() {
       setLoadingSocial(true);
       setSocialError('');
       try {
-        const token = localStorage.getItem('token');
+        const token = sessionStorage.getItem('token');
         const response = await API.get(`/admin/users/${userId}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
@@ -156,7 +156,7 @@ export default function ProfileTab() {
     setSocialSuccess('');
 
     try {
-      const token = localStorage.getItem('token');
+      const token = sessionStorage.getItem('token');
 
       // FIX 6: Payload eksplisit — pastikan userId selalu terkirim
       const payload = {
@@ -195,8 +195,8 @@ export default function ProfileTab() {
 
   // ── Logout ────────────────────────────────────────────────────────────────
   const handleLogoutAction = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('user');
     handleClose('logout');
     navigate('/login', { replace: true });
   };

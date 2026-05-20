@@ -26,6 +26,7 @@ import { DashboardInformasi } from "./pages/dashboard/Informasi/index";
 import { DashboardBursa } from "./pages/dashboard/Bursa/index";
 import { DashboardAgenda } from "./pages/dashboard/Agenda/index";
 import { DashboardAduan } from "./pages/dashboard/Aduan/index";
+import { DaftarPermohonan } from "pages/daftarPermohonan";
 import { Team } from "./components/Team";
 import AuthGuard from './components/AuthGuard';
 import JsonData from "./data/data.json";
@@ -90,6 +91,7 @@ const App = () => {
                 <Route path="info-sertamerta" element={<Serta />} />
                 <Route path="info-kecuali" element={<DIK />} />
                 <Route path="info-berkala" element={<Berkala />} />
+                <Route path="daftar-permohonan" element={<DaftarPermohonan />} />
               </Route>
 
               {/* 2. Rute Autentikasi */}

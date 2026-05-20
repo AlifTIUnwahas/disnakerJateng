@@ -85,7 +85,7 @@ export const ProfilDinas = () => {
       maxWidth: '1000px',
       margin: '40px auto',
       padding: '100px',
-      backgroundColor: '#f8fafc',
+      backgroundColor: '#ffffff',
       color: '#1e293b',
       fontFamily: "'Inter', sans-serif",
       lineHeight: '1.6',

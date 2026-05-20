@@ -14,7 +14,15 @@ import AuthCard from './AuthCard';
 import AuthBackground from './AuthBackground';
 
 // ==============================|| AUTHENTICATION - WRAPPER ||============================== //
-
+const styles = {
+     headerLogos: { 
+      display: "flex", 
+      gap: "20px", 
+      marginBottom: "30px",
+      justifyContent: "center",
+      alignItems: "center"
+    },
+  }
 export default function AuthWrapper({ children }) {
   return (
     <Box sx={{ minHeight: '100vh' }}>
@@ -32,6 +40,12 @@ export default function AuthWrapper({ children }) {
           >
             <Grid>
               <AuthCard>{children}</AuthCard>
+              <div style={styles.headerLogos}>
+                <img src="/img/jateng.png" alt="Jateng" style={{ height: "70px" }} />
+                <img src="/img/ayoKerjo.png" alt="Ayo Kerjo" style={{ height: "60px" }} />
+                <img src="/img/ngopeniNglakoni.png" alt="Slogan" style={{ height: "60px" }} />
+              </div>
+            
             </Grid>
           </Grid>
         </Box>

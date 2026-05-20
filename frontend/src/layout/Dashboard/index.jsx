@@ -26,7 +26,6 @@ export default function DashboardLayout() {
   }, [downXL]);
 
   if (menuMasterLoading) return <Loader />;
-
   return (
     <Box sx={{ display: 'flex', width: '100%' }}>
       <Header />

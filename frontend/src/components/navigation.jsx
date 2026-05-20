@@ -110,6 +110,11 @@ export const Navigation = (props) => {
                   </Link>
                 </li>
                 <li>
+                  <Link to="/daftar-permohonan">
+                    Daftar Permohonan
+                  </Link>
+                </li>
+                <li>
                   <Link to="/struktur">
                     Struktur PPID Pelaksana
                   </Link>

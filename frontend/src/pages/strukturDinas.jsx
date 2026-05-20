@@ -10,7 +10,7 @@ import { styled } from '@mui/material/styles';
 
 const s = {
     wrapper: {
-      backgroundColor: "#F4F7F9",
+      backgroundColor: "#ffffff",
       minHeight: "100vh",
       padding: "120px 20px 50px 20px",
       fontFamily: "'Source Sans 3', sans-serif",
@@ -67,8 +67,8 @@ export const StrukturDinas = () => {
           <img src="/img/ayoKerjo.png" alt="Ayo Kerjo" style={{ height: "60px" }} />
           <img src="/img/ngopeniNglakoni.png" alt="Slogan" style={{ height: "60px" }} />
         </div>
-    <Box sx={{ p: 4, backgroundColor: '#f5f5f5', minHeight: '100vh' }}>
-      <Typography variant="h5" align="center" gutterBottom sx={{ fontWeight: 'bold' }}>
+    <Box sx={{ p: 4, backgroundColor: '#ffffff', minHeight: '100vh' }}>
+      <Typography variant="h4" align="center" gutterBottom sx={{ fontWeight: 'bold' }}>
         STRUKTUR ORGANISASI DISNAKERTRANS PROVINSI JAWA TENGAH
       </Typography>
       

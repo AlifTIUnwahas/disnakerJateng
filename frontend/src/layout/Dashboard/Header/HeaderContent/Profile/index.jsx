@@ -4,6 +4,12 @@ import { useRef, useState } from 'react';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import Divider from '@mui/material/Divider';
 import ButtonBase from '@mui/material/ButtonBase';
 import CardContent from '@mui/material/CardContent';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
@@ -17,19 +23,17 @@ import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
-// project imports
 import ProfileTab from './ProfileTab';
 import Avatar from 'components/@extended/Avatar';
 import MainCard from 'components/MainCard';
 import Transitions from 'components/@extended/Transitions';
 import IconButton from 'components/@extended/IconButton';
 
-// assets
+import CloseOutlined from '@ant-design/icons/CloseOutlined';
 import LogoutOutlined from '@ant-design/icons/LogoutOutlined';
 import UserOutlined from '@ant-design/icons/UserOutlined';
 import avatar1 from 'assets/images/users/avatar-1.png';
 
-// tab panel wrapper
 function TabPanel({ children, value, index, ...other }) {
   return (
     <div role="tabpanel" hidden={value !== index} id={`profile-tabpanel-${index}`} aria-labelledby={`profile-tab-${index}`} {...other}>
@@ -45,19 +49,26 @@ function a11yProps(index) {
   };
 }
 
-// ==============================|| HEADER CONTENT - PROFILE ||============================== //
 
 export default function Profile() {
   const theme = useTheme();
-  const userData = JSON.parse(localStorage.getItem('user'));
+  const userData = JSON.parse(sessionStorage.getItem('user'));
   const username = userData?.username || 'Guest';
   const role = userData?.role || 'User';
   const navigate = useNavigate();
+  const [openModal, setOpenModal] = useState({
+    edit: false,
+    view: false,
+    social: false,
+    logout: false
+  });
 
-  const handleLogout = () => {
-    localStorage.removeItem('token'); 
-    localStorage.removeItem('user');
-    
+  const handleOpen = (type) => setOpenModal((prev) => ({ ...prev, [type]: true }));
+
+  const handleLogoutAction = () => {
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('user');
+    handleClose('logout');
     navigate('/login', { replace: true });
   };
 
@@ -136,7 +147,7 @@ export default function Profile() {
                       </Grid>
                       <Grid>
                         <Tooltip title="Logout">
-                          <IconButton size="large" sx={{ color: 'text.primary' }} onClick={handleLogout}>
+                          <IconButton size="large" sx={{ color: 'text.primary' }} onClick={() => handleOpen('logout')}>
                             <LogoutOutlined />
                           </IconButton>
                         </Tooltip>
@@ -173,6 +184,23 @@ export default function Profile() {
           </Transitions>
         )}
       </Popper>
+      {/* ── 4. MODAL LOGOUT ───────────────────────────────────────────────── */}
+      <Dialog open={openModal.logout} onClose={() => handleClose('logout')} maxWidth="xs" fullWidth>
+        <DialogTitle component="div" sx={{ m: 0, p: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <Typography variant="h5" fontWeight="600">Confirm Logout</Typography>
+          <IconButton onClick={() => handleClose('logout')} size="small"><CloseOutlined /></IconButton>
+        </DialogTitle>
+        <Divider />
+        <DialogContent sx={{ p: 3 }}>
+          <Typography variant="body1" color="textSecondary">
+            Apakah Anda yakin ingin keluar dari akun saat ini? Semua sesi aktif pada perangkat ini akan diakhiri.
+          </Typography>
+        </DialogContent>
+        <DialogActions sx={{ p: 2, gap: 1 }}>
+          <Button variant="outlined" color="secondary" fullWidth onClick={() => handleClose('logout')}>Cancel</Button>
+          <Button variant="contained" color="error" fullWidth onClick={handleLogoutAction}>Logout</Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 }
