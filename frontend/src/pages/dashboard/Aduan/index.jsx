@@ -178,8 +178,8 @@ export const DashboardAduan = () => {
                           <Typography variant="subtitle2" sx={{ fontWeight: 700 }}>{row.namaPemohon}</Typography>
                           <Box sx={{ fontSize: '0.8rem', color: 'text.secondary', mt: 0.5 }}>
                             <div><FontAwesomeIcon icon={faIdCard} style={{ marginRight: 6 }} /> {maskText(row.nikIdentitas, 'nik')}</div>
-                            <div><FontAwesomeIcon icon={faEnvelope} style={{ marginRight: 6 }} /> {maskText(row.email, 'email')}</div>
-                            <div><FontAwesomeIcon icon={faPhone} style={{ marginRight: 6 }} /> {maskText(row.nomorTelepon, 'phone')}</div>
+                            <div><FontAwesomeIcon icon={faEnvelope} style={{ marginRight: 6 }} /> {row.email}</div>
+                            <div><FontAwesomeIcon icon={faPhone} style={{ marginRight: 6 }} /> {row.nomorTelepon}</div>
                           </Box>
                         </TableCell>
                         <TableCell>

@@ -65,7 +65,7 @@ export const AduanForm = ({ open, onClose, data, onApprove, onReject }) => {
             <Typography variant="subtitle2" color="primary" sx={{ fontWeight: 700, mb: 1 }}>LAMPIRAN VERIFIKASI BERKAS</Typography>
             <Stack direction="row" spacing={2}>
               {data.fileKtp ? (
-                <Button variant="outlined" size="small" href={`http://localhost:5000/images/${data.fileKtp}`} target="_blank" rel="noreferrer">
+                <Button variant="outlined" size="small" href={`http://localhost:5000${data.fileKtp}`} target="_blank" rel="noreferrer">
                   Lihat KTP Pemohon
                 </Button>
               ) : (

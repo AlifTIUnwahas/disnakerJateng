@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { 
   Box, 
   Container, 
@@ -6,11 +6,12 @@ import {
   Grid,
   Card, 
   CardContent, 
-  Stack 
+  Stack,
+  CircularProgress
 } from "@mui/material";
 import { ArrowRight } from "lucide-react";
 
-// Komponen Card dengan animasi hover seperti referensi
+// Komponen Card dengan animasi hover tetap sama, properti disesuaikan dengan skema backend
 const InfoCard = ({ title, desc, link }) => (
   <Card 
     onClick={() => window.open(link, '_blank')}
@@ -25,7 +26,6 @@ const InfoCard = ({ title, desc, link }) => (
       cursor: 'pointer',
       transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)', 
       border: '1px solid #eee',
-      // Background Image sebagai identitas visual kartu
       background: `linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url("/img/ppid.PNG")`,
       backgroundSize: '120px',
       backgroundRepeat: 'no-repeat',
@@ -42,7 +42,6 @@ const InfoCard = ({ title, desc, link }) => (
     }}
   >
     <CardContent sx={{ p: 4, position: 'relative', zIndex: 2 }}>
-      {/* Judul */}
       <Typography 
         className="text-target"
         sx={{ 
@@ -57,7 +56,6 @@ const InfoCard = ({ title, desc, link }) => (
         {title}
       </Typography>
 
-      {/* Deskripsi */}
       <Typography 
         className="text-target"
         sx={{ 
@@ -67,13 +65,12 @@ const InfoCard = ({ title, desc, link }) => (
           lineHeight: 1.6,
           minHeight: '60px',
           transition: '0.3s',
-          maxWidth: '85%' // Memberi ruang agar teks tidak menabrak background di kanan
+          maxWidth: '85%'
         }}
       >
         {desc}
       </Typography>
 
-      {/* Tombol Link */}
       <Stack 
         direction="row" 
         alignItems="center" 
@@ -85,7 +82,6 @@ const InfoCard = ({ title, desc, link }) => (
         <ArrowRight size={20} />
       </Stack>
 
-      {/* Dekorasi Titik-titik */}
       <Box 
         className="decoration-dots"
         sx={{ 
@@ -107,6 +103,39 @@ const InfoCard = ({ title, desc, link }) => (
 );
 
 export const DIP = (props) => {
+  // State untuk menyimpan data, status loading, dan error
+  const [listInfo, setListInfo] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        // Mengambil data dari endpoint backend Node.js Anda
+        const response = await fetch("http://localhost:5000/api/informasi");
+        if (!response.ok) {
+          throw new Error("Gagal mengambil data dari server");
+        }
+        const result = await response.json();
+        
+        if (result.success) {
+          // Melakukan filter agar hanya menampilkan item dengan kategori 'publik'
+          const dataPublik = result.data.filter(item => item.kategori === 'publik');
+          setListInfo(dataPublik);
+        } else {
+          throw new Error(result.message || "Terjadi kesalahan");
+        }
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <Box sx={{ bgcolor: "#f8f9fa", minHeight: "50vh" }}>
       {/* Hero Section */}
@@ -136,19 +165,44 @@ export const DIP = (props) => {
 
       {/* Main Content */}
       <Container maxWidth="xl" sx={{ mt: -10, pb: 10, position: 'relative', zIndex: 10, display: 'flex', justifyContent: 'center' }}>
-        <Card sx={{ borderRadius: 6, p: { xs: 3, md: 6 }, boxShadow: "0 15px 40px rgba(0,0,0,0.12)" }}>
-          {/* Grid Cards */}
-          <Grid container spacing={4} sx={{ display: 'flex' }}>
-            <Grid item xs={12} md={6} sx={{ display: 'flex' }}>
-              <InfoCard title="DIP 2025" desc="Daftar Informasi Publik Dinas Tenaga Kerja dan Transmigrasi Tahun 2025." link="https://drive.google.com/file/d/1LIffiukyRMOrk7exyGYXo5j4tAAHLlfo/view?usp=sharing" />
+        <Card sx={{ width: '100%', borderRadius: 6, p: { xs: 3, md: 6 }, boxShadow: "0 15px 40px rgba(0,0,0,0.12)" }}>
+          
+          {/* Kondisi Jika Loading */}
+          {loading && (
+            <Box sx={{ display: 'flex', justifyContent: 'center', py: 5 }}>
+              <CircularProgress color="primary" />
+            </Box>
+          )}
+
+          {/* Kondisi Jika Error */}
+          {!loading && error && (
+            <Typography variant="body1" color="error" textAlign="center" sx={{ py: 3 }}>
+              Gagal memuat data: {error}
+            </Typography>
+          )}
+
+          {/* Kondisi Jika Data Kosong */}
+          {!loading && !error && listInfo.length === 0 && (
+            <Typography variant="body1" color="textSecondary" textAlign="center" sx={{ py: 3 }}>
+              Belum ada data Daftar Informasi Publik saat ini.
+            </Typography>
+          )}
+
+          {/* Grid Cards - Render secara Dinamis */}
+          {!loading && !error && listInfo.length > 0 && (
+            <Grid container spacing={4} sx={{ display: 'flex' }}>
+              {listInfo.map((info) => (
+                <Grid item xs={12} md={6} key={info._id} sx={{ display: 'flex' }}>
+                  <InfoCard 
+                    title={info.judul} 
+                    desc={info.ringkasan_informasi} 
+                    link={info.file_url} 
+                  />
+                </Grid>
+              ))}
             </Grid>
-            <Grid item xs={12} md={6} sx={{ display: 'flex' }}>
-              <InfoCard title="DIP 2024" desc="Daftar Informasi Publik Dinas Tenaga Kerja dan Transmigrasi Tahun 2024." link="https://drive.google.com/file/d/1FnGy2-n7YjdBY-EPEceayalPN-fr_gcJ/view?usp=sharing" />
-            </Grid>
-            <Grid item xs={12} md={6} sx={{ display: 'flex' }}>
-              <InfoCard title="DIP 2023" desc="Daftar Informasi Publik Dinas Tenaga Kerja dan Transmigrasi Tahun 2023." link="https://drive.google.com/file/d/1CcNmBiHDU3q1xOiJu7-IDHtXagRK2Paj/view?usp=sharing" />
-            </Grid>
-          </Grid>
+          )}
+
         </Card>
       </Container>
     </Box>
