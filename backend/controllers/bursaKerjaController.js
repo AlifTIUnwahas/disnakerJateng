@@ -1,4 +1,4 @@
-const BursaKerja = require('../models/BursaKerja');
+const BursaKerja = require('../models/bursaKerja');
 
 exports.createBursaKerja = async (req, res) => {
   try {

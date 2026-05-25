@@ -30,4 +30,4 @@ const bursaKerjaSchema = new mongoose.Schema({
   collection: 'bursaKerja' 
 });
 
-module.exports = mongoose.model('BursaKerja', bursaKerjaSchema);
+module.exports = mongoose.model('bursaKerja', bursaKerjaSchema);
