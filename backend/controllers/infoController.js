@@ -1,8 +1,8 @@
 const infoBerkala = require('../models/Berkala');
 const infoSertaMerta = require('../models/Serta');
-const infoSelalu = require('../models/tiapSaat');
 const infoKecuali = require('../models/infoKecuali');
 const infoPublik = require('../models/InfoPublik');
+const infoSelalu = require('../models/infoSelalu');
 
 const getModelByKategori = (kategori) => {
   if (!kategori) return null;

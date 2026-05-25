@@ -17,9 +17,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faFileCircleCheck, 
   faFileCircleExclamation, 
-  faCalendarDays, 
-  faBuildingColumns, faGavel, faListCheck, faCircleCheck, faGears, 
-  faDatabase, faBoxArchive, faHandHoldingHand, faScaleBalanced,
+  faCalendarDays,
   faFilePen, faFileCircleXmark, 
   faIdCard,
   faEnvelope,
@@ -188,7 +186,7 @@ export const DaftarPermohonan = () => {
       >
         <Container maxWidth="lg">
           <Typography variant="h1" sx={{ fontWeight: 800, mb: 3, color: 'white', fontSize: { xs: "2.3rem", md: "4rem" }, lineHeight: 1.1 }}>
-            Daftar Permohonan Informasi
+            Fomulir Permohonan Informasi
           </Typography>
           <Typography variant="h5" sx={{ opacity: 0.9, color: 'white', fontWeight: "normal", maxWidth: "850px", fontSize: "1.3rem", textTransform: "none", lineHeight: 1.6 }}>
             Transparansi pelacakan berkas permohonan informasi publik dan pengajuan keberatan masyarakat secara berkala sesuai regulasi UU Keterbukaan Informasi Publik.

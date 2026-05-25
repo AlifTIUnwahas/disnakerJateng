@@ -13,10 +13,12 @@ import { DetailBerita } from "./components/detailBerita";
 import { Layout } from "./components/layout";
 import { Struktur } from "./pages/Struktur";
 import { DIP } from "./pages/publikInfo";
+import { Selalu } from "./pages/infoSelalu";
 import { Serta } from "./pages/sertaMerta";
 import { SwiperHome } from './components/swiperHome';
 import { DIK } from "./pages/infoKecuali";
 import { ProfilPpid } from "./pages/profilPpid";
+import { AlurPermohonan } from "pages/alurPermohonan";
 import { ProfilDinas } from "./pages/sejarahDinas";
 import { VisiDinas } from "./pages/visiMisiDinas";
 import { TusiDinas } from "./pages/tusiDinas";
@@ -91,7 +93,9 @@ const App = () => {
                 <Route path="info-sertamerta" element={<Serta />} />
                 <Route path="info-kecuali" element={<DIK />} />
                 <Route path="info-berkala" element={<Berkala />} />
+                <Route path="info-selalu" element={<Selalu />} />
                 <Route path="daftar-permohonan" element={<DaftarPermohonan />} />
+                <Route path="alur-permohonan" element={<AlurPermohonan />} />
               </Route>
 
               {/* 2. Rute Autentikasi */}

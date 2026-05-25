@@ -1,8 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { Box, Container, Pagination, Typography, Grid, Card, CardContent, Stack, CircularProgress, Dialog, DialogTitle, DialogContent, List, ListItem, ListItemButton, ListItemIcon, ListItemText, IconButton} from "@mui/material";
+import { 
+  Box, 
+  Container, 
+  Typography, 
+  Grid,
+  Card, 
+  CardContent, 
+  Stack,
+  CircularProgress,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  IconButton,
+  Pagination
+} from "@mui/material";
 import { ArrowRight, FileText, X } from "lucide-react";
 
-const InfoCard = ({ title, desc, onClick }) => (
+const InfoCard = ({ title, year, desc, onClick }) => (
   <Card 
     onClick={onClick}
     variant="outlined" 
@@ -17,11 +36,10 @@ const InfoCard = ({ title, desc, onClick }) => (
       cursor: 'pointer',
       transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)', 
       border: '1px solid #eee',
-      bgcolor: '#ffffff',
-      background: `linear-gradient(rgba(255, 255, 255, 0.93), rgba(255, 255, 255, 0.93)), url("/img/ppid.PNG")`,
-      backgroundSize: '100px',
+      background: `linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url("/img/ppid.PNG")`,
+      backgroundSize: '120px',
       backgroundRepeat: 'no-repeat',
-      backgroundPosition: 'right 15px bottom 15px',
+      backgroundPosition: 'right 20px bottom 20px',
       
       '&:hover': { 
         bgcolor: '#5ca9fb', 
@@ -33,14 +51,15 @@ const InfoCard = ({ title, desc, onClick }) => (
       }
     }}
   >
-    <CardContent sx={{ p: 4, position: 'relative', zIndex: 2 }}>
+    <CardContent sx={{ p: 4, position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', height: '100%' }}>
+      {/* Menampilkan Judul Konten */}
       <Typography 
         className="text-target"
         sx={{ 
           fontWeight: 800, 
-          mb: 2, 
+          mb: 1, 
           color: "#001d3d", 
-          fontSize: "1.5rem",
+          fontSize: "1.8rem",
           lineHeight: 1.2,
           transition: '0.3s'
         }}
@@ -48,12 +67,26 @@ const InfoCard = ({ title, desc, onClick }) => (
         {title}
       </Typography>
 
+      {/* Menampilkan Label Tahun secara Jelas pada Kartu */}
+      <Typography 
+        className="text-target"
+        sx={{ 
+          fontWeight: 'bold', 
+          color: '#131313', 
+          fontSize: '1.3rem', 
+          mb: 2,
+          transition: '0.3s'
+        }}
+      >
+        Tahun {year}
+      </Typography>
+
       <Typography 
         className="text-target"
         sx={{ 
           color: "#666", 
           mb: 4, 
-          fontSize: "1.02rem",
+          fontSize: "1.2rem",
           lineHeight: 1.6,
           minHeight: '60px',
           transition: '0.3s',
@@ -94,20 +127,19 @@ const InfoCard = ({ title, desc, onClick }) => (
   </Card>
 );
 
-export const Berkala = (props) => {
-  const [allBerkalaData, setAllBerkalaData] = useState([]);
-  const [groupedCards, setGroupedCards] = useState([]);
+export const Selalu = (props) => {
+  const [listSelalu, setListSelalu] = useState([]); 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const [openModal, setOpenModal] = useState(false);
-  const [selectedTitle, setSelectedTitle] = useState("");
-  const [availableYears, setAvailableYears] = useState([]);
-  const [page, setPage] = useState(1);
-  const itemsPerPage = 9;
+  const [selectedItem, setSelectedItem] = useState(null);
+
+  const [page, setPage] = useState(1); 
+  const itemsPerPage = 9; 
 
   useEffect(() => {
-    const fetchBerkalaData = async () => {
+    const fetchSelaluData = async () => {
       try {
         setLoading(true);
         const response = await fetch("http://localhost:5000/api/informasi");
@@ -116,20 +148,9 @@ export const Berkala = (props) => {
         const result = await response.json();
         
         if (result.success) {
-          const berkalaItems = result.data.filter(item => item.kategori === 'berkala');
-          setAllBerkalaData(berkalaItems);
-
-          const uniqueCardsMap = new Map();
-          berkalaItems.forEach(item => {
-            if (!uniqueCardsMap.has(item.judul)) {
-              uniqueCardsMap.set(item.judul, {
-                judul: item.judul,
-                ringkasan_informasi: item.ringkasan_informasi
-              });
-            }
-          });
-          
-          setGroupedCards(Array.from(uniqueCardsMap.values()));
+          const selaluItems = result.data.filter(item => item.kategori === 'setiap_saat');
+          const sortedItems = selaluItems.sort((a, b) => b.tahun - a.tahun);
+          setListSelalu(sortedItems);
         } else {
           throw new Error(result.message || "Terjadi kesalahan");
         }
@@ -140,33 +161,28 @@ export const Berkala = (props) => {
       }
     };
 
-    fetchBerkalaData();
+    fetchSelaluData();
   }, []);
 
   const handlePageChange = (event, value) => {
     setPage(value);
-    window.scrollTo({ top: 400, behavior: 'smooth' });
+    window.scrollTo({ top: 420, behavior: 'smooth' });
   };
-  const handleCardClick = (judul) => {
-    setSelectedTitle(judul);
-    
-    const filteredYears = allBerkalaData
-      .filter(item => item.judul === judul)
-      .sort((a, b) => b.tahun - a.tahun);
-      
-    setAvailableYears(filteredYears);
+
+  const handleCardClick = (item) => {
+    setSelectedItem(item);
     setOpenModal(true);
   };
 
   const handleCloseModal = () => {
     setOpenModal(false);
-    setSelectedTitle("");
-    setAvailableYears([]);
+    setSelectedItem(null);
   };
+
   const indexOfLastItem = page * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentCards = groupedCards.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages = Math.ceil(groupedCards.length / itemsPerPage);
+  const currentCards = listSelalu.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(listSelalu.length / itemsPerPage);
 
   return (
     <Box sx={{ bgcolor: "#f8f9fa", minHeight: "50vh" }}>
@@ -186,10 +202,10 @@ export const Berkala = (props) => {
       >
         <Container maxWidth="lg">
           <Typography variant="h1" sx={{ fontWeight: 800, mb: 3, color: 'white', fontSize: { xs: "2.5rem", md: "4.5rem" }, lineHeight: 1.1 }}>
-            Informasi Berkala
+            Informasi Setiap Saat
           </Typography>
           <Typography variant="h5" sx={{ opacity: 0.9, color: 'white', fontWeight: "normal", maxWidth: "850px", fontSize: "1.3rem", textTransform: "none", lineHeight: 1.6 }}>
-            Portal Informasi Berkala Dinas Tenaga Kerja dan Transmigrasi Provinsi Jawa Tengah. Temukan data, laporan, dan dokumen berkala terkait ketenagakerjaan di Jawa Tengah yang wajib dipublikasikan sesuai peraturan perundang-undangan.
+            Portal Informasi Setiap Saat Dinas Tenaga Kerja dan Transmigrasi Provinsi Jawa Tengah. Temukan data, laporan, dan dokumen terkait informasi yang wajib dipublikasikan setiap saat sesuai peraturan perundang-undangan.
             Sesuai Pasal 11 Undang-Undang Nomor 14 Tahun 2008 mengenai Keterbukaan Informasi Publik, 
             Badan Publik wajib menyediakan Informasi Publik setiap saat yang dapat diakses oleh Pengguna Informasi Publik.
           </Typography>
@@ -197,9 +213,8 @@ export const Berkala = (props) => {
       </Box>
 
       {/* Main Content */}
-      
-      <Container maxWidth="xl" sx={{ mt: -10, pb: 10, position: 'relative', zIndex: 10, display: 'flex', justifyContent: 'center'}}>
-        <Card sx={{ width: '100%', bgcolor: '#ffffff', zIndex: 2, overflow: 'hidden', borderRadius: 6, p: { xs: 3, md: 6 }, boxShadow: "0 15px 40px rgba(0,0,0,0.12)"}}>
+      <Container maxWidth="xl" sx={{ mt: -10, pb: 10, position: 'relative', zIndex: 10, display: 'flex', justifyContent: 'center' }}>
+        <Card sx={{ width: '100%', borderRadius: 6, p: { xs: 3, md: 6 }, boxShadow: "0 15px 40px rgba(0,0,0,0.12)", position: 'relative'}}>
           
           {loading && (
             <Box sx={{ display: 'flex', justifyContent: 'center', py: 5 }}>
@@ -213,26 +228,29 @@ export const Berkala = (props) => {
             </Typography>
           )}
 
-          {!loading && !error && groupedCards.length === 0 && (
+          {!loading && !error && listSelalu.length === 0 && (
             <Typography variant="body1" color="textSecondary" textAlign="center" sx={{ py: 3 }}>
-              Belum ada data Informasi Berkala saat ini.
+              Belum ada data Informasi Setiap Saat.
             </Typography>
           )}
 
+          {/* Grid Render Kartu per Data dari Database */}
           {!loading && !error && currentCards.length > 0 && (
             <>
               <Grid container spacing={4}>
-                {currentCards.map((card, index) => (
-                  <Grid item xs={12} md={6} lg={4} key={index} sx={{ display: 'flex' }}>
+                {currentCards.map((item) => (
+                  <Grid item xs={12} md={6} lg={4} key={item._id} sx={{ display: 'flex' }}>
                     <InfoCard 
-                      title={card.judul} 
-                      desc={card.ringkasan_informasi} 
-                      onClick={() => handleCardClick(card.judul)}
+                      title={item.judul} 
+                      year={item.tahun}
+                      desc={item.ringkasan_informasi} 
+                      onClick={() => handleCardClick(item)}
                     />
                   </Grid>
                 ))}
               </Grid>
 
+              {/* Navigasi Pagination */}
               {totalPages > 1 && (
                 <Box sx={{ display: 'flex', justifyContent: 'center', mt: 6 }}>
                   <Pagination 
@@ -255,7 +273,7 @@ export const Berkala = (props) => {
         </Card>
       </Container>
 
-      {/* MODAL / DIALOG PEMILIH TAHUN DOKUMEN */}
+      {/* MODAL POP-UP DETAIL DOKUMEN TUNGGAL */}
       <Dialog 
         open={openModal} 
         onClose={handleCloseModal}
@@ -265,12 +283,8 @@ export const Berkala = (props) => {
           sx: { borderRadius: 4, p: 1 }
         }}
       >
-        {/* Header Modal */}
-        <DialogTitle sx={{ fontWeight: 800, color: "#001d3d", pr: 6, fontSize: "1.5rem" }}>
-          Pilih  Berkas
-          <Typography variant="body1" color="textSecondary" sx={{ fontWeight: 'normal', mt: 0.5 }}>
-            {selectedTitle}
-          </Typography>
+        <DialogTitle sx={{ fontWeight: 800, color: "#001d3d", pr: 6 }}>
+          Detail Berkas Dokumen
           <IconButton
             onClick={handleCloseModal}
             sx={{ position: 'absolute', right: 16, top: 16, color: '#666' }}
@@ -279,16 +293,16 @@ export const Berkala = (props) => {
           </IconButton>
         </DialogTitle>
 
-        {/* Konten Daftar Tahun */}
         <DialogContent dividers>
-          <List>
-            {availableYears.map((item) => (
-              <ListItem disablePadding key={item._id} sx={{ mb: 1 }}>
+          {selectedItem && (
+            <List>
+              <ListItem disablePadding>
                 <ListItemButton 
-                  onClick={() => window.open(item.file_url, '_blank')}
+                  onClick={() => window.open(selectedItem.file_url, '_blank')}
                   sx={{ 
                     borderRadius: 3, 
                     border: '1px solid #e0e0e0',
+                    p: 2,
                     transition: '0.2s',
                     '&:hover': {
                       bgcolor: '#f0f7ff',
@@ -298,19 +312,29 @@ export const Berkala = (props) => {
                   }}
                 >
                   <ListItemIcon sx={{ color: 'inherit' }}>
-                    <FileText size={24} />
+                    <FileText size={26} />
                   </ListItemIcon>
-                  <ListItemText fontSize="1.5rem"
-                    primary={`Informasi Berkala tentang ${item.judul}`} 
-                    secondary={ `Tahun ${item.tahun}` }
-                    primaryTypographyProps={{ fontWeight: 'bold', fontSize: '1.5rem' }}
-                    secondaryTypographyProps={{ fontSize: '1.3rem' }}
+                  
+                  {/* UKURAN FONT DI-CUSTOM LEBIH BESAR SESUAI REQUEST */}
+                  <ListItemText 
+                    primary={`Berkas ${selectedItem.judul}`} 
+                    secondary={`Tahun ${selectedItem.tahun}`}
+                    primaryTypographyProps={{ 
+                      fontWeight: 'bold',
+                      fontSize: '1.9rem' 
+                    }}
+                    secondaryTypographyProps={{
+                      fontSize: '1.7rem',
+                      fontWeight: 'bold',
+                      color: '#1d7edb',
+                      mt: 0.5
+                    }}
                   />
-                  <ArrowRight size={18} />
+                  <ArrowRight size={22} />
                 </ListItemButton>
               </ListItem>
-            ))}
-          </List>
+            </List>
+          )}
         </DialogContent>
       </Dialog>
     </Box>

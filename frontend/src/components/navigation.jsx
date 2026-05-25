@@ -89,6 +89,11 @@ export const Navigation = (props) => {
                   </Link>
                 </li>
                 <li>
+                  <Link to="/alur-permohonan">
+                    Alur Permohonan Informasi
+                  </Link>
+                </li>
+                <li>
                   <Link to="/daftar-informasi-publik">
                     Daftar Informasi Publik
                   </Link>
@@ -98,7 +103,11 @@ export const Navigation = (props) => {
                     Informasi Dikecualikan
                   </Link>
                 </li>
-                
+                <li>
+                  <Link to="/info-selalu">
+                    Informasi Setiap Saat
+                  </Link>
+                </li>
                 <li>
                   <Link to="/info-berkala">
                     Informasi Berkala
@@ -111,7 +120,7 @@ export const Navigation = (props) => {
                 </li>
                 <li>
                   <Link to="/daftar-permohonan">
-                    Daftar Permohonan
+                    Formulir Permohonan
                   </Link>
                 </li>
                 <li>

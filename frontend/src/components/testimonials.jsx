@@ -25,7 +25,7 @@ const LAYANAN_DATA = [
     deskripsi: "Fasilitasi penempatan tenaga kerja dalam dan luar negeri, serta bursa kerja.",
     warna: "#1A5276",
     tags: ["AKL", "AKAD", "AKAN"],
-    link: "/layanan/penempatan",
+    // link: "/layanan/penempatan",
     icon: <IdcardOutlined />,
   },
   {
@@ -33,7 +33,6 @@ const LAYANAN_DATA = [
     deskripsi: "Pelatihan kerja berbasis kompetensi melalui jaringan BLK di seluruh Jawa Tengah.",
     warna: "#1E8449",
     tags: ["BLK", "Sertifikasi BNSP", "Magang"],
-    link: "/layanan/pelatihan",
     icon: <SafetyCertificateOutlined />,
   },
   {
@@ -41,7 +40,6 @@ const LAYANAN_DATA = [
     deskripsi: "Mediasi, konsiliasi, dan arbitrase perselisihan hubungan industrial.",
     warna: "#7D6608",
     tags: ["PHK", "Upah", "PKB"],
-    link: "/layanan/hubungan-industrial",
     icon: <ReconciliationOutlined />,
   },
   {
@@ -49,7 +47,6 @@ const LAYANAN_DATA = [
     deskripsi: "Pemeriksaan norma kerja dan K3 di perusahaan sesuai perundang-undangan.",
     warna: "#922B21",
     tags: ["Norma Kerja", "K3", "Inspeksi"],
-    link: "/layanan/pengawasan",
     icon: <EyeOutlined />,
   },
   {
@@ -57,7 +54,6 @@ const LAYANAN_DATA = [
     deskripsi: "Program transmigrasi umum dan swakarsa mandiri bagi keluarga transmigran.",
     warna: "#515A5A",
     tags: ["TU", "TBS", "TSM"],
-    link: "/layanan/transmigrasi",
     icon: <EnvironmentOutlined />,
   },
   {
@@ -65,7 +61,6 @@ const LAYANAN_DATA = [
     deskripsi: "Koordinasi kepesertaan BPJS Ketenagakerjaan dan perlindungan pekerja.",
     warna: "#154360",
     tags: ["BPJS", "JHT", "JKK"],
-    link: "/layanan/jaminan-sosial",
     icon: <InsuranceOutlined />,
   },
 ];
@@ -106,7 +101,7 @@ const LayananCard = ({ layanan, delay }) => {
               color: "#fff",
             },
           }}
-          onClick={() => window.location.href = layanan.link}
+          // onClick={() => window.location.href = layanan.link}
         >
           <CardContent sx={{ flexGrow: 1, p: 2, display: "flex", flexDirection: "column" }}>
             <Box

@@ -11,12 +11,12 @@ import {
 } from "@mui/material";
 import { ArrowRight } from "lucide-react";
 
-// Komponen Card dengan animasi hover tetap sama, properti disesuaikan dengan skema backend
-const InfoCard = ({ title, desc, link }) => (
+const InfoCard = ({ title, year, desc, link }) => (
   <Card 
     onClick={() => window.open(link, '_blank')}
     variant="outlined" 
     sx={{ 
+      width: '400px',
       height: '100%',
       display: 'flex',
       flexDirection: 'column',
@@ -55,13 +55,26 @@ const InfoCard = ({ title, desc, link }) => (
       >
         {title}
       </Typography>
-
+      
+      <Typography 
+        className="text-target"
+        sx={{ 
+          fontWeight: 'bold', 
+          color: '#000000', 
+          fontSize: '1.3rem', 
+          mb: 2,
+          transition: '0.3s'
+        }}
+      >
+        Tahun {year}
+      </Typography>
+      
       <Typography 
         className="text-target"
         sx={{ 
           color: "#666", 
           mb: 4, 
-          fontSize: "1.05rem",
+          fontSize: "1.1rem",
           lineHeight: 1.6,
           minHeight: '60px',
           transition: '0.3s',
@@ -112,7 +125,6 @@ export const DIP = (props) => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        // Mengambil data dari endpoint backend Node.js Anda
         const response = await fetch("http://localhost:5000/api/informasi");
         if (!response.ok) {
           throw new Error("Gagal mengambil data dari server");
@@ -120,7 +132,6 @@ export const DIP = (props) => {
         const result = await response.json();
         
         if (result.success) {
-          // Melakukan filter agar hanya menampilkan item dengan kategori 'publik'
           const dataPublik = result.data.filter(item => item.kategori === 'publik');
           setListInfo(dataPublik);
         } else {
@@ -154,9 +165,10 @@ export const DIP = (props) => {
       >
         <Container maxWidth="lg">
           <Typography variant="h1" sx={{ fontWeight: 800, mb: 3, color: 'white', fontSize: { xs: "2.5rem", md: "4.5rem" }, lineHeight: 1.1 }}>
-            Informasi Tersedia Setiap Saat
+            Informasi Publik
           </Typography>
           <Typography variant="h5" sx={{ opacity: 0.9, color: 'white', fontWeight: "normal", maxWidth: "850px", fontSize: "1.3rem", textTransform: "none", lineHeight: 1.6 }}>
+            Portal Informasi Publik Dinas Tenaga Kerja dan Transmigrasi Provinsi Jawa Tengah. Temukan data, laporan, dan dokumen terkait informasi yang wajib dipublikasikan untuk umum sesuai peraturan perundang-undangan.
             Sesuai Pasal 11 Undang-Undang Nomor 14 Tahun 2008 mengenai Keterbukaan Informasi Publik, 
             Badan Publik wajib menyediakan Informasi Publik setiap saat yang dapat diakses oleh Pengguna Informasi Publik.
           </Typography>
@@ -194,7 +206,8 @@ export const DIP = (props) => {
               {listInfo.map((info) => (
                 <Grid item xs={12} md={6} key={info._id} sx={{ display: 'flex' }}>
                   <InfoCard 
-                    title={info.judul} 
+                    title={info.judul}
+                    year={info.tahun} 
                     desc={info.ringkasan_informasi} 
                     link={info.file_url} 
                   />
