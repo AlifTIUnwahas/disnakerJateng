@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: mongodb-disnakertrans
+    env: node
+    region: singapore
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: mongodb://blackSuede994:Azizyalif9@ac-ym7ujjt-shard-00-00.ldtl6zh.mongodb.net:27017,ac-ym7ujjt-shard-00-01.ldtl6zh.mongodb.net:27017,ac-ym7ujjt-shard-00-02.ldtl6zh.mongodb.net:27017/?ssl=true&replicaSet=atlas-m31a7c-shard-0&authSource=admin&appName=ppidDisnakertrans
+        sync: false
