@@ -14,8 +14,21 @@ const permohonanRoutes = require('./routes/permohonan');
 const PORT = 5000;
 
 connectDB();
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  'http://localhost:3000',
+  'https://colorfully-formfitting-lacey.ngrok-free.dev'
+];
+
 app.use(cors({
-    origin: 'http://localhost:3000'
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Blocked by CORS'));
+    }
+  },
+  credentials: true 
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
