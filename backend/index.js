@@ -20,7 +20,7 @@ const allowedOrigins = [
   'https://colorfully-formfitting-lacey.ngrok-free.dev'
 ];
 
-app.use(cors({
+const corsOptions = {
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
@@ -29,8 +29,11 @@ app.use(cors({
     }
   },
   credentials: true 
-}));
-app.options('*', cors());
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/api/admin', adminRoutes);
